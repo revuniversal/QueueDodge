@@ -1,0 +1,274 @@
+﻿<div class="container">
+    <button ng-click="vm.getToken()">Get Token</button>
+    <div class="card card-1">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="pointer" ng-click="vm.showFilters = !vm.showFilters">Filters</h3>
+            </div>
+            <div class="col-md-12" uib-collapse="vm.showFilters">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group-sm">
+                            <label>Realm</label>
+                            <select ng-options="x.id as x.name for x in vm.realms"
+                                    ng-model="vm.filter.realm"
+                                    class="form-control input-sm"></select>
+                            <br/>
+                            <label>Bracket</label>
+                            <br />
+                            <label class="pointer"><input type="radio" ng-model="vm.filter.bracket" name="bracket" value="2v2"> 2v2 </label><br />
+                            <label class="pointer"><input type="radio" ng-model="vm.filter.bracket" name="bracket" value="3v3"> 3v3 </label><br />
+                            <label class="pointer"><input type="radio" ng-model="vm.filter.bracket" name="bracket" value="5v5"> 5v5 </label><br />
+                            <label class="pointer"><input type="radio" ng-model="vm.filter.bracket" name="bracket" value="RBG"> RBG </label> <br />
+
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <label>
+                            Classes &nbsp;
+                            <small class="pointer"
+                                   ng-click="vm.showSpecs = !vm.showSpecs">
+
+                                (Click here to show specs)
+                            </small>
+                        </label>
+                        <ul class="classFilters">
+                            <li ng-repeat="class in vm.classes">
+
+                                <label class="{{class.name.toLowerCase().split(' ').join('')}} pointer"
+                                       ng-click="vm.toggleSpecializations(class); $event.stopPropagation()">
+
+                                    <input type="checkbox"
+                                           ng-model="class.selected"/>
+
+                                    <img class="icon-frame"
+                                         ng-src="{{'app/images/class/class_' + class.id + '.jpg'}}" 
+                                         ng-click="vm.toggleSpecializations(class); $event.stopPropagation()"/>
+
+                                    {{class.name}}
+                                </label>
+
+                                <ul uib-collapse="!vm.showSpecs">
+                                    <li ng-repeat="specialization in class.specializations">
+
+                                        <label class="{{class.name.toLowerCase().split(' ').join('')}} pointer">
+                                            <input type="checkbox"
+                                                   ng-model="specialization.selected" />
+
+                                            <img class="icon-frame"
+                                                 ng-src="{{'app/images/spec/spec_' + specialization.id + '.jpg'}}" />
+
+                                            {{specialization.name}}
+                                        </label>
+                                    </li>
+                                </ul>
+                                <br />
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary pull-right"
+                                ng-click="vm.search()">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 ng-click="vm.showRepresentation = !vm.showRepresentation"
+                    class="pointer">Representation</h3>
+            </div>
+            <div class="col-md-12" uib-collapse="vm.showRepresentation">
+                <div class="pull-left representation">
+                    <h4>
+                        Classes
+                        <br />
+                        <small>Showing All</small>
+                    </h4>
+                    <ol>
+                        <li ng-repeat="rep in vm.leaderboard.classRepresentation">
+                            <img class="icon-frame"
+                                 ng-src="{{'app/images/class/class_' + rep.data.id + '.jpg'}}" />
+                            &nbsp;
+                            {{rep.count / rep.total * 100 | number : 2}}%
+                            &nbsp;
+                            <small>({{rep.count}})</small>
+                        </li>
+                    </ol>
+                </div>
+                <div class="pull-left representation">
+                    <h4>
+                        Specs
+                        <br />
+                        <small>Showing Top 15</small>
+                    </h4>
+                    <ol>
+                        <li ng-repeat="rep in vm.leaderboard.specializationRepresentation">
+                            <img class="icon-frame"
+                                 ng-src="{{'app/images/class/class_' + rep.data.classID + '.jpg'}}" />
+                            <img class="icon-frame"
+                                 ng-src="{{'app/images/spec/spec_' + rep.data.id + '.jpg'}}" />
+                            &nbsp;
+                            {{rep.count / rep.total * 100 | number : 2}}%
+                            &nbsp;
+                            <small>({{rep.count}})</small>
+                        </li>
+                    </ol>
+                </div>
+                <div class="pull-left representation">
+                    <h4>
+                        Races
+                        <br />
+                        <small>Showing All</small>
+                    </h4>
+                    <ol>
+                        <li ng-repeat="rep in vm.leaderboard.raceRepresentation">
+                            <img class="icon-frame"
+                                 ng-src="{{'app/images/race/race_' + rep.data.id + '_0.jpg'}}" />
+                            &nbsp;
+                            {{rep.count / rep.total * 100 | number : 2}}%
+                            &nbsp;
+                            <small>({{rep.count}})</small>
+                        </li>
+                    </ol>
+                </div>
+                <div class="pull-left representation">
+                    <h4>
+                        Realms
+                        <br />
+                        <small>Showing Top 15</small>
+                    </h4>
+                    <ol>
+                        <li ng-repeat="rep in vm.leaderboard.realmRepresentation">
+                            <img ng-src="{{'app/images/region/' + rep.data.region.id + '.png'}}" />
+                            &nbsp;
+                            {{rep.data.name}}
+                            &nbsp;
+                            {{rep.count / rep.total * 100 | number : 2}}%
+                            &nbsp;
+                            <small>({{rep.count}})</small>
+                        </li>
+                    </ol>
+                </div>
+                <div class="pull-left representation">
+                    <h4>
+                        Faction
+                        <br />
+                        <small>Showing All</small>
+                    </h4>
+                    <ol>
+                        <li ng-repeat="rep in vm.leaderboard.factionRepresentation">
+                            <img class="icon-frame"
+                                 ng-src="{{'app/images/faction/faction_' + rep.data.id + '.jpg'}}" />
+                            &nbsp;
+                            {{rep.data.name}}
+                            &nbsp;
+                            {{rep.count / rep.total * 100 | number : 2}}%
+                            &nbsp;
+                            <small>({{rep.count}})</small>
+                        </li>
+                    </ol>
+                    <br />
+                    <h4>
+                        Region
+                        <br />
+                        <small>Showing All</small>
+                    </h4>
+                    <ol>
+                        <li ng-repeat="rep in vm.leaderboard.regionRepresentation">
+                            <img ng-src="{{'app/images/region/' + rep.data.id + '.png'}}" />
+                            &nbsp;
+                            {{rep.data.name | uppercase}}
+                            &nbsp;
+                            {{rep.count / rep.total * 100 | number : 2}}%
+                            &nbsp;
+                            <small>({{rep.count}})</small>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <uib-pagination total-items="vm.leaderboard.totalItemCount"
+                                items-per-page="vm.filter.itemsPerPage"
+                                max-size="vm.numPages"
+                                ng-model="vm.filter.page"
+                                ng-change="vm.getLeaderboard()"
+                                boundary-links="true"
+                                class="pull-right">
+
+                </uib-pagination>
+
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Realm</th>
+                            <th>Rating</th>
+                            <th>Season Ratio</th>
+                            <th>Weekly Ratio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="player in vm.leaderboard.leaderboard">
+                            <td>
+                                {{player.ranking}}
+                                <img ng-src="{{'app/images/region/' + player.regionID + '.png'}}" />
+                            </td>
+                            <td>
+                                <img class="icon-frame"
+                                     ng-src="{{'app/images/race/race_' + player.raceID + '_' + player.genderID + '.jpg'}}" />
+                                <img class="icon-frame"
+                                     ng-src="{{'app/images/class/class_' + player.classID + '.jpg'}}" />
+                                <img class="icon-frame"
+                                     ng-src="{{'app/images/spec/spec_' + player.specID + '.jpg'}}" />
+                                <span class="{{player.class.name.toLowerCase().split(' ').join('')}}">{{player.name}}</span>
+                            </td>
+                            <td>
+                                <img class="icon-frame"
+                                     ng-src="{{'app/images/faction/faction_' + player.factionID + '.jpg'}}" />
+
+                                <span ng-class="{
+                          'text-primary': player.factionID === 0,
+                          'text-danger': player.factionID === 1
+
+                          }">
+                                    {{player.realmName}}
+                                </span>
+                            </td>
+                            <td>{{player.rating}}</td>
+                            <td>
+                                <span class="text-success">{{player.seasonWins}}</span>
+                                /
+                                <span class="text-danger">{{player.seasonLosses}}</span>
+                            </td>
+                            <td>
+                                <span class="text-success">{{player.weeklyWins}}</span>
+                                /
+                                <span class="text-danger">{{player.weeklyLosses}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <uib-pagination total-items="vm.leaderboard.totalItemCount"
+                                items-per-page="vm.filter.itemsPerPage"
+                                max-size="vm.numPages"
+                                ng-model="vm.filter.page"
+                                ng-change="vm.getLeaderboard()"
+                                boundary-links="true"
+                                class="pull-right">
+
+                </uib-pagination>
+            </div>
+        </div>
+    </div>
+</div>
+

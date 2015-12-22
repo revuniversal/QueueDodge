@@ -1,0 +1,51 @@
+﻿<nav id="sub-nav">
+    <ul>
+        <li>
+            <a ui-sref="Activity({bracket:'2v2'})"
+               ui-sref-opts="{ reload: true, inherit: false }">
+
+                2v2
+            </a>
+        </li>
+        <li>
+            <a ui-sref="Activity({bracket:'3v3'})"
+               ui-sref-opts="{ reload: true, inherit: false }">
+
+                3v3
+            </a>
+        </li>
+        <li>
+            <a ui-sref="Activity({bracket:'5v5'})"
+               ui-sref-opts="{ reload: true, inherit: false }">
+
+                5v5
+            </a>
+        </li>
+        <li>
+            <a ui-sref="Activity({bracket:'rbg'})"
+               ui-sref-opts="{ reload: true, inherit: false }">
+
+                RBG
+            </a>
+        </li>
+    </ul>
+</nav>
+<div ng-show="vm.bracket" class="container">
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <activity-watcher watch="vm.detectedPlayers">
+
+            </activity-watcher>
+        </div>
+        <div class="col-md-12">
+            <live-activity bracket="vm.bracket"
+                           region="vm.region"
+                           data="vm.detectedPlayers">
+
+            </live-activity>
+        </div>
+
+    </div>
+</div>

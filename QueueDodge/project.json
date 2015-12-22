@@ -1,0 +1,31 @@
+{
+  "authors": [ "Nick" ],
+  "dependencies": {
+    "Microsoft.CSharp": "4.0.1-beta-23516",
+    "System.Collections": "4.0.11-beta-23516",
+    "System.Linq": "4.0.1-beta-23516",
+    "System.Runtime": "4.0.21-beta-23516",
+    "System.Threading": "4.0.11-beta-23516",
+    "System.Net.Http": "4.0.1-beta-23516",
+    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+    "EntityFramework.Relational": "7.0.0-rc1-final",
+    "System.ComponentModel.Annotations": "4.0.11-beta-23516",
+    "System.Data.SqlClient": "4.0.0-beta-23516",
+    "Newtonsoft.Json": "8.0.1-beta3"
+  },
+  "commands": {
+    "ef": "EntityFramework.Commands"
+  },
+  "description": "QueueDodge2 Class Library",
+  "frameworks": {
+    "dnxcore50": {
+      "dependencies": {
+        "BattleDotSwag": "1.0.6"
+      }
+    }
+  },
+  "licenseUrl": "",
+  "projectUrl": "",
+  "tags": [ "" ],
+  "version": "1.0.0-*"
+}

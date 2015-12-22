@@ -1,0 +1,146 @@
+﻿USE [QueueDodge]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Leaderboards_DetectChanges]    Script Date: 11/5/2015 8:16:55 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+alter Procedure [dbo].[usp_Leaderboards_DetectChanges]
+@Bracket as varchar(3),
+@PreviousRequestID as integer,
+@CurrentRequestID as integer,
+@LeaderboardComparisonID as integer
+as
+
+Insert into LadderChanges
+(LadderComparisonID,PreviousRequestID,CurrentRequestID,Bracket, Name, RealmID, RegionID,
+ PreviousFaction, DetectedFaction, PreviousRace, DetectedRace, PreviousClass, 
+
+DetectedClass,
+ PreviousSpec, DetectedSpec, PreviousRanking, DetectedRanking, PreviousRating, 
+
+DetectedRating,
+ PreviousSeasonWins, DetectedSeasonWins, PreviousSeasonLosses, DetectedSeasonLosses,
+ PreviousWeeklyWins, DetectedWeeklyWins, PreviousWeeklyLosses, DetectedWeeklyLosses,
+ PreviousGenderID, DetectedGenderID)
+
+Select distinct 
+@LeaderboardComparisonID,
+t1.RequestID as PreviousRequestID,
+t2.RequestID as CurrentRequestID,
+t1.bracket,
+t1.Name,
+t1.RealmID,
+t1.RegionID,
+t1.FactionID as PreviousFaction,
+t2.FactionID as CurrentFaction,
+t1.RaceID as PreviousRace,
+t2.RaceID as CurrentRace,
+t1.ClassID as PreviousClass,
+t2.ClassID as CurrentClass,
+t1.SpecID as PreviousSpec,
+t2.SpecID as CurrentSpec,
+t1.Ranking as PreviousRanking,
+t2.Ranking as CurrentRanking,
+t1.Rating as PreviousRating,
+t2.Rating as CurrentRating,
+t1.SeasonWins as PreviousSeasonWins,
+t2.SeasonWins as CurrentSeasonWins,
+t1.SeasonLosses as PreviousSeasonLosses,
+t2.SeasonLosses as CurrentSEasonLosses,
+t1.WeeklyWins as PreviousWeeklyWins,
+t2.WeeklyWins as CurrentWeeklyWins,
+t1.WeeklyLosses as PreviousWeeklyLosses,
+t2.WeeklyLosses as CurrentWeeklyLosses,
+t1.GenderID as PreviousGenderID,
+t2.GenderID as DetectedGenderID
+from Leaderboards t1
+Join Leaderboards t2 
+	on t1.RegionID = t2.RegionID 
+	and t1.Name = t2.Name 
+	and t1.realmID = t2.RealmID 
+	and t1.bracket = t2.bracket
+Where t1.requestID = @PreviousRequestID
+and t2.RequestID = @CurrentRequestID 
+and t1.bracket = @bracket 
+and 
+(t1.SeasonWins <> t2.SeasonWins
+or t1.SeasonLosses <> t2.SeasonLosses
+or t1.WeeklyWins <> t2.WeeklyWins
+or t1.WeeklyLosses <> t2.WeeklyLosses)
+
+
+
+--/* Delete previous request data */
+	delete from Leaderboards where bracket = @Bracket and RequestID <> @CurrentRequestID;
+
+
+/* Insert new characters */
+
+Insert into Characters
+(CharacterName, RegionID, RealmID, Gender, RaceID, ClassID, FactionID, SpecID)
+select distinct
+Name,
+RegionID,
+RealmID,
+GenderID,
+RaceID,
+ClassID,
+FactionID,
+SpecID
+FROM [QueueDodge].[dbo].[Leaderboards] t1
+Where NOT EXISTS
+	(select distinct 
+	name, 
+	regionID
+	realmid
+	from Characters
+	Where name = t1.name and regionID = t1.regionID 
+	and realmid = t1.realmid)
+
+
+
+ /* Update existing characters*/
+ 
+UPDATE	C
+SET
+    C.ClassID = LC.DetectedClass,
+	C.FactionID = LC.DetectedFaction,
+	C.RaceID = LC.DetectedRace,
+	C.Gender = LC.DetectedGenderID,
+	C.RealmID = LC.RealmID,
+	C.SpecID = LC.DetectedSpec
+FROM
+    CHARACTERS C
+INNER JOIN
+    LADDERCHANGES LC
+ON
+    C.CharacterName = LC.Name and
+	C.RealmID = LC.RealmID and
+	C.RegionID = LC.RegionID
+WHERE
+    LC.CurrentRequestID = @CurrentRequestID
+
+
+
+
+
+/* Insert new realms */
+
+Insert into Realms
+(ID, Name, Slug, RegionID)
+select distinct
+RealmID,
+RealmName,
+RealmSlug, 
+RegionID
+FROM [QueueDodge].[dbo].[Leaderboards] t1
+Where NOT EXISTS
+	(select distinct 
+	ID, 
+	Name
+	Slug,
+	RegionID
+	from Realms
+	Where name = t1.RealmName
+	and realmid = t1.RealmID)

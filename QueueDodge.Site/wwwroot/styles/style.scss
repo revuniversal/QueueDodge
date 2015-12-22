@@ -1,0 +1,374 @@
+﻿$border: #111111;
+$background: #38303C;
+$card-background: rgba(6,9,11,0.7);
+$defaultColor: #fcfcfc;
+$fontColor: #fcfcfc;
+$navbarColor: rgba(6,9,11,1);
+$tableStripe1: #2B1507;
+$tableStripe2: #231207;
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: $background;
+    color: $defaultColor;
+    font-family: 'Roboto Condensed', sans-serif;
+    height: 100%;
+    background-image: url('../images/bg.jpg');
+    background-size:cover;
+    background-attachment: fixed;
+}
+
+
+nav {
+    position: fixed;
+    width: 100%;
+    background-color: $navbarColor;
+    border-top: 1px solid $border;
+    border-bottom: 1px solid $border;
+    height: 50px;
+    z-index: 2;
+
+    ul {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 0;
+        font-weight: 700;
+        text-align: center;
+        height: 100%;
+        display: table;
+        color: $fontColor;
+        width: auto;
+
+        li {
+            vertical-align: middle;
+            list-style-type: none;
+            display: table-cell;
+            text-align: center;
+            font-size: 18px;
+            margin: 0;
+            padding: 0 20px 0 20px;
+            border-left: 1px solid $border;
+            height: 50px;
+        }
+
+        li:first-child {
+            border-left: 0;
+        }
+
+        li:hover {
+            color: #83B900;
+        }
+    }
+}
+
+main {
+    position: relative;
+    top: 51px;
+}
+
+h3{
+    margin-top:0;
+}
+hr{
+    border-color:#555;
+}
+
+.icon-frame {
+    display: inline-block;
+    overflow: hidden;
+    padding: 1px;
+    background-color: #000;
+    background-position: 1px 1px;
+    background-repeat: no-repeat;
+    border-radius: 3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B1B2B4 #434445 #2F3032;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-image: none;
+    -o-border-image: none;
+    -webkit-border-image: none;
+    border-image: none;
+}
+
+.classFilters {
+    -webkit-column-count: 4; /* Chrome, Safari, Opera */
+    -moz-column-count: 4; /* Firefox */
+    column-count: 4;
+}
+
+.representation {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+ul {
+    li {
+        list-style: none;
+    }
+
+    li.pagination-page {
+        a {
+            background-color: $card-background !important;
+            border:$border;
+        }
+    }
+
+    li.pagination-first {
+        a {
+            background-color: $card-background !important;
+            border:$border;
+        }
+    }
+
+    li.pagination-prev {
+        a {
+            background-color: $card-background !important;
+            border:$border;
+        }
+    }
+
+    li.pagination-next {
+        a {
+            background-color: $card-background !important;
+            border:$border;
+        }
+    }
+
+    li.pagination-last {
+        a {
+            background-color: $card-background !important;
+            border:$border;
+        }
+    }
+}
+
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+#sub-nav {
+    position: relative;
+    font-size: 12px;
+    z-index: 0;
+}
+
+a, a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+h1 {
+    position: relative;
+    top: 25px;
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+.card {
+    background: $card-background;
+    border-radius: 2px;
+    margin: 1rem;
+    position: relative;
+    padding: 25px;
+    height: auto;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.auto-card {
+    @extend .card;
+    height: auto;
+}
+
+
+.card-1 {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+/*.card-1:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}*/
+
+.card-2 {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.card-3 {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.card-4 {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.card-5 {
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.fade {
+    opacity: 1;
+}
+
+.fade.ng-enter {
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    opacity: 0;
+}
+
+.fade.ng-enter-active {
+    opacity: 1;
+}
+
+.fade.ng-move {
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    opacity: 1;
+}
+
+.fade.ng-move-active {
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    opacity: 0;
+}
+
+.fade.ng-leave {
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    opacity: 1;
+}
+
+.fade.ng-leave-active {
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    opacity: 0;
+}
+
+
+.animate-repeat {
+    line-height: 40px;
+    list-style: none;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave {
+    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+}
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter {
+    opacity: 0;
+    max-height: 0;
+}
+
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active {
+    opacity: 1;
+    max-height: 40px;
+}
+
+section {
+    height: 300px;
+}
+
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: $tableStripe1;
+}
+
+.table-striped > tbody > tr:nth-of-type(2n) {
+    background-color: $tableStripe2;
+}
+
+table {
+    td {
+        border-color: $border !important;
+    }
+
+    th {
+        border-color: $border !important;
+    }
+}
+
+.deathknight {
+    color: rgba( 196, 30, 59,1);
+}
+
+.druid {
+    color: rgba(255, 125, 10,1);
+}
+
+.hunter {
+    color: rgba(171, 212, 115,1);
+}
+
+.mage {
+    color: rgba(105, 204, 240,1);
+}
+
+.monk {
+    color: rgba(0, 255, 150,1);
+}
+
+.paladin {
+    color: rgba(245, 140, 186,1);
+}
+
+.priest {
+    color: rgba(255, 255, 255,1);
+}
+
+.rogue {
+    color: rgba(255, 245, 105,1);
+}
+
+.shaman {
+    color: rgba(0, 112, 222,1);
+}
+
+.warlock {
+    color: rgba(148, 130, 201,1);
+}
+
+.warrior {
+    color: rgba(199, 156, 110,1);
+}
+
+select {
+    color: #000;
+}
+
+.pointer{
+    cursor:pointer;
+}

@@ -1,0 +1,75 @@
+﻿
+<div class="card card-1">
+    <h4>
+        {{vm.bracket | uppercase}} Live Activity
+        <small>
+            Last Request:  <span am-time-ago="vm.requestDate"></span>
+            <br/>
+            {{vm.message}}
+        </small>
+    </h4>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Region</th>
+                <th>Name</th>
+                <th>Realm</th>
+                <th class="text-center">Rank/Change</th>
+                <th class="text-center">Rating/Change</th>
+                <th>Watch</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="animate-repeat"
+                ng-animate="'animate'"
+                ng-repeat="change in vm.data">
+                <td>
+                    <img ng-src="{{'app/images/region/' + change.regionID + '.png'}}" />
+                </td>
+                <td>
+                    <img class="icon-frame" ng-src="{{'app/images/race/race_' + change.detectedRace + '_' + change.detectedGenderID + '.jpg'}}" />
+                    <img class="icon-frame"  ng-src="{{'app/images/class/class_' + change.detectedClass + '.jpg'}}" />
+                    <img class="icon-frame"  ng-src="{{'app/images/spec/spec_' + change.detectedSpec + '.jpg'}}" />
+                    {{change.name}}
+                </td>
+                <td>
+                    <img class="icon-frame"  ng-src="{{'app/images/faction/faction_' + change.detectedFaction + '.jpg'}}" />
+                    <span ng-class="{
+                          'text-primary': change.detectedFaction === 0,
+                          'text-danger': change.detectedFaction === 1
+
+                          }">
+                        {{change.realm.name}}
+                    </span>
+                </td>
+                <td class="text-center">
+                    {{change.detectedRanking}}
+                    <small>
+                        <span ng-class="{
+                          'text-success': change.previousRanking-change.detectedRanking > 0,
+                          'text-danger': change.previousRanking-change.detectedRanking < 0
+
+                          }">
+                            ({{change.detectedRanking-change.previousRanking}})
+                        </span>
+                    </small>
+                </td>
+                <td class="text-center">
+                    {{change.detectedRating}}
+                    <small>
+                        <span ng-class="{
+                              'text-success': change.detectedRating - change.previousRating > 0,
+                              'text-danger': change.detectedRating - change.previousRating < 0,
+                              }">
+                            ({{change.detectedRating - change.previousRating}})
+                        </span>
+                    </small>
+                </td>
+                <td>
+                  <a class="text-success" ng-click="vm.watch(change)">WATCH</a>
+                </td>
+            </tr>
+        </tbody>
+      <tfoot></tfoot>
+    </table>
+</div>
