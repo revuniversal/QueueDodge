@@ -21,21 +21,21 @@
         function activate() {
             get();
 
-            var connection = $.hubConnection();
-            var leaderboardHubProxy = connection.createHubProxy('leaderboardHub');
-            var requestStartedEventName = 'request_' + vm.region + '_' + vm.bracket;
-            var requestCompleteEventName = 'refresh_' + vm.region + '_' + vm.bracket;
+            //var connection = $.hubConnection();
+            //var leaderboardHubProxy = connection.createHubProxy('leaderboardHub');
+            //var requestStartedEventName = 'request_' + vm.region + '_' + vm.bracket;
+            //var requestCompleteEventName = 'refresh_' + vm.region + '_' + vm.bracket;
 
-            leaderboardHubProxy.on(requestCompleteEventName, function (activity, completedTime) {
-                vm.data = activity;
-                vm.requestDate = completedTime;
-                $scope.$emit('PlayersDetected');
-                $scope.$apply();
-            });
+            //leaderboardHubProxy.on(requestCompleteEventName, function (activity, completedTime) {
+            //    vm.data = activity;
+            //    vm.requestDate = completedTime;
+            //    $scope.$emit('PlayersDetected');
+            //    $scope.$apply();
+            //});
 
-            connection.start()
-                .done(function () { console.log('Now connected, connection ID=' + connection.id); })
-                .fail(function () { console.log('Could not connect'); });
+            //connection.start()
+            //    .done(function () { console.log('Now connected, connection ID=' + connection.id); })
+            //    .fail(function () { console.log('Could not connect'); });
 
         }
 

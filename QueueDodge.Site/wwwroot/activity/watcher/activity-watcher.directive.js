@@ -12,7 +12,7 @@
         return {
             link: link,
             restrict: 'E',
-            templateUrl: 'app/activity/watcher/activity-watcher.html',
+            templateUrl: 'activity/watcher/activity-watcher.html',
             controller: 'ActivityWatcherController',
             controllerAs: 'vm',
             scope: {},

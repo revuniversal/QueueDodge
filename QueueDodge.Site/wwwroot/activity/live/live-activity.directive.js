@@ -20,7 +20,7 @@
             link: link,
             controller: 'LiveActivityController',
             controllerAs: 'vm',
-            templateUrl: 'app/activity/live/live-activity.html',
+            templateUrl: 'activity/live/live-activity.html',
         };
 
         function link($scope, element, attributes, ctrl) {
