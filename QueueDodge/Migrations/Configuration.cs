@@ -6,7 +6,6 @@
 //        public Configuration()
 //        {
 //            AutomaticMigrationsEnabled = false;
-
 //        }
 
 //        //protected override void Seed(QueueDodgeDB context)

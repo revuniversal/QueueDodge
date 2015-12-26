@@ -1,8 +1,10 @@
 {
   "projects": [
-    "wrap"
+    "QueueDodge",
+    "QueueDodge.Api"
   ],
   "sdk": {
-    "version": "1.0.0-rc1-update1"
+    "version": "1.0.0-rc2-16351"
+
   }
 }

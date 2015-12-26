@@ -1,5 +1,7 @@
 ﻿using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Metadata;
 using QueueDodge.Models;
+using System.Linq;
 
 namespace QueueDodge
 {
@@ -22,14 +24,14 @@ namespace QueueDodge
 
         public QueueDodgeDB() 
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
             //this.Configuration.AutoDetectChangesEnabled = false;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Visual Studio 2015 | Use the LocalDb 12 instance created by Visual Studio
-            optionsBuilder.UseSqlServer(@"data source=(localdb)\v11.0;integrated security=true;initial catalog=queuedodge;multipleactiveresultsets=true;");
+         //   optionsBuilder.UseSqlServer(@"data source=(localdb)\v11.0;integrated security=true;initial catalog=queuedodge;multipleactiveresultsets=true;");
 
             // Visual Studio 2013 | Use the LocalDb 11 instance created by Visual Studio
             // optionsBuilder.UseSqlServer(@"Server=(localdb)\v11.0;Database=EFGetStarted.ConsoleApp.NewDb;Trusted_Connection=True;");
@@ -42,6 +44,20 @@ namespace QueueDodge
             //    .Property(b => b.Url)
             //    .IsRequired();
 
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+
+            modelBuilder.Entity<LeaderboardComparison>()
+                .HasOne<BattleNetRequest>(p => p.CurrentRequest)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<LeaderboardComparison>()
+          .HasOne<BattleNetRequest>(p => p.PreviousRequest)
+          .WithOne()
+          .OnDelete(DeleteBehavior.Restrict);
         }
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{

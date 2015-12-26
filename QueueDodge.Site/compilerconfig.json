@@ -1,10 +1,6 @@
 ﻿[
   {
-    "outputFile": "wwwroot/styles/style.css",
-    "inputFile": "wwwroot/styles/style.scss"
-  },
-  {
-    "outputFile": "wwwroot/vendor/_bootstrap.css",
-    "inputFile": "wwwroot/vendor/_bootstrap.scss"
+    "outputFile": "wwwroot/app/styles/style.css",
+    "inputFile": "wwwroot/app/styles/style.scss"
   }
 ]

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Http;
 using QueueDodge.Models;
 using QueueDodge.Services;
 using Microsoft.AspNet.Mvc;
@@ -18,14 +17,14 @@ namespace QueueDodge.Api.Controllers
 
         [HttpGet]
         [Route("{bracket}")]
-        public IEnumerable<LadderChange> GetRecentActivity(string bracket, [FromUri] string region)
+        public IEnumerable<LadderChange> GetRecentActivity(string bracket, string region)
         {
             BattleDotSwag.Region regionCode = (BattleDotSwag.Region)Enum.Parse(typeof(BattleDotSwag.Region), region);
             return leaderboards.GetRecentActivity(bracket, regionCode);
         }
 
         [HttpGet]
-        public LeaderboardViewModel GetLeaderboard([FromUri]LeaderboardFilter filter)
+        public LeaderboardViewModel GetLeaderboard(LeaderboardFilter filter)
         {
             var leaderboard = leaderboards.GetLeaderboard(filter);
             return leaderboard;

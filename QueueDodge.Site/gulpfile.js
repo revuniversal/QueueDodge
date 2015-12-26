@@ -12,6 +12,9 @@ concat = require('gulp-concat'),
 uglify = require('gulp-uglify'),
 sourcemaps = require('gulp-sourcemaps')
 
+
+
+
 gulp.task('BOWER_INJECT', function () {
 
     var target = gulp.src('./wwwroot/index.html');
@@ -20,13 +23,14 @@ gulp.task('BOWER_INJECT', function () {
        .pipe(gulp.dest('./wwwroot/'));
 });
 
+
+
 gulp.task('INJECT', function () {
 
 
     var css = gulp.src(['./wwwroot/**/*.css']);
-    var cssVendor = gulp.src(['./wwwroot/vendor/**/*.css']);
 
-    var appScripts = gulp.src(['./wwwroot/**/*.js', '!./wwwroot/vendor/**/*.js', '!./wwwroot/lib/**/*.js', '!./wwwroot/app.js']).pipe(angularFilesort());
+    var appScripts = gulp.src(['./wwwroot/app/**/*.js', '!./wwwroot/vendor/**/*.js', '!./wwwroot/lib/**/*.js', '!./wwwroot/app/app.js']).pipe(angularFilesort());
     var target = gulp.src('./wwwroot/index.html');
 
 
@@ -40,7 +44,7 @@ gulp.task('INJECT', function () {
 
     target
   .pipe(
-  inject(series(cssVendor, css)
+  inject(series(css)
     //.pipe(concat('style.css'))
     //.pipe(gulp.dest('./wwwroot/'))
     , { relative: true }))

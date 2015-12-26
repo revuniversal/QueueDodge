@@ -1,17 +1,24 @@
 {
   "authors": [ "Nick" ],
   "dependencies": {
-    "Microsoft.CSharp": "4.0.1-beta-23516",
-    "System.Collections": "4.0.11-beta-23516",
-    "System.Linq": "4.0.1-beta-23516",
-    "System.Runtime": "4.0.21-beta-23516",
-    "System.Threading": "4.0.11-beta-23516",
-    "System.Net.Http": "4.0.1-beta-23516",
-    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
-    "EntityFramework.Relational": "7.0.0-rc1-final",
-    "System.ComponentModel.Annotations": "4.0.11-beta-23516",
+    "EntityFramework.MicrosoftSqlServer": "7.0.0-*",
+    "EntityFramework.Relational": "7.0.0-*",
+    "EntityFramework.Commands": "7.0.0-*",
+
+    "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc2-16150",
+    "Microsoft.CSharp": "4.0.1-*",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-15945",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0-*",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-*",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc2-16530",
+    "Newtonsoft.Json": "8.0.1-beta3",
+    "System.Collections": "4.0.11-beta-23516",           
+    "System.ComponentModel.Annotations": "4.1.0-rc2-23623",
     "System.Data.SqlClient": "4.0.0-beta-23516",
-    "Newtonsoft.Json": "8.0.1-beta3"
+    "System.Linq": "4.0.1-beta-23516",
+    "System.Net.Http": "4.0.1-beta-23516",
+    "System.Runtime": "4.0.21-beta-23516",
+    "System.Threading": "4.0.11-beta-23516"
   },
   "commands": {
     "ef": "EntityFramework.Commands"
