@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -80,7 +77,6 @@ namespace QueueDodge.Site
         {
             var application = new WebApplicationBuilder()
                  .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
-                 .UseServerFactory("Microsoft.AspNet.Server.Kestrel")
                  .UseStartup<Startup>()
                  .Build();
 

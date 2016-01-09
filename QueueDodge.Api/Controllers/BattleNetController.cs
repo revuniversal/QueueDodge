@@ -2,11 +2,9 @@
 using Microsoft.AspNet.Mvc;
 using QueueDodge.Integrations;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Collections.Specialized;
 
 namespace QueueDodge.Api.Controllers
 {
@@ -26,7 +24,7 @@ namespace QueueDodge.Api.Controllers
         public async void Get(string regionCode, string bracket)
         {
             Region region = (Region)Enum.Parse(typeof(Region), regionCode, true);
-            Locale locale;
+            Locale locale = default(Locale);
 
             switch (region.ToString())
             {
@@ -75,8 +73,8 @@ namespace QueueDodge.Api.Controllers
             //string stuff = response.Content.ReadAsStringAsync().Result;
             //return stuff;
 
-            var clientID = "heuemgj94eyv484cekut2a82d6crnskm";
-            var secret = "Cw5V9sdXnxdvHj5gexXvJQbQ4g9MTcds";
+            var clientID = "";
+            var secret = "";
 
             string pass = Convert.ToBase64String(Encoding.ASCII.GetBytes(clientID + ":" + secret));
 
