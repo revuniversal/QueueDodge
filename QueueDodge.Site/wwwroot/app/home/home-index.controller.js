@@ -27,5 +27,17 @@
             });
         }
 
+        function getToken() {
+            var code = window.location.search.replace("?code=", "").replace("&state=", "");
+
+            Restangular
+            .all("battlenet")
+            .one("oauth", code)
+            .get()
+            .then(function (token) {
+                alert(token);
+            });
+        }
+
     }
 })();

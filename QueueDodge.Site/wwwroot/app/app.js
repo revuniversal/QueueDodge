@@ -19,7 +19,7 @@
 
     function config(RestangularProvider, $locationProvider) {
 
-        RestangularProvider.setBaseUrl('/api');
+        RestangularProvider.setBaseUrl('http://localhost:5001/api');
 
     }
     

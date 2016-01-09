@@ -5,19 +5,19 @@
   },
 
   "dependencies": {
-    "Microsoft.AspNet.Mvc": "6.0.0-rc2-16747",
-    "Microsoft.AspNet.Hosting": "1.0.0-rc2-16150",
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc2-16224",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-rc2-16097",
-    "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc2-15945",
-    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-15932",
-    "Microsoft.Extensions.Logging": "1.0.0-rc2-15935",
-    "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-15949",
-    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-15949"
+    "Microsoft.AspNet.Mvc": "6.0.0-rc2-*",
+    "Microsoft.AspNet.Hosting": "1.0.0-rc2-*",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc2-*",
+    "Microsoft.AspNet.StaticFiles": "1.0.0-rc2-*",
+    "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc2-*",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-*",
+    "Microsoft.Extensions.Logging": "1.0.0-rc2-*",
+    "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-*",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-*"
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel  --server.urls 'http: //localhost:5001'"
+    "web": "Microsoft.AspNet.Server.Kestrel  --server.urls 'http://localhost:5001'"
   },
 
   "frameworks": {

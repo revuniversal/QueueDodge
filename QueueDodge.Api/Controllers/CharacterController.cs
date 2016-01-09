@@ -5,7 +5,7 @@ using QueueDodge.Services;
 namespace QueueDodge.Api.Controllers
 {
     // [RoutePrefix("api/region/{regionID}/realm/{realmID}/character")]
-    [Route("api/character")]
+    [Route("{realm}/[controller]")]
     public class CharacterController : Controller
     {
         private CharacterService characters;
@@ -17,9 +17,9 @@ namespace QueueDodge.Api.Controllers
 
         [HttpGet]
         [Route("{name}")]
-        public Character GetCharacters(int regionID, int realmID, string name)
+        public Character GetCharacters(int region, int realm, string name)
         {
-            return characters.GetCharacter(regionID, realmID, name);
+            return characters.GetCharacter(region, realm, name);
         }
     }
 }

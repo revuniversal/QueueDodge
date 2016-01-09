@@ -7,7 +7,7 @@ using System.Linq;
 namespace QueueDodge.Api.Controllers
 {
     //[RoutePrefix("api/region/{regionID}")]
-    [Route("api/realm")]
+    [Route("api/region")]
     public class RealmController : Controller
     {
         private RealmService realms;
@@ -17,12 +17,12 @@ namespace QueueDodge.Api.Controllers
             realms = new RealmService();
         }
 
-        [HttpGet]
-        [Route("realm")]
-        public IEnumerable<Realm> Get(int regionID)
+        [HttpGet("{region}/[controller]")]
+        public IEnumerable<Realm> Get(int region)
         {
-            var selectedRegion = (BattleDotSwag.Region)regionID;
-            return realms.GetRealms(selectedRegion).OrderBy(p => p.Name);
+            var selectedRegion = (BattleDotSwag.Region)region;
+            var data = realms.GetRealms(selectedRegion).OrderBy(p => p.Name).AsEnumerable();
+            return data;
         }
     }
 }

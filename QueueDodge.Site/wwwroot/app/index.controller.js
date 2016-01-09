@@ -12,6 +12,7 @@
   
         vm.region;
 
+
         activate();
 
         $scope.$on("$destroy", function () {
@@ -21,10 +22,8 @@
         });
         function activate() {
             vm.region = 'us';
-
-
-
         }
 
+    
     }
 })();

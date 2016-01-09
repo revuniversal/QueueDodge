@@ -31,7 +31,7 @@ namespace QueueDodge
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Visual Studio 2015 | Use the LocalDb 12 instance created by Visual Studio
-         //   optionsBuilder.UseSqlServer(@"data source=(localdb)\v11.0;integrated security=true;initial catalog=queuedodge;multipleactiveresultsets=true;");
+            optionsBuilder.UseSqlServer(@"data source=(localdb)\v11.0;integrated security=true;initial catalog=queuedodge;multipleactiveresultsets=true;");
 
             // Visual Studio 2013 | Use the LocalDb 11 instance created by Visual Studio
             // optionsBuilder.UseSqlServer(@"Server=(localdb)\v11.0;Database=EFGetStarted.ConsoleApp.NewDb;Trusted_Connection=True;");

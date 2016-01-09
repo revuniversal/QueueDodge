@@ -29,7 +29,6 @@
         vm.getLeaderboard = getLeaderboard;
         vm.toggleSpecializations = toggleSpecializations;
         vm.search = search;
-        vm.getToken = getToken;
         activate();
 
         function activate() {
@@ -97,17 +96,6 @@
                 c.specializations[x].selected = c.selected;
             }
         }
-        
-        function getToken(){
-            var code = window.location.search.replace("?code=","").replace("&state=","");
-
-            Restangular
-            .all("battlenet")
-            .one("oauth", code)
-            .get()
-            .then(function(token){
-            alert(token);
-            });
-        }
+       
     }
 })();
