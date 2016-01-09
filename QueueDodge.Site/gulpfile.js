@@ -4,7 +4,7 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 */
 var gulp = require('gulp');
 
-var mainBowerFiles = require('main-bower-files');
+var mainBowerFiles = require('main-bower-files'),
 series = require('stream-series'),
 inject = require('gulp-inject'),
 angularFilesort = require('gulp-angular-filesort'),

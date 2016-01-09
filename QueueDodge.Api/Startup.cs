@@ -92,9 +92,9 @@ namespace QueueDodge.Api
         public static void Main(string[] args)
         {
             var application = new WebApplicationBuilder()
-            .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
-            .UseStartup<Startup>()
-            .Build();
+                 .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
+                 .UseStartup<Startup>()
+                 .Build();
 
             // The following section should be used to demo sockets
             //var addresses = application.GetAddresses();

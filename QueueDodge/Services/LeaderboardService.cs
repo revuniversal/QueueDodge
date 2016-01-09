@@ -26,8 +26,8 @@ namespace QueueDodge.Services
             IEnumerable<LadderChange> recentChanges = data
                 .LadderChanges
                 .Where(p => p.CurrentRequestID == lastComparison)
-                 .Include(p => p.Realm)
-                 .OrderBy(p => p.DetectedRanking)
+                .Include(p => p.Realm)
+                .OrderBy(p => p.DetectedRanking)
                 .AsEnumerable();
 
             return recentChanges;
@@ -36,11 +36,8 @@ namespace QueueDodge.Services
         public LeaderboardViewModel GetLeaderboard(LeaderboardFilter filter)
         {
             int requestID = GetRequestID(filter);
-
             int recordCount = GetCount(filter, requestID);
-
             int pageCount = recordCount / filter.ItemsPerPage;
-
             BattleDotSwag.Region region = (BattleDotSwag.Region)filter.Region;
 
             var filteredLeaderboard =
@@ -79,7 +76,6 @@ namespace QueueDodge.Services
         public IEnumerable<Representation<int>> GetClassRepresentation(LeaderboardFilter filter, IQueryable<Leaderboard> leaderboard)
         {
             int requestID = GetRequestID(filter);
-
             int totalCount = GetCount(filter, requestID);
 
             var representation = leaderboard
@@ -99,7 +95,6 @@ namespace QueueDodge.Services
         public IEnumerable<Representation<object>> GetSpecializationRepresentation(LeaderboardFilter filter, IQueryable<Leaderboard> leaderboard)
         {
             int requestID = GetRequestID(filter);
-
             int totalCount = GetCount(filter, requestID);
 
             var representation = leaderboard
@@ -119,9 +114,8 @@ namespace QueueDodge.Services
         public IEnumerable<Representation<int>> GetRaceRepresentation(LeaderboardFilter filter, IQueryable<Leaderboard> leaderboard)
         {
             int requestID = GetRequestID(filter);
-
             int totalCount = GetCount(filter, requestID);
-
+            
             var representation = leaderboard
                                     .GroupBy(p => p.RaceID)
                                     .Select(group => new Representation<int>
@@ -138,7 +132,6 @@ namespace QueueDodge.Services
         public IEnumerable<Representation<object>> GetRealmRepresentation(LeaderboardFilter filter, IQueryable<Leaderboard> leaderboard)
         {
             int requestID = GetRequestID(filter);
-
             int totalCount = GetCount(filter, requestID);
 
             var representation = leaderboard
@@ -159,7 +152,6 @@ namespace QueueDodge.Services
         public IEnumerable<Representation<int>> GetFactionRepresentation(LeaderboardFilter filter, IQueryable<Leaderboard> leaderboard)
         {
             int requestID = GetRequestID(filter);
-
             int totalCount = GetCount(filter, requestID);
 
             var representation = leaderboard
@@ -178,7 +170,6 @@ namespace QueueDodge.Services
         public IEnumerable<Representation<int>> GetRegionRepresentation(LeaderboardFilter filter, IQueryable<Leaderboard> leaderboard)
         {
             int requestID = GetRequestID(filter);
-
             int totalCount = GetCount(filter, requestID);
 
             var representation = leaderboard
@@ -221,6 +212,7 @@ namespace QueueDodge.Services
         private IEnumerable<Leaderboard> GetPagedLeaderboard(LeaderboardFilter filter, IQueryable<Leaderboard> leaderboard)
         {
             filter.Page--;
+            
             if (filter.Page != 0)
             {
                 leaderboard =

@@ -22,11 +22,7 @@ namespace QueueDodge
         // INSERTS FROM API REQUESTS ONLY.
         public DbSet<Leaderboard> Leaderboards { get; set; }
 
-        public QueueDodgeDB() 
-        {
-            //Database.EnsureCreated();
-            //this.Configuration.AutoDetectChangesEnabled = false;
-        }
+        public QueueDodgeDB() {}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -39,11 +35,6 @@ namespace QueueDodge
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Make Blog.Url required     
-            //modelBuilder.Entity<Blog>()
-            //    .Property(b => b.Url)
-            //    .IsRequired();
-
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
@@ -59,12 +50,5 @@ namespace QueueDodge
           .WithOne()
           .OnDelete(DeleteBehavior.Restrict);
         }
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-
-        //    //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
-        //    base.OnModelCreating(builder);
-        //}
     }
 }
