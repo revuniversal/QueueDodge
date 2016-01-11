@@ -23,11 +23,11 @@
   "commands": {
     "ef": "EntityFramework.Commands"
   },
-  "description": "QueueDodge2 Class Library",
+  "description": "QueueDodge Class Library",
   "frameworks": {
     "dnxcore50": {
       "dependencies": {
-        "BattleDotSwag": "1.0.6"
+        "BattleDotSwag": "1.0.7"
       }
     }
   },

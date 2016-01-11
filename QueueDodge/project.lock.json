@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     "DNXCore,Version=v5.0": {
-      "BattleDotSwag/1.0.6": {
+      "BattleDotSwag/1.0.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
@@ -15,10 +15,10 @@
           "System.Threading": "4.0.11-beta-23516"
         },
         "compile": {
-          "lib/dnxcore50/BattleDotSwag.dll": {}
+          "lib/dotnet5.4/BattleDotSwag.dll": {}
         },
         "runtime": {
-          "lib/dnxcore50/BattleDotSwag.dll": {}
+          "lib/dotnet5.4/BattleDotSwag.dll": {}
         }
       },
       "EntityFramework.Commands/7.0.0-rc2-16649": {
@@ -1469,7 +1469,7 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x86": {
-      "BattleDotSwag/1.0.6": {
+      "BattleDotSwag/1.0.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
@@ -1481,10 +1481,10 @@
           "System.Threading": "4.0.11-beta-23516"
         },
         "compile": {
-          "lib/dnxcore50/BattleDotSwag.dll": {}
+          "lib/dotnet5.4/BattleDotSwag.dll": {}
         },
         "runtime": {
-          "lib/dnxcore50/BattleDotSwag.dll": {}
+          "lib/dotnet5.4/BattleDotSwag.dll": {}
         }
       },
       "EntityFramework.Commands/7.0.0-rc2-16649": {
@@ -2026,34 +2026,6 @@
         },
         "runtime": {
           "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.dll": {}
-        }
-      },
-      "runtime.any.System.Linq.Expressions/4.0.11-rc2-23623": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.10",
-          "System.Diagnostics.Debug": "4.0.10",
-          "System.Globalization": "4.0.10",
-          "System.IO": "4.0.10",
-          "System.Linq": "4.0.0",
-          "System.ObjectModel": "4.0.10",
-          "System.Reflection": "4.0.10",
-          "System.Reflection.Emit": "4.0.0",
-          "System.Reflection.Emit.ILGeneration": "4.0.0",
-          "System.Reflection.Emit.Lightweight": "4.0.0",
-          "System.Reflection.Extensions": "4.0.0",
-          "System.Reflection.Primitives": "4.0.0",
-          "System.Reflection.TypeExtensions": "4.0.0",
-          "System.Resources.ResourceManager": "4.0.0",
-          "System.Runtime": "4.0.20",
-          "System.Runtime.Extensions": "4.0.10",
-          "System.Threading": "4.0.10"
-        },
-        "compile": {
-          "ref/dotnet/_._": {}
-        },
-        "runtime": {
-          "lib/DNXCore50/System.Linq.Expressions.dll": {}
         }
       },
       "runtime.win.System.Runtime.InteropServices.RuntimeInformation/4.0.0-rc2-23621": {
@@ -3527,7 +3499,7 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x64": {
-      "BattleDotSwag/1.0.6": {
+      "BattleDotSwag/1.0.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
@@ -3539,10 +3511,10 @@
           "System.Threading": "4.0.11-beta-23516"
         },
         "compile": {
-          "lib/dnxcore50/BattleDotSwag.dll": {}
+          "lib/dotnet5.4/BattleDotSwag.dll": {}
         },
         "runtime": {
-          "lib/dnxcore50/BattleDotSwag.dll": {}
+          "lib/dotnet5.4/BattleDotSwag.dll": {}
         }
       },
       "EntityFramework.Commands/7.0.0-rc2-16649": {
@@ -4084,34 +4056,6 @@
         },
         "runtime": {
           "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.dll": {}
-        }
-      },
-      "runtime.any.System.Linq.Expressions/4.0.11-rc2-23623": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.10",
-          "System.Diagnostics.Debug": "4.0.10",
-          "System.Globalization": "4.0.10",
-          "System.IO": "4.0.10",
-          "System.Linq": "4.0.0",
-          "System.ObjectModel": "4.0.10",
-          "System.Reflection": "4.0.10",
-          "System.Reflection.Emit": "4.0.0",
-          "System.Reflection.Emit.ILGeneration": "4.0.0",
-          "System.Reflection.Emit.Lightweight": "4.0.0",
-          "System.Reflection.Extensions": "4.0.0",
-          "System.Reflection.Primitives": "4.0.0",
-          "System.Reflection.TypeExtensions": "4.0.0",
-          "System.Resources.ResourceManager": "4.0.0",
-          "System.Runtime": "4.0.20",
-          "System.Runtime.Extensions": "4.0.10",
-          "System.Threading": "4.0.10"
-        },
-        "compile": {
-          "ref/dotnet/_._": {}
-        },
-        "runtime": {
-          "lib/DNXCore50/System.Linq.Expressions.dll": {}
         }
       },
       "runtime.win.System.Runtime.InteropServices.RuntimeInformation/4.0.0-rc2-23621": {
@@ -5586,17 +5530,15 @@
     }
   },
   "libraries": {
-    "BattleDotSwag/1.0.6": {
+    "BattleDotSwag/1.0.7": {
       "type": "package",
-      "sha512": "C+2xLCrKmMMXdj6teqafx6v+xBqkKqGjKwxouUk96gt5D4aK7ewxyCUuxZFfP+RJnz2YMvwsdYH4IUzrSYCvGA==",
+      "sha512": "XO9E3xUV6+6u803QC0Yt+GjHZBZIaHs3d/tHOzWsY+UmGhqgE5nrmZkOS1NK3cwWapVs6Yg5tWYBdMEM7a6I4Q==",
       "files": [
-        "BattleDotSwag.1.0.6.nupkg",
-        "BattleDotSwag.1.0.6.nupkg.sha512",
+        "BattleDotSwag.1.0.7.nupkg",
+        "BattleDotSwag.1.0.7.nupkg.sha512",
         "BattleDotSwag.nuspec",
-        "lib/dnx451/BattleDotSwag.dll",
-        "lib/dnx451/BattleDotSwag.xml",
-        "lib/dnxcore50/BattleDotSwag.dll",
-        "lib/dnxcore50/BattleDotSwag.xml"
+        "lib/dotnet5.4/BattleDotSwag.dll",
+        "lib/dotnet5.4/BattleDotSwag.xml"
       ]
     },
     "EntityFramework.Commands/7.0.0-rc2-16649": {
@@ -6171,28 +6113,6 @@
         "Remotion.Linq.2.0.1.nupkg",
         "Remotion.Linq.2.0.1.nupkg.sha512",
         "Remotion.Linq.nuspec"
-      ]
-    },
-    "runtime.any.System.Linq.Expressions/4.0.11-rc2-23623": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "jazI7UHy1BXwQ8AltLZKDnQ6rQYlItEGX4UE+BTzsLrn+fEwFp/R0hhXS6qB95pwzW2j8Rfws1c36KJNGmu8ag==",
-      "files": [
-        "lib/DNXCore50/System.Linq.Expressions.dll",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net45/_._",
-        "lib/netcore50/System.Linq.Expressions.dll",
-        "lib/win8/_._",
-        "lib/wp80/_._",
-        "lib/wpa81/_._",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "ref/dotnet/_._",
-        "runtime.any.System.Linq.Expressions.4.0.11-rc2-23623.nupkg",
-        "runtime.any.System.Linq.Expressions.4.0.11-rc2-23623.nupkg.sha512",
-        "runtime.any.System.Linq.Expressions.nuspec",
-        "runtimes/aot/lib/netcore50/_._"
       ]
     },
     "runtime.win.System.Runtime.InteropServices.RuntimeInformation/4.0.0-rc2-23621": {
@@ -9444,7 +9364,7 @@
       "System.Threading >= 4.0.11-beta-23516"
     ],
     "DNXCore,Version=v5.0": [
-      "BattleDotSwag >= 1.0.6"
+      "BattleDotSwag >= 1.0.7"
     ]
   }
 }

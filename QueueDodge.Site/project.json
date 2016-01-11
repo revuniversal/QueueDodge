@@ -16,8 +16,7 @@
   },
 
   "commands": {
-
-"web": "QueueDodge.Site"
+    "web": "QueueDodge.Site"
   },
 
   "frameworks": {

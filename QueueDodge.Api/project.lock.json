@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     "DNXCore,Version=v5.0": {
-      "BattleDotSwag/1.0.6": {
+      "BattleDotSwag/1.0.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
@@ -15,10 +15,10 @@
           "System.Threading": "4.0.11-beta-23516"
         },
         "compile": {
-          "lib/dnxcore50/BattleDotSwag.dll": {}
+          "lib/dotnet5.4/BattleDotSwag.dll": {}
         },
         "runtime": {
-          "lib/dnxcore50/BattleDotSwag.dll": {}
+          "lib/dotnet5.4/BattleDotSwag.dll": {}
         }
       },
       "EntityFramework.Commands/7.0.0-rc2-16649": {
@@ -1341,7 +1341,7 @@
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "BattleDotSwag": "1.0.6",
+          "BattleDotSwag": "1.0.7",
           "EntityFramework.Commands": "7.0.0",
           "EntityFramework.MicrosoftSqlServer": "7.0.0",
           "EntityFramework.Relational": "7.0.0",
@@ -2418,7 +2418,7 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x86": {
-      "BattleDotSwag/1.0.6": {
+      "BattleDotSwag/1.0.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
@@ -2430,10 +2430,10 @@
           "System.Threading": "4.0.11-beta-23516"
         },
         "compile": {
-          "lib/dnxcore50/BattleDotSwag.dll": {}
+          "lib/dotnet5.4/BattleDotSwag.dll": {}
         },
         "runtime": {
-          "lib/dnxcore50/BattleDotSwag.dll": {}
+          "lib/dotnet5.4/BattleDotSwag.dll": {}
         }
       },
       "EntityFramework.Commands/7.0.0-rc2-16649": {
@@ -3759,7 +3759,7 @@
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "BattleDotSwag": "1.0.6",
+          "BattleDotSwag": "1.0.7",
           "EntityFramework.Commands": "7.0.0",
           "EntityFramework.MicrosoftSqlServer": "7.0.0",
           "EntityFramework.Relational": "7.0.0",
@@ -5422,7 +5422,7 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x64": {
-      "BattleDotSwag/1.0.6": {
+      "BattleDotSwag/1.0.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
@@ -5434,10 +5434,10 @@
           "System.Threading": "4.0.11-beta-23516"
         },
         "compile": {
-          "lib/dnxcore50/BattleDotSwag.dll": {}
+          "lib/dotnet5.4/BattleDotSwag.dll": {}
         },
         "runtime": {
-          "lib/dnxcore50/BattleDotSwag.dll": {}
+          "lib/dotnet5.4/BattleDotSwag.dll": {}
         }
       },
       "EntityFramework.Commands/7.0.0-rc2-16649": {
@@ -6763,7 +6763,7 @@
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "BattleDotSwag": "1.0.6",
+          "BattleDotSwag": "1.0.7",
           "EntityFramework.Commands": "7.0.0",
           "EntityFramework.MicrosoftSqlServer": "7.0.0",
           "EntityFramework.Relational": "7.0.0",
@@ -8431,17 +8431,15 @@
       "type": "project",
       "path": "../QueueDodge/project.json"
     },
-    "BattleDotSwag/1.0.6": {
+    "BattleDotSwag/1.0.7": {
       "type": "package",
-      "sha512": "C+2xLCrKmMMXdj6teqafx6v+xBqkKqGjKwxouUk96gt5D4aK7ewxyCUuxZFfP+RJnz2YMvwsdYH4IUzrSYCvGA==",
+      "sha512": "XO9E3xUV6+6u803QC0Yt+GjHZBZIaHs3d/tHOzWsY+UmGhqgE5nrmZkOS1NK3cwWapVs6Yg5tWYBdMEM7a6I4Q==",
       "files": [
-        "BattleDotSwag.1.0.6.nupkg",
-        "BattleDotSwag.1.0.6.nupkg.sha512",
+        "BattleDotSwag.1.0.7.nupkg",
+        "BattleDotSwag.1.0.7.nupkg.sha512",
         "BattleDotSwag.nuspec",
-        "lib/dnx451/BattleDotSwag.dll",
-        "lib/dnx451/BattleDotSwag.xml",
-        "lib/dnxcore50/BattleDotSwag.dll",
-        "lib/dnxcore50/BattleDotSwag.xml"
+        "lib/dotnet5.4/BattleDotSwag.dll",
+        "lib/dotnet5.4/BattleDotSwag.xml"
       ]
     },
     "EntityFramework.Commands/7.0.0-rc2-16649": {
@@ -13344,7 +13342,7 @@
       "Microsoft.Extensions.Logging.Debug >= 1.0.0-rc2-*"
     ],
     "DNXCore,Version=v5.0": [
-      "QueueDodge >= 1.0.0-*"
+      "QueueDodge >= 1.0.0"
     ]
   }
 }

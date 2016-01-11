@@ -36,7 +36,7 @@ namespace QueueDodge.Integrations
                 RequestDate = DateTime.Now,
                 RequestType = "leaderboards",
                 Bracket = bracket,
-                Url = leaderboard.GetUri(endpoint, host, region, game).ToString()
+                Url = leaderboard.GetUri(endpoint, region).ToString()
             };
 
             //BattleNetRequest request =

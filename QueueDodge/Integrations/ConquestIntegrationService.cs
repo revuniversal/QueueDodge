@@ -30,7 +30,7 @@ namespace QueueDodge.Integrations
                 RequestDate = DateTime.Now,
                 RequestType = "leaderboards",
                 Bracket = "",
-                Url = conquestCapService.GetUri(endpoint, host, region, game).ToString()
+                Url = conquestCapService.GetUri(endpoint, region).ToString()
             };
 
            // BattleNetRequest request =

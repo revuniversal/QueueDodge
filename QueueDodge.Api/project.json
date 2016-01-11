@@ -14,6 +14,7 @@
     "Microsoft.Extensions.Logging": "1.0.0-rc2-*",
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-*",
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-*"
+  
   },
 
   "commands": {
@@ -23,7 +24,7 @@
   "frameworks": {
     "dnxcore50": {
       "dependencies": {
-        "QueueDodge": "1.0.0-*"
+        "QueueDodge": "1.0.0"
       }
     }
   },
