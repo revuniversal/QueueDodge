@@ -1,7 +1,7 @@
 ﻿{
   "Data": {
     "DefaultConnection": {
-      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=QueueDodge2;Trusted_Connection=True;"
+      "ConnectionString": "data source=(localdb)\\v11.0;integrated security=true;initial catalog=queuedodge;multipleactiveresultsets=true;"
     }
   }
 }

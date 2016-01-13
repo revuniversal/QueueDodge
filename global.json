@@ -2,7 +2,8 @@
   "projects": [
     "QueueDodge",
     "QueueDodge.Api",
-    "QueueDodge.Site"
+    "QueueDodge.Site",
+    "wrap"
   ],
   "sdk": {
     "version": "1.0.0-rc2-16357"

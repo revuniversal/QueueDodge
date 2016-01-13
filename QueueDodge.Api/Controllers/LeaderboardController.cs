@@ -3,31 +3,34 @@ using System.Collections.Generic;
 using QueueDodge.Models;
 using QueueDodge.Services;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using QueueDodge.Integrations;
+using System.Threading.Tasks;
 
 namespace QueueDodge.Api.Controllers
 {
- //   [RoutePrefix("api/region/{region}/leaderboard")]
- [Route("api/leaderboard")]
+    //   [RoutePrefix("api/region/{region}/leaderboard")]
+    [Route("api/leaderboard")]
     public class LeaderboardController : Controller
     {
+        private IMemoryCache cache { get; set; }
         private LeaderboardService leaderboards { get; set; }
-        public LeaderboardController() {
-            leaderboards = new LeaderboardService();
+
+        public LeaderboardController(IMemoryCache cache)
+        {
+            this.leaderboards = new LeaderboardService();
+            this.cache = cache;
         }
 
         [HttpGet]
-        [Route("{bracket}")]
-        public IEnumerable<LadderChange> GetRecentActivity(string bracket, string region)
+        public async Task GetRecentActivity(string bracket, string region, string locale)
         {
-            BattleDotSwag.Region regionCode = (BattleDotSwag.Region)Enum.Parse(typeof(BattleDotSwag.Region), region);
-            return leaderboards.GetRecentActivity(bracket, regionCode);
-        }
-
-        [HttpGet]
-        public LeaderboardViewModel GetLeaderboard(LeaderboardFilter filter)
-        {
-            var leaderboard = leaderboards.GetLeaderboard(filter);
-            return leaderboard;
+            // TODO:  Perform parameter checking here.
+            var _locale = (BattleDotSwag.Locale)Enum.Parse(typeof(BattleDotSwag.Locale), locale);
+            var _region = (BattleDotSwag.Region)Enum.Parse(typeof(BattleDotSwag.Region), locale);
+            var key = "YOUR KEY HERE";
+            var service = new LeaderboardIntegrationService(key);
+            await service.GetRecentActivity(bracket, _locale, key, cache, _region);
         }
     }
 }

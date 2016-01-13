@@ -40,7 +40,7 @@ namespace QueueDodge.Api
             //    .AddDbContext<QueueDodge.QueueDodgeDB>(options => options.UseSqlServer(connection));
           
             services.AddMvc();
-            
+            services.AddCaching();
 
         }
 

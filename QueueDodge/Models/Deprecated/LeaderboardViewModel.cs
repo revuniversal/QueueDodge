@@ -7,7 +7,7 @@ namespace QueueDodge.Models
         public int PageCount { get; set; }
         public int ItemsPerPage { get; set; }
         public int TotalItemCount { get; set; }
-        public IEnumerable<Leaderboard> Leaderboard { get; set; }
+//        public IEnumerable<Leaderboard> Leaderboard { get; set; }
 
         public IEnumerable<Representation<int>> ClassRepresentation { get; set; }
         public IEnumerable<Representation<object>> SpecializationRepresentation { get; set; }

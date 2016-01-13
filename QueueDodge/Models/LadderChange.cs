@@ -4,7 +4,6 @@
     {
         public int ID { get; set; }
 
-        public int LadderComparisonID { get; set; }
         public int PreviousRequestID { get; set; }
         public int CurrentRequestID { get; set; }
 
@@ -45,8 +44,49 @@
 
         public int PreviousGenderID { get; set; }
         public int DetectedGenderID { get; set; }
-
-        public virtual LeaderboardComparison LadderComparison { get; set; }
+        
         public virtual Realm Realm { get; set; }
+        public virtual BattleNetRequest PreviousRequest { get; set; }
+        public virtual BattleNetRequest CurrentRequest { get; set; }
+
+        public LadderChange()
+        { }
+        public LadderChange(LadderEntry previous, LadderEntry detected)
+        {
+            Name = detected.Name;
+            Bracket = detected.Request.Bracket;
+            RegionID = detected.Request.RegionID;
+            RealmID = detected.RealmID;
+            PreviousRequestID = previous.Request.ID;
+            PreviousClass = previous.ClassID;
+            PreviousFaction = previous.FactionID;
+            PreviousGenderID = previous.GenderID;
+            PreviousRace = previous.RaceID;
+            PreviousRanking = previous.Ranking;
+            PreviousRating = previous.Rating;
+            PreviousSpec = previous.SpecID;
+            PreviousSeasonWins = previous.SeasonWins;
+            PreviousSeasonLosses = previous.SeasonLosses;
+            PreviousWeeklyWins = previous.WeeklyWins;
+            PreviousWeeklyLosses = previous.WeeklyLosses;
+            CurrentRequestID = detected.Request.ID;
+            DetectedClass = detected.ClassID;
+            DetectedFaction = detected.FactionID;
+            DetectedGenderID = detected.GenderID;
+            DetectedRace = detected.RaceID;
+            DetectedRanking = detected.Ranking;
+            DetectedRating = detected.Rating;
+            DetectedSpec = detected.SpecID;
+            DetectedSeasonWins = detected.SeasonWins;
+            DetectedSeasonLosses = detected.SeasonLosses;
+            DetectedWeeklyWins = detected.WeeklyWins;
+            DetectedWeeklyLosses = detected.WeeklyLosses;
+
+
+        }
+
+        // TODO:  CHECK FOR MORE CHANGES!  MORE OPPORTUNITIES!
+        public bool Changed() => (PreviousSeasonWins != DetectedSeasonWins) || (PreviousSeasonLosses != DetectedSeasonLosses);
+
     }
 }

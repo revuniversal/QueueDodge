@@ -8,9 +8,10 @@ using QueueDodge;
 namespace QueueDodge.Migrations
 {
     [DbContext(typeof(QueueDodgeDB))]
-    partial class QueueDodgeDBModelSnapshot : ModelSnapshot
+    [Migration("20160110233307_removedfkfromleaderboard")]
+    partial class removedfkfromleaderboard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc2-16649")
@@ -133,6 +134,8 @@ namespace QueueDodge.Migrations
 
                     b.Property<int>("DetectedWeeklyWins");
 
+                    b.Property<int>("LadderComparisonID");
+
                     b.Property<string>("Name");
 
                     b.Property<int>("PreviousClass");
@@ -165,11 +168,73 @@ namespace QueueDodge.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("LadderComparisonID");
+
+                    b.HasIndex("RealmID");
+                });
+
+            modelBuilder.Entity("QueueDodge.Models.Leaderboard", b =>
+                {
+                    b.ToTable("Leaderboard");
+
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Bracket");
+
+                    b.Property<int>("ClassID");
+
+                    b.Property<int>("FactionID");
+
+                    b.Property<int>("GenderID");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("RaceID");
+
+                    b.Property<int>("Ranking");
+
+                    b.Property<int>("Rating");
+
+                    b.Property<int>("RealmID");
+
+                    b.Property<string>("RealmName");
+
+                    b.Property<string>("RealmSlug");
+
+                    b.Property<int>("RegionID");
+
+                    b.Property<int>("RequestID");
+
+                    b.Property<int>("SeasonLosses");
+
+                    b.Property<int>("SeasonWins");
+
+                    b.Property<int>("SpecID");
+
+                    b.Property<int>("WeeklyLosses");
+
+                    b.Property<int>("WeeklyWins");
+
+                    b.HasKey("ID");
+                });
+
+            modelBuilder.Entity("QueueDodge.Models.LeaderboardComparison", b =>
+                {
+                    b.ToTable("LeaderboardComparison");
+
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CurrentRequestID");
+
+                    b.Property<int>("PreviousRequestID");
+
+                    b.HasKey("ID");
+
                     b.HasIndex("CurrentRequestID");
 
                     b.HasIndex("PreviousRequestID");
-
-                    b.HasIndex("RealmID");
                 });
 
             modelBuilder.Entity("QueueDodge.Models.Race", b =>
@@ -259,17 +324,24 @@ namespace QueueDodge.Migrations
 
             modelBuilder.Entity("QueueDodge.Models.LadderChange", b =>
                 {
-                    b.HasOne("QueueDodge.Models.BattleNetRequest")
+                    b.HasOne("QueueDodge.Models.LeaderboardComparison")
                         .WithMany()
-                        .HasForeignKey("CurrentRequestID");
-
-                    b.HasOne("QueueDodge.Models.BattleNetRequest")
-                        .WithMany()
-                        .HasForeignKey("PreviousRequestID");
+                        .HasForeignKey("LadderComparisonID");
 
                     b.HasOne("QueueDodge.Models.Realm")
                         .WithMany()
                         .HasForeignKey("RealmID");
+                });
+
+            modelBuilder.Entity("QueueDodge.Models.LeaderboardComparison", b =>
+                {
+                    b.HasOne("QueueDodge.Models.BattleNetRequest")
+                        .WithOne()
+                        .HasForeignKey("QueueDodge.Models.LeaderboardComparison", "CurrentRequestID");
+
+                    b.HasOne("QueueDodge.Models.BattleNetRequest")
+                        .WithOne()
+                        .HasForeignKey("QueueDodge.Models.LeaderboardComparison", "PreviousRequestID");
                 });
 
             modelBuilder.Entity("QueueDodge.Models.Race", b =>

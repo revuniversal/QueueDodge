@@ -1,18 +1,61 @@
 ﻿USE [QueueDodge]
 GO
-/****** Object:  StoredProcedure [dbo].[usp_Leaderboards_DetectChanges]    Script Date: 11/5/2015 8:16:55 PM ******/
+/****** Object:  StoredProcedure [dbo].[usp_Leaderboards_DetectChanges]    Script Date: 1/10/2016 6:48:53 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-alter Procedure [dbo].[usp_Leaderboards_DetectChanges]
+ALTER Procedure [dbo].[usp_Leaderboards_DetectChanges]
 @Bracket as varchar(3),
 @PreviousRequestID as integer,
 @CurrentRequestID as integer,
 @LeaderboardComparisonID as integer
 as
 
-Insert into LadderChanges
+/* Insert new realms */
+
+Insert into Realm
+(ID, Name, Slug)
+select distinct
+RealmID,
+RealmName,
+RealmSlug
+FROM [QueueDodge].[dbo].[Leaderboard] t1
+Where NOT EXISTS
+	(select distinct 
+	ID, 
+	Name
+	Slug
+	from Realm
+	Where name = t1.RealmName
+	and realmid = t1.RealmID)
+
+
+
+/* Insert new characters */
+
+Insert into [Character]
+(CharacterName, RegionID, RealmID, Gender, RaceID, ClassID, FactionID)
+select distinct
+Name,
+RegionID,
+RealmID,
+GenderID,
+RaceID,
+ClassID,
+FactionID
+FROM [QueueDodge].[dbo].[Leaderboard] t1
+Where NOT EXISTS
+	(select distinct 
+	name, 
+	regionID
+	realmid
+	from [Character]
+	Where name = t1.name and regionID = t1.regionID 
+	and realmid = t1.realmid)
+
+
+Insert into LadderChange
 (LadderComparisonID,PreviousRequestID,CurrentRequestID,Bracket, Name, RealmID, RegionID,
  PreviousFaction, DetectedFaction, PreviousRace, DetectedRace, PreviousClass, 
 
@@ -54,8 +97,8 @@ t1.WeeklyLosses as PreviousWeeklyLosses,
 t2.WeeklyLosses as CurrentWeeklyLosses,
 t1.GenderID as PreviousGenderID,
 t2.GenderID as DetectedGenderID
-from Leaderboards t1
-Join Leaderboards t2 
+from Leaderboard t1
+Join Leaderboard t2 
 	on t1.RegionID = t2.RegionID 
 	and t1.Name = t2.Name 
 	and t1.realmID = t2.RealmID 
@@ -72,31 +115,7 @@ or t1.WeeklyLosses <> t2.WeeklyLosses)
 
 
 --/* Delete previous request data */
-	delete from Leaderboards where bracket = @Bracket and RequestID <> @CurrentRequestID;
-
-
-/* Insert new characters */
-
-Insert into Characters
-(CharacterName, RegionID, RealmID, Gender, RaceID, ClassID, FactionID, SpecID)
-select distinct
-Name,
-RegionID,
-RealmID,
-GenderID,
-RaceID,
-ClassID,
-FactionID,
-SpecID
-FROM [QueueDodge].[dbo].[Leaderboards] t1
-Where NOT EXISTS
-	(select distinct 
-	name, 
-	regionID
-	realmid
-	from Characters
-	Where name = t1.name and regionID = t1.regionID 
-	and realmid = t1.realmid)
+--	delete from Leaderboards where bracket = @Bracket and RequestID <> @CurrentRequestID;
 
 
 
@@ -107,13 +126,11 @@ SET
     C.ClassID = LC.DetectedClass,
 	C.FactionID = LC.DetectedFaction,
 	C.RaceID = LC.DetectedRace,
-	C.Gender = LC.DetectedGenderID,
-	C.RealmID = LC.RealmID,
-	C.SpecID = LC.DetectedSpec
+	C.Gender = LC.DetectedGenderID
 FROM
-    CHARACTERS C
+    [CHARACTER] C
 INNER JOIN
-    LADDERCHANGES LC
+    LADDERCHANGE LC
 ON
     C.CharacterName = LC.Name and
 	C.RealmID = LC.RealmID and
@@ -125,22 +142,3 @@ WHERE
 
 
 
-/* Insert new realms */
-
-Insert into Realms
-(ID, Name, Slug, RegionID)
-select distinct
-RealmID,
-RealmName,
-RealmSlug, 
-RegionID
-FROM [QueueDodge].[dbo].[Leaderboards] t1
-Where NOT EXISTS
-	(select distinct 
-	ID, 
-	Name
-	Slug,
-	RegionID
-	from Realms
-	Where name = t1.RealmName
-	and realmid = t1.RealmID)

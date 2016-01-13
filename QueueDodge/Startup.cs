@@ -32,6 +32,8 @@ public class Startup
         services.AddEntityFramework()
             .AddSqlServer()
             .AddDbContext<QueueDodgeDB>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+
+       // services.AddCaching();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

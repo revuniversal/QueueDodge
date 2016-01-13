@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LeaderboardSync": {
+      "commandName": "LeaderboardSync",
+      "commandLineArgs": "\"3v3\" \"vftjkwdyvev3p4m9jrnfxgsdu2dz68yd\" \"en_us\" \"us\""
+    }
+  }
+}

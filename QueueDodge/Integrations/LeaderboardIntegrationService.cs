@@ -7,6 +7,20 @@ using BattleDotSwag.Services;
 using BattleDotSwag.PVP;
 using QueueDodge.Services;
 using Microsoft.Data.Entity;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.IO;
+using Newtonsoft.Json.Linq;
+using Microsoft.Extensions.Caching.Memory;
+using System.Threading.Tasks;
+
+//using System.Reactive.PlatformServices;
+//using System.Reactive.Concurrency;
+//using System.Reactive.Disposables;
+//using System.Reactive.Joins;
+//using System.Reactive.Subjects;
+//using System.Reactive;
 
 namespace QueueDodge.Integrations
 {
@@ -24,164 +38,83 @@ namespace QueueDodge.Integrations
             leaderboard = new BattleNetService();
             requests = new RequestService(data);
         }
-
-        public BattleNetRequest GetLeaderboard(string bracket, string host, BattleDotSwag.Region region, Game game, Locale locale)
+        public LeaderboardIntegrationService(string apiKey)
         {
-            var endpoint = new LeaderboardEndpoint(bracket, locale, apiKey);
+            this.apiKey = apiKey;
+            leaderboard = new BattleNetService();
+            requests = new RequestService(data);
+            data = new QueueDodgeDB();
+        }
 
-            var newRequest = new BattleNetRequest()
+        public async Task GetRecentActivity(string bracket, BattleDotSwag.Locale locale, string key, IMemoryCache cache, BattleDotSwag.Region region)
+        {
+            var endpoint = new LeaderboardEndpoint(bracket, locale, key);
+            var requestor = new BattleNetService();
+
+            var request = new QueueDodge.Models.BattleNetRequest()
             {
+                Bracket = bracket,
                 Locale = locale.ToString(),
                 RegionID = (int)region,
                 RequestDate = DateTime.Now,
-                RequestType = "leaderboards",
-                Bracket = bracket,
-                Url = leaderboard.GetUri(endpoint, region).ToString()
+                RequestType = "leaderboard",
+                Url = requestor.GetUri(endpoint, region).ToString(),
+                Duration = 0
             };
 
-            //BattleNetRequest request =
-                data.BattleNetRequests.Add(newRequest);
+            var addedRequest = data.BattleNetRequests.Add(request).Entity;
             data.SaveChanges();
 
-            // TODO:  Fix leaderboard request.
+            var json = requestor.Get(endpoint, region).Result;
 
-            //requests.Perform(10, 2, 5, request, () =>
-            //{
-            //    var json = leaderboard.Get(endpoint, host, region, game).Result;
-            //    //BulkInsertLeaderboards(json, request.ID, bracket, region);
-            //});
+            var ladder = JsonConvert.DeserializeObject<Leaderboard>(json);
 
-            //return request;
-            return null;
+            for (var x = 0; x<ladder.Rows.Count; x++)
+            {
+                var ladderEntry = new LadderEntry(ladder.Rows[x], addedRequest);
+                Compare(ladderEntry, cache);             
+            }
         }
 
-        //private void BulkInsertLeaderboards(string json, int requestID, string bracket, BattleDotSwag.Region region)
-        //{
-        //    BattleDotSwag.PVP.Leaderboard data = JsonConvert.DeserializeObject<BattleDotSwag.PVP.Leaderboard>(json);
+        private async Task Compare(LadderEntry entry, IMemoryCache cache)
+        {
+            var key = entry.Request.RegionID + ":" + entry.RealmID + ":" + entry.Name;
 
-        //    var dt = new DataTable("Leaderboards");
+            LadderEntry cachedEntry = null;
 
-        //    dt.Columns.Add("ID", typeof(int));
-        //    dt.Columns.Add("RequestID", typeof(int));
-        //    dt.Columns.Add("Bracket");
+            var cached = cache.TryGetValue<LadderEntry>(key, out cachedEntry);
 
-        //    //dt.Columns.Add("RegionID", typeof(int));
+            cache.Set(key, entry);
 
+            if (cachedEntry == null)
+            { 
+                await DetectChanges(cachedEntry, entry);
+            }
+        }
 
-        //    dt.Columns.Add("Ranking", typeof(int));
-        //    dt.Columns.Add("Rating", typeof(int));
-        //    dt.Columns.Add("Name");
-        //    dt.Columns.Add("RealmID", typeof(int));
-        //    dt.Columns.Add("RealmName");
-        //    dt.Columns.Add("RealmSlug");
-        //    dt.Columns.Add("RaceID", typeof(int));
-        //    dt.Columns.Add("ClassID", typeof(int));
-        //    dt.Columns.Add("SpecID", typeof(int));
-        //    dt.Columns.Add("FactionID", typeof(int));
-        //    dt.Columns.Add("GenderID", typeof(int));
-        //    dt.Columns.Add("SeasonWins", typeof(int));
-        //    dt.Columns.Add("SeasonLosses", typeof(int));
-        //    dt.Columns.Add("WeeklyWins", typeof(int));
-        //    dt.Columns.Add("WeeklyLosses", typeof(int));
+        private async Task DetectChanges(LadderEntry previous, LadderEntry detected)
+        {
+            var change = new LadderChange(previous, detected);
 
-        //    dt.Columns.Add("RegionID", typeof(int));
+            if (change.Changed())
+            {
+                data.LadderChanges.Add(change);
+                data.SaveChanges();
 
-        //    foreach (var item in data.Rows)
-        //    {
-        //        DataRow dr = dt.NewRow();
+                await UpdateLadder(change);
+            }
+        }
 
-        //        dr["RequestID"] = requestID;
-        //        dr["Bracket"] = bracket;
-
-        //        //dr["RegionID"] = (int)region;
-
-        //        dr["Ranking"] = item.Ranking;
-        //        dr["Rating"] = item.Rating;
-        //        dr["Name"] = item.Name;
-        //        dr["RealmID"] = ValidateRealmID(item.RealmID.ToString());  // this is stupid... but battle.net has bad data for some players.  aka player without a specified realm.
-        //        dr["RealmName"] = item.RealmName;
-        //        dr["RealmSlug"] = item.RealmSlug;
-        //        dr["RaceID"] = item.RaceID;
-        //        dr["ClassID"] = item.ClassID;
-        //        dr["SpecID"] = item.SpecID;
-        //        dr["FactionID"] = item.FactionID;
-        //        dr["GenderID"] = item.GenderID;
-        //        dr["SeasonWins"] = item.SeasonWins;
-        //        dr["SeasonLosses"] = item.SeasonLosses;
-        //        dr["WeeklyWins"] = item.WeeklyWins;
-        //        dr["WeeklyLosses"] = item.WeeklyLosses;
-
-        //        dr["RegionID"] = (int)region;
-
-        //        dt.Rows.Add(dr);
-        //    }
-
-        //    var connection = System.Configuration.ConfigurationManager.ConnectionStrings["QueueDodge"].ConnectionString;
-
-        //    using (SqlBulkCopy s = new SqlBulkCopy(connection))
-        //    {
-        //        s.DestinationTableName = "Leaderboards";
-        //        s.WriteToServer(dt);
-        //    }
-
-        //    CompareLeaderboards(bracket, region);
-        //}
+        private async Task UpdateLadder(LadderChange change)
+        {
+            // update ladder and send web socket update
+        }
 
         private int ValidateRealmID(string id)
         {
             int realmID = 999;
             int.TryParse(id, out realmID);
             return realmID;
-        }
-
-        private void CompareLeaderboards(string bracket, BattleDotSwag.Region region)
-        {
-            int currentRequestID =
-                data
-                .Leaderboards
-                .Where(p => p.Bracket == bracket && p.RegionID == (int)region)
-                .OrderByDescending(p => p.RequestID)
-                .Select(p => p.RequestID)
-                .FirstOrDefault();
-
-            int previousRequestID =
-                data
-                .Leaderboards
-                .Where(p => p.RequestID != currentRequestID && p.Bracket == bracket && p.RegionID == (int)region)
-                .OrderByDescending(p => p.RequestID)
-                .Select(p => p.RequestID)
-                .FirstOrDefault();
-
-            if (previousRequestID == 0)
-            {
-                previousRequestID = currentRequestID;
-            }
-
-
-            var comparison = new LeaderboardComparison()
-            {
-                CurrentRequestID = currentRequestID,
-                PreviousRequestID = previousRequestID
-            };
-
-            data.LeaderboardComparisons.Add(comparison);
-            data.SaveChanges();
-
-            var bracketParam = new SqlParameter("@Bracket", bracket);
-            var previousParam = new SqlParameter("@PreviousRequestID", previousRequestID);
-            var currentParam = new SqlParameter("@CurrentRequestID", currentRequestID);
-            var comparisonPAram = new SqlParameter("@LeaderboardComparisonID", comparison.ID);
-
-            data.Database.ExecuteSqlCommand("exec usp_Leaderboards_DetectChanges @bracket, @PreviousRequestID, @currentRequestID, @LeaderboardComparisonID", bracketParam, previousParam, currentParam, comparisonPAram);
-
-            //var oldData =
-            //    data
-            //    .Leaderboards
-            //    .Where(p => p.RequestID != currentRequestID)
-            //    .AsEnumerable();
-
-            //data.Leaderboards.RemoveRange(oldData);
-           // data.SaveChanges();
         }
     }
 }
