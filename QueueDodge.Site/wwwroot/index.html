@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
+    <base href="/">
     <title>Queue Dodge</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,60 +10,36 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="~/app/images/favicon.ico" />
     <!-- inject:css -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="app/styles/style.css">
     <link rel="stylesheet" href="app/styles/style.min.css">
-    <link rel="stylesheet" href="lib/angular/angular-csp.css">
-    <link rel="stylesheet" href="lib/angular-bootstrap/ui-bootstrap-csp.css">
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap-theme.css">
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
     <!-- endinject -->
+
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <!-- 1. Load libraries -->
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+    <script src="node_modules/angular2/bundles/http.dev.js"></script>
+    <!-- 2. Configure SystemJS -->
+    <script>
+        System.config({
+            packages: {
+                app: {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        System.import('app/boot')
+              .then(null, console.error.bind(console));
+    </script>
 </head>
-
-<body ng-app="app">
-    <nav class="card-1">
-        <ul>
-            <li ui-sref="Home.Index">Home</li>
-            <li ui-sref="Home.Activity({bracket:'3v3'})">Activity</li>
-            <li ui-sref="Home.Leaderboard">Ladder</li>
-            <li><a href="https://us.battle.net/oauth/authorize?client_id=heuemgj94eyv484cekut2a82d6crnskm&scope=wow.profile&state=&redirect_uri=https%3A%2F%2Flocalhost%3A443&response_type=code">Login With Battle.Net</a></li>
-        </ul>
-    </nav>
-    <main>
-        <div class="container-fluid" style="margin:0; padding:0;">
-            <div ui-view>
-            </div>
-        </div>
-    </main>
-    <!-- bower:js -->
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/lodash/lodash.js"></script>
-    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="lib/jquery/dist/jquery.js"></script>
-    <script src="lib/moment/moment.js"></script>
-    <script src="lib/angular-animate/angular-animate.js"></script>
-    <script src="lib/restangular/dist/restangular.js"></script>
-    <script src="lib/angular-moment/angular-moment.js"></script>
-    <!-- endinject -->
-    <!-- inject:js -->
-    <script src="app/app.module.js"></script>
-    <script src="app/activity/watcher/activity-watcher.directive.js"></script>
-    <script src="app/activity/watcher/activity-watcher.controller.js"></script>
-    <script src="app/activity/live/live-activity.directive.js"></script>
-    <script src="app/activity/live/live-activity.controller.js"></script>
-    <script src="app/utilities/stop-propagation.directive.js"></script>
-    <script src="app/leaderboard/leaderboard-index.controller.js"></script>
-    <script src="app/home/home-index.controller.js"></script>
-    <script src="app/conquest-calculator/conquest-calulator.controller.js"></script>
-    <script src="app/activity/activity-index.controller.js"></script>
-    <script src="app/index.controller.js"></script>
-    <script src="app/app.routing.js"></script>
-    <!-- endinject -->
+<body>
+    <queue-dodge></queue-dodge>
 </body>
-</html>
 
+</html>
 

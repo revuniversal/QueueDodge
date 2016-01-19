@@ -12,12 +12,12 @@ namespace QueueDodge.Services
             data = new QueueDodgeDB();
         }
 
-        public Character GetCharacter(int regionID, int realmID, string name)
+        public Character GetCharacter(BattleDotSwag.Region region, string realm, string name)
         {
             Character character = data.Characters
                 .Where(p => p.CharacterName.ToLower() == name.ToLower() &&
-                            p.RealmID == realmID &&
-                            p.RegionID == regionID)
+                            (p.Realm.Name == realm || p.Realm.Slug == realm) &&
+                            p.RegionID == (int)region)
                 .ToList()
                 .FirstOrDefault();
 

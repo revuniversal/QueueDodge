@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNet.Mvc;
 using QueueDodge.Models;
 using QueueDodge.Services;
+using System;
 
 namespace QueueDodge.Api.Controllers
 {
-    // [RoutePrefix("api/region/{regionID}/realm/{realmID}/character")]
-    [Route("{realm}/[controller]")]
+    [Route("api/region/{region}/realm/{realm}/[controller]")]
     public class CharacterController : Controller
     {
         private CharacterService characters;
@@ -17,9 +17,10 @@ namespace QueueDodge.Api.Controllers
 
         [HttpGet]
         [Route("{name}")]
-        public Character GetCharacters(int region, int realm, string name)
+        public Character GetCharacters(string region, string realm, string name)
         {
-            return characters.GetCharacter(region, realm, name);
+            var selectedRegion = (BattleDotSwag.Region)Enum.Parse(typeof(BattleDotSwag.Region), region);
+            return characters.GetCharacter(selectedRegion, realm, name);
         }
     }
 }

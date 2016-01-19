@@ -1,0 +1,63 @@
+﻿<div>
+    <h1>The Watcher</h1>
+    <!--<form ng-submit="vm.watchPlayer()">
+        <div class="row">
+            <div class="col-md-4">
+                <label>Realm</label>
+                <br />
+                <select ng-options="x as x.name group by x.region.name for x in vm.realms"
+                        ng-model="vm.player.realm"
+                        class="form-control input-sm"></select>
+            </div>
+            <div class="col-md-4">
+                <label>Name</label>
+                <br />
+                <input class="form-control input-sm"
+                       ng-model="vm.player.name" />
+            </div>
+            <div class="col-md-4">
+                <br />
+                <button type="submit" class="btn btn-primary">Watch Player</button>
+            </div>
+        </div>
+
+    </form>-->
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Region</th>
+                <th>Character</th>
+                <th>Realm</th>
+                <th>Rating Progress</th>
+                <th>Ranking Progress</th>
+                <th>Times Seen</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+     <!--   <tbody>
+            <tr ng-repeat="player in vm.players">
+                <td><img ng-src="{{'app/images/region/' + player.region + '.png'}}" /></td>
+                <td>
+                    <img class="icon-frame" ng-src="{{'app/images/race/race_' + player.race + '_' + player.gender + '.jpg'}}" />
+                    <img class="icon-frame" ng-src="{{'app/images/class/class_' + player.playerClass + '.jpg'}}" />
+                    <img class="icon-frame" ng-src="{{'app/images/spec/spec_' + player.specialization + '.jpg'}}" />
+                    {{player.name}}
+                </td>
+                <td>
+                    <img class="icon-frame" ng-src="{{'app/images/faction/faction_' + player.faction + '.jpg'}}" />
+                    <span ng-class="{
+                          'text-primary': player.faction === 0,
+                          'text-danger': player.faction === 1
+
+                          }">
+                        {{player.realm}}
+                    </span>
+                </td>
+                <td>{{player.ratingProgression}}</td>
+                <td>{{player.rankingProgression}}</td>
+                <td>{{player.timesSeen}}</td>
+                <td class="text-center pointer text-danger" ng-click="vm.removeWatch(player)"><i class="fa fa-times"></i></td>
+            </tr>
+        </tbody>-->
+    </table>
+</div>

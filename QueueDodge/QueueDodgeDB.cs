@@ -9,7 +9,6 @@ namespace QueueDodge
     {
         public DbSet<LadderChange> LadderChanges { get; set; }
         public DbSet<BattleNetRequest> BattleNetRequests { get; set; }
-        //public DbSet<LadderEntryComparison> LeaderboardComparisons { get; set; }
 
         public DbSet<Character> Characters { get; set; }
         public DbSet<Class> Classes { get; set; }

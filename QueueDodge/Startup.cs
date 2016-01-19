@@ -15,11 +15,9 @@ public class Startup
 {
     public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
     {
-        // link the original startup project's root for the config.json
         var builder = new ConfigurationBuilder()
             .SetBasePath(appEnv.ApplicationBasePath)
             .AddJsonFile("config.json");
-          //  .AddJsonFile($"config.{env.EnvironmentName}.json", optional: true);
 
         builder.AddEnvironmentVariables();
         Configuration = builder.Build();
@@ -32,11 +30,8 @@ public class Startup
         services.AddEntityFramework()
             .AddSqlServer()
             .AddDbContext<QueueDodgeDB>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
-
-       // services.AddCaching();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-    {
-    }
+    { }
 }

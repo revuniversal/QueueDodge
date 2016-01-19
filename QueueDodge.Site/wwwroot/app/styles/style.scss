@@ -1,12 +1,12 @@
 ﻿$border: #111111;
-$background: #38303C;
-$card-background: rgba(6,9,11,0.7);
+$background: #1C2126;
+$card-background: rgba(23,27,31,0.7);
 $defaultColor: #fcfcfc;
 $fontColor: #fcfcfc;
-$navbarColor: rgba(6,9,11,1);
+$navbarColor: #15202B;
 $tableStripe1: #2B1507;
 $tableStripe2: #231207;
-
+$footer: #3F3F46;
 body {
     padding: 0;
     margin: 0;
@@ -14,7 +14,7 @@ body {
     color: $defaultColor;
     font-family: 'Roboto Condensed', sans-serif;
     height: 100%;
-    background-image: url('../images/bg.jpg');
+   
     background-size:cover;
     background-attachment: fixed;
 }
@@ -52,14 +52,15 @@ nav {
             padding: 0 20px 0 20px;
             border-left: 1px solid $border;
             height: 50px;
+            color:#fff;
+
+            a{
+                color:#fff;
+            }
         }
 
         li:first-child {
             border-left: 0;
-        }
-
-        li:hover {
-            color: #83B900;
         }
     }
 }
@@ -68,7 +69,11 @@ main {
     position: relative;
     top: 51px;
 }
+footer{
 
+    background-color:$footer;
+
+}
 h3{
     margin-top:0;
 }
@@ -165,24 +170,17 @@ a, a:hover {
     cursor: pointer;
 }
 
-
-h1 {
-    position: relative;
-    top: 25px;
-    margin: 0;
-    color: white;
-    text-align: center;
-}
-
 .card {
     background: $card-background;
     border-radius: 2px;
+    border:$border;
     margin: 1rem;
     position: relative;
     padding: 25px;
     height: auto;
     width: 100%;
     overflow-y: auto;
+    color:$defaultColor;
 }
 
 .auto-card {

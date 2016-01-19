@@ -10,27 +10,14 @@ inject = require('gulp-inject'),
 angularFilesort = require('gulp-angular-filesort'),
 concat = require('gulp-concat'),
 uglify = require('gulp-uglify'),
-sourcemaps = require('gulp-sourcemaps')
-
-
-
-
-gulp.task('BOWER_INJECT', function () {
-
-    var target = gulp.src('./wwwroot/index.html');
-    return target
-       .pipe(inject(gulp.src(mainBowerFiles(), { read: false }).pipe(concat('vendor.js')), { name: 'bower', relative: true }))
-       .pipe(gulp.dest('./wwwroot/'));
-});
-
-
+sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('INJECT', function () {
 
 
     var css = gulp.src(['./wwwroot/**/*.css']);
 
-    var appScripts = gulp.src(['./wwwroot/app/**/*.js', '!./wwwroot/vendor/**/*.js', '!./wwwroot/lib/**/*.js', '!./wwwroot/app/app.js']).pipe(angularFilesort());
+    var appScripts = gulp.src(['./wwwroot/app2/**/*.js', '!./wwwroot/vendor/**/*.js', '!./wwwroot/lib/**/*.js', '!./wwwroot/app2/app.js']).pipe(angularFilesort());
     var target = gulp.src('./wwwroot/index.html');
 
 

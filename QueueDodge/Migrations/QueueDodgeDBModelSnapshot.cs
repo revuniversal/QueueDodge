@@ -172,6 +172,48 @@ namespace QueueDodge.Migrations
                     b.HasIndex("RealmID");
                 });
 
+            modelBuilder.Entity("QueueDodge.Models.LadderEntry", b =>
+                {
+                    b.ToTable("LadderEntry");
+
+                    b.Property<int>("Ranking")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ClassID");
+
+                    b.Property<int>("FactionID");
+
+                    b.Property<int>("GenderID");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("RaceID");
+
+                    b.Property<int>("Rating");
+
+                    b.Property<int>("RealmID");
+
+                    b.Property<string>("RealmName");
+
+                    b.Property<string>("RealmSlug");
+
+                    b.Property<int>("RequestID");
+
+                    b.Property<int>("SeasonLosses");
+
+                    b.Property<int>("SeasonWins");
+
+                    b.Property<int>("SpecID");
+
+                    b.Property<int>("WeeklyLosses");
+
+                    b.Property<int>("WeeklyWins");
+
+                    b.HasKey("Ranking");
+
+                    b.HasIndex("RequestID");
+                });
+
             modelBuilder.Entity("QueueDodge.Models.Race", b =>
                 {
                     b.ToTable("Race");
@@ -270,6 +312,13 @@ namespace QueueDodge.Migrations
                     b.HasOne("QueueDodge.Models.Realm")
                         .WithMany()
                         .HasForeignKey("RealmID");
+                });
+
+            modelBuilder.Entity("QueueDodge.Models.LadderEntry", b =>
+                {
+                    b.HasOne("QueueDodge.Models.BattleNetRequest")
+                        .WithMany()
+                        .HasForeignKey("RequestID");
                 });
 
             modelBuilder.Entity("QueueDodge.Models.Race", b =>

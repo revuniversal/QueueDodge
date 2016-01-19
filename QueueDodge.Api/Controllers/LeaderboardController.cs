@@ -9,28 +9,36 @@ using System.Threading.Tasks;
 
 namespace QueueDodge.Api.Controllers
 {
-    //   [RoutePrefix("api/region/{region}/leaderboard")]
     [Route("api/leaderboard")]
     public class LeaderboardController : Controller
     {
         private IMemoryCache cache { get; set; }
-        private LeaderboardService leaderboards { get; set; }
+        private LeaderboardService leaderboard { get; set; }
 
         public LeaderboardController(IMemoryCache cache)
         {
-            this.leaderboards = new LeaderboardService();
+            this.leaderboard = new LeaderboardService(cache);
             this.cache = cache;
         }
 
         [HttpGet]
+        public LeaderboardViewModel GetLeaderboard(LeaderboardFilter filter)
+        {
+            var vm = leaderboard.GetLeaderboard(filter);
+            return vm;
+        }
+
+        [HttpGet]
+        [Route("activity")]
         public async Task GetRecentActivity(string bracket, string region, string locale)
         {
-            // TODO:  Perform parameter checking here.
+            var key = "INSERT-BATTLENET-KEY-HERE";
             var _locale = (BattleDotSwag.Locale)Enum.Parse(typeof(BattleDotSwag.Locale), locale);
-            var _region = (BattleDotSwag.Region)Enum.Parse(typeof(BattleDotSwag.Region), locale);
-            var key = "YOUR KEY HERE";
+            var _region = (BattleDotSwag.Region)Enum.Parse(typeof(BattleDotSwag.Region), region);
+
             var service = new LeaderboardIntegrationService(key);
-            await service.GetRecentActivity(bracket, _locale, key, cache, _region);
+            await service.GetRecentActivity(bracket, _locale, _region, key, cache, WebSocketMiddleware.Broadcast);
         }
+
     }
 }

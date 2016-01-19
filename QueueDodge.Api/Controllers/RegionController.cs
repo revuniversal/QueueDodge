@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace QueueDodge.Api.Controllers
 {
-    // [RoutePrefix("api/region")]
     [Route("api/[controller]")]
     public class RegionController : Controller
     {

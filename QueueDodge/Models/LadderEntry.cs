@@ -1,10 +1,12 @@
-﻿namespace QueueDodge.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace QueueDodge.Models
 {
     public class LadderEntry
     {
-        public int ID { get; set; }
-        public BattleNetRequest Request { get; set; }
+        [Key]
         public int Ranking { get; set; }
+        public int RequestID { get; set; }
         public int Rating { get; set; }
         public string Name { get; set; }
         public int RealmID { get; set; }
@@ -19,6 +21,8 @@
         public int SeasonLosses { get; set; }
         public int WeeklyWins { get; set; }
         public int WeeklyLosses { get; set; }
+
+        public BattleNetRequest Request { get; set; }
 
         public LadderEntry() { }
         public LadderEntry(BattleDotSwag.PVP.Row entry, BattleNetRequest request)

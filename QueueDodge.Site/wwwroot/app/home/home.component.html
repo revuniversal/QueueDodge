@@ -1,0 +1,34 @@
+﻿<h1>Queue Dodge</h1>
+<p>I hate queueing into cheaters.  So I made this site.</p>
+<br />
+<div style="position:relative; left:25px;">
+    <h3>
+        Live Activity Tracking
+        <br />
+        <small>No more waiting. See ladder changes right as they happen.</small>
+    </h3>
+    <br />
+    <h3>
+        The Watcher
+        <br />
+        <small>Tell QueueDodge which player to watch for and it will notify you when they get out of a game.</small>
+    </h3>
+    <br />
+    <h3>
+        The Ladder
+        <br />
+        <small>Rich searching capabilities and statistics.</small>
+    </h3>
+    <br />
+    <h3>
+        Open Source
+        <br />
+        <small>All code is available on <a href="https://github.com/NickolasAcosta/QueueDodge">GitHub</a>.  If this site falls to DDOS.  Anyone can host a copy.</small>
+    </h3>
+    <ul>
+        <li *ngFor="#region of regions">
+            {{ region.Name }}
+            {{ region.ID }}
+        </li>
+    </ul>
+</div>

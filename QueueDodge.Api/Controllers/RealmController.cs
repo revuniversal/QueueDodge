@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNet.Mvc;
 using QueueDodge.Models;
 using QueueDodge.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace QueueDodge.Api.Controllers
 {
-    //[RoutePrefix("api/region/{regionID}")]
-    [Route("api/region")]
+    [Route("api/region/{region}/[controller]")]
     public class RealmController : Controller
     {
         private RealmService realms;
@@ -17,10 +17,10 @@ namespace QueueDodge.Api.Controllers
             realms = new RealmService();
         }
 
-        [HttpGet("{region}/[controller]")]
-        public IEnumerable<Realm> Get(int region)
+        [HttpGet]
+        public IEnumerable<Realm> Get(string region)
         {
-            var selectedRegion = (BattleDotSwag.Region)region;
+            var selectedRegion = (BattleDotSwag.Region)Enum.Parse(typeof(BattleDotSwag.Region),region);
             var data = realms.GetRealms(selectedRegion).OrderBy(p => p.Name).AsEnumerable();
             return data;
         }
