@@ -6,7 +6,9 @@ namespace QueueDodge.Models
     {
         [Key]
         public int Ranking { get; set; }
-        public int RequestID { get; set; }
+        public int RegionID { get; set; }
+        public string Bracket { get; set; }
+        // public int RequestID { get; set; }
         public int Rating { get; set; }
         public string Name { get; set; }
         public int RealmID { get; set; }
@@ -22,12 +24,14 @@ namespace QueueDodge.Models
         public int WeeklyWins { get; set; }
         public int WeeklyLosses { get; set; }
 
-        public BattleNetRequest Request { get; set; }
+        //  public BattleNetRequest Request { get; set; }
 
         public LadderEntry() { }
-        public LadderEntry(BattleDotSwag.PVP.Row entry, BattleNetRequest request)
+        public LadderEntry(BattleDotSwag.PVP.Row entry, BattleDotSwag.Region region, string bracket)
         {
-            Request = request;
+            //  Request = request;
+            Bracket = bracket;
+            RegionID = (int)region;
             Ranking = entry.Ranking;
             Rating = entry.Rating;
             Name = entry.Name;

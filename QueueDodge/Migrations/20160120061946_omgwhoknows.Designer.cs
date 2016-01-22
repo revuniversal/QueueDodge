@@ -8,9 +8,10 @@ using QueueDodge;
 namespace QueueDodge.Migrations
 {
     [DbContext(typeof(QueueDodgeDB))]
-    partial class QueueDodgeDBModelSnapshot : ModelSnapshot
+    [Migration("20160120061946_omgwhoknows")]
+    partial class omgwhoknows
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc2-16649")

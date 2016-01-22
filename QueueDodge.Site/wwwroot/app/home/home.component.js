@@ -23,7 +23,11 @@ System.register(['angular2/core', 'angular2/common', '../services/region.service
             }],
         execute: function() {
             HomeComponent = (function () {
-                function HomeComponent() {
+                function HomeComponent(regionService) {
+                    var _this = this;
+                    regionService
+                        .getRegions()
+                        .subscribe(function (res) { return _this.regions = res; });
                 }
                 HomeComponent = __decorate([
                     core_1.Component({
@@ -32,7 +36,7 @@ System.register(['angular2/core', 'angular2/common', '../services/region.service
                         providers: [region_service_1.RegionService],
                         directives: [common_1.CORE_DIRECTIVES]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [region_service_1.RegionService])
                 ], HomeComponent);
                 return HomeComponent;
             })();

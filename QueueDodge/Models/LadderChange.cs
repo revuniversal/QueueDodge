@@ -9,8 +9,6 @@
 
         public string Bracket { get; set; }
         public string Name { get; set; }
-        public int RealmID { get; set; }
-        public int RegionID { get; set; }
 
         public int PreviousFaction { get; set; }
         public int DetectedFaction { get; set; }
@@ -35,7 +33,7 @@
         public int PreviousGenderID { get; set; }
         public int DetectedGenderID { get; set; }
         
-        public virtual Realm Realm { get; set; }
+        public Realm Realm { get; set; }
         public virtual BattleNetRequest PreviousRequest { get; set; }
         public virtual BattleNetRequest CurrentRequest { get; set; }
 
@@ -43,11 +41,26 @@
         { }
         public LadderChange(LadderEntry previous, LadderEntry detected)
         {
+
             Name = detected.Name;
-            Bracket = detected.Request.Bracket;
-            RegionID = detected.Request.RegionID;
-            RealmID = detected.RealmID;
-            PreviousRequestID = previous.Request.ID;
+            Bracket = detected.Bracket;
+
+            var region = new Region()
+            {
+            ID = detected.RegionID,
+            Name = ((BattleDotSwag.Region)detected.RegionID).ToString()
+            };
+
+            var realm = new Realm()
+            {
+                ID = detected.RealmID,
+                Name = detected.RealmName,
+                Slug = detected.RealmSlug,
+                Region = region
+            };
+
+            Realm = realm;
+            PreviousRequestID = 0;
             PreviousClass = previous.ClassID;
             PreviousFaction = previous.FactionID;
             PreviousGenderID = previous.GenderID;
@@ -59,7 +72,7 @@
             PreviousSeasonLosses = previous.SeasonLosses;
             PreviousWeeklyWins = previous.WeeklyWins;
             PreviousWeeklyLosses = previous.WeeklyLosses;
-            CurrentRequestID = detected.Request.ID;
+            CurrentRequestID = 0;
             DetectedClass = detected.ClassID;
             DetectedFaction = detected.FactionID;
             DetectedGenderID = detected.GenderID;

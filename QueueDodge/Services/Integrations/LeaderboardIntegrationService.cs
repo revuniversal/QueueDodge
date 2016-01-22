@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Memory;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Newtonsoft.Json.Serialization;
 
 namespace QueueDodge.Integrations
 {
@@ -65,21 +66,19 @@ namespace QueueDodge.Integrations
 
             var ladder = JsonConvert.DeserializeObject<Leaderboard>(json);
 
-
-
-            foreach(var entry in ladder.Rows)
+            foreach (var entry in ladder.Rows)
             {
-                var ladderEntry = new LadderEntry(entry, addedRequest);
+                var ladderEntry = new LadderEntry(entry, region, bracket);
                 leaderboard.Add(ladderEntry);
-                CompareWithCache(ladderEntry, cache, Send);
+                CompareWithCache(ladderEntry, cache, Send, region);
             };
 
             cache.Set(region + ":" + bracket, leaderboard);
         }
 
-        private async Task CompareWithCache(LadderEntry entry, IMemoryCache cache, Func<string, Task> Send)
+        private async Task CompareWithCache(LadderEntry entry, IMemoryCache cache, Func<string, Task> Send, BattleDotSwag.Region region)
         {
-            var key = entry.Request.RegionID + ":" + entry.RealmID + ":" + entry.Name;
+            var key = (int)region + ":" + entry.RealmID + ":" + entry.Name;
 
             LadderEntry cachedEntry = default(LadderEntry);
 
@@ -93,15 +92,15 @@ namespace QueueDodge.Integrations
 
                 if (change.Changed())
                 {
-                    SaveChange(change);
-                    BroadcastChange(change, Send);              
+                  //  SaveChange(change);
+                    BroadcastChange(change, Send);
                 }
             }
         }
 
         private async Task BroadcastChange(LadderChange change, Func<string, Task> Send)
         {
-            var json = JsonConvert.SerializeObject(change);
+            var json = JsonConvert.SerializeObject(change, new JsonSerializerSettings() { ContractResolver = new CamelCasePropertyNamesContractResolver()});
             await Send(json);
         }
 
