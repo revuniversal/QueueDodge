@@ -9,7 +9,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1;
-    var RegionService;
+    var LeaderboardService;
     return {
         setters:[
             function (core_1_1) {
@@ -19,31 +19,18 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
                 http_1 = http_1_1;
             }],
         execute: function() {
-            RegionService = (function () {
-                function RegionService(http) {
+            LeaderboardService = (function () {
+                function LeaderboardService(http) {
                     this.http = http;
-                    // TODO: default to "us".  check local storage for users default eventually.
-                    this.region = "us";
-                    this.regionChanged = new core_1.EventEmitter();
                 }
-                RegionService.prototype.changeRegion = function (region) {
-                    this.region = region;
-                    this.regionChanged.emit(region);
-                };
-                RegionService.prototype.getRegions = function () {
-                    return this
-                        .http
-                        .get("api/region")
-                        .map(function (res) { return res.json(); });
-                };
-                RegionService = __decorate([
+                LeaderboardService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])
-                ], RegionService);
-                return RegionService;
+                ], LeaderboardService);
+                return LeaderboardService;
             })();
-            exports_1("RegionService", RegionService);
+            exports_1("LeaderboardService", LeaderboardService);
         }
     }
 });
-//# sourceMappingURL=region.service.js.map
+//# sourceMappingURL=leaderboard.service.js.map

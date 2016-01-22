@@ -13499,6 +13499,7 @@
       "Microsoft.AspNet.Hosting >= 1.0.0-rc2-*",
       "Microsoft.AspNet.Http >= 1.0.0-rc2-*",
       "Microsoft.AspNet.Http.Abstractions >= 1.0.0-rc2-*",
+      "Microsoft.AspNet.Cors >= 6.0.0-rc2-*",
       "Microsoft.AspNet.Server.Kestrel >= 1.0.0-rc2-*",
       "System.Net.WebSockets >= 4.0.0-rc2-*",
       "Microsoft.AspNet.WebSockets.Server >= 1.0.0-rc2-16106",

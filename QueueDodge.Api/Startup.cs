@@ -1,4 +1,5 @@
 ﻿using System;
+using static System.Console;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -61,7 +62,10 @@ namespace QueueDodge.Api
 
             app.UseWebSockets();
 
-            app.Map("/ws", WebSocketMiddleware.WebSocketConnect);
+
+            app.Map("/ws/us/2v2", US2v2.WebSocketConnect);
+            app.Map("/ws/us/3v3", US3v3.WebSocketConnect);
+
 
             app.Run(async context =>
             {
