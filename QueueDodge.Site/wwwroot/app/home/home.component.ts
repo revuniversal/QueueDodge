@@ -9,5 +9,12 @@ import {RegionService} from '../services/region.service';
     directives: [CORE_DIRECTIVES]
 })
 export class HomeComponent{
+    regions: any;
+    private regionService: RegionService;
 
+    constructor(regionService: RegionService) {
+        regionService
+            .getRegions()
+            .subscribe(res => this.regions = res);
+    }
 }

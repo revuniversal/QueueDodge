@@ -34,9 +34,8 @@
                 <td>
                     <img class="icon-frame"  ng-src="{{'app/images/faction/faction_' + change.detectedFaction + '.jpg'}}" />
                     <span ng-class="{
-                          'text-primary': change.detectedFaction === 0,
-                          'text-danger': change.detectedFaction === 1
-
+                          text-primary: change.detectedFaction === 0,
+                          text-danger: change.detectedFaction === 1
                           }">
                         {{change.realm.name}}
                     </span>
@@ -44,11 +43,7 @@
                 <td class="text-center">
                     {{change.detectedRanking}}
                     <small>
-                        <span ng-class="{
-                          'text-success': change.previousRanking-change.detectedRanking > 0,
-                          'text-danger': change.previousRanking-change.detectedRanking < 0
-
-                          }">
+                        <span ng-class="{text-success: (change.previousRanking-change.detectedRanking > 0),text-danger: (change.previousRanking-change.detectedRanking < 0)}">
                             ({{change.detectedRanking-change.previousRanking}})
                         </span>
                     </small>
@@ -56,10 +51,7 @@
                 <td class="text-center">
                     {{change.detectedRating}}
                     <small>
-                        <span ng-class="{
-                              'text-success': change.detectedRating - change.previousRating > 0,
-                              'text-danger': change.detectedRating - change.previousRating < 0,
-                              }">
+                        <span ng-class="{text-success: (change.previousRating - change.detectedRating) > 0, text-danger: (change.previousRating - change.detectedRating) < 0}">
                             ({{change.detectedRating - change.previousRating}})
                         </span>
                     </small>

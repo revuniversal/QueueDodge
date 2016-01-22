@@ -17,7 +17,7 @@ namespace QueueDodge.Services
         {
             return data
                 .Realms
-                .Where(p => region == BattleDotSwag.Region.all || p.RegionID == (int)region)
+                .Where(p => region == BattleDotSwag.Region.all || p.Region.ID == (int)region)
                 .AsEnumerable();
         }
     }
