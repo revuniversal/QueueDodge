@@ -73,48 +73,38 @@ table {
     }
 }
 
-.deathknight {
-    color: rgba( 196, 30, 59,1);
+.warrior, ._1 {
+    color: rgba(199, 156, 110,1);
 }
-
-.druid {
-    color: rgba(255, 125, 10,1);
-}
-
-.hunter {
-    color: rgba(171, 212, 115,1);
-}
-
-.mage {
-    color: rgba(105, 204, 240,1);
-}
-
-.monk {
-    color: rgba(0, 255, 150,1);
-}
-
-.paladin {
+.paladin, ._2 {
     color: rgba(245, 140, 186,1);
 }
-
-.priest {
-    color: rgba(255, 255, 255,1);
+.hunter, ._3 {
+    color: rgba(171, 212, 115,1);
 }
-
-.rogue {
+.rogue, ._4 {
     color: rgba(255, 245, 105,1);
 }
-
-.shaman {
+.priest, ._5 {
+    color: rgba(255, 255, 255,1);
+}
+.deathknight, ._6 {
+    color: rgba( 196, 30, 59,1);
+}
+.shaman, ._7 {
     color: rgba(0, 112, 222,1);
 }
-
-.warlock {
+.mage, ._8 {
+    color: rgba(105, 204, 240,1);
+}
+.warlock, ._9 {
     color: rgba(148, 130, 201,1);
 }
-
-.warrior {
-    color: rgba(199, 156, 110,1);
+.monk, ._10 {
+    color: rgba(0, 255, 150,1);
+}
+.druid, ._11 {
+    color: rgba(255, 125, 10,1);
 }
 
 select {

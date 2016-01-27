@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "compilationOptions": {
     "emitEntryPoint": true
@@ -6,6 +6,8 @@
 
   "dependencies": {
     "Microsoft.AspNet.Hosting": "1.0.0-rc2-*",
+    "Microsoft.AspNet.Routing": "1.0.0-rc2-16139",
+    "Microsoft.AspNet.FileProviders": "1.0.0-beta5-11261",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc2-*",
     "Microsoft.AspNet.StaticFiles": "1.0.0-rc2-*",
     "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc2-*",

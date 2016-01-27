@@ -13,24 +13,14 @@ namespace QueueDodge.Api.Controllers
     public class LeaderboardController : Controller
     {
         private IMemoryCache cache { get; set; }
-       // private LeaderboardService leaderboard { get; set; }
 
         public LeaderboardController(IMemoryCache cache)
         {
-           // this.leaderboard = new LeaderboardService(cache);
             this.cache = cache;
         }
 
-        //[HttpGet]
-        //public LeaderboardViewModel GetLeaderboard(LeaderboardFilter filter)
-        //{
-        //    //var vm = leaderboard.GetLeaderboard(filter);
-        //   // return vm;
-        //}
-
         [HttpGet]
-        [Route("activity")]
-        public void GetRecentActivity(string bracket, string region, string locale)
+        public void GetActivity(string region, string bracket, string locale)
         {
             var key = "vftjkwdyvev3p4m9jrnfxgsdu2dz68yd";
             var _locale = (BattleDotSwag.Locale)Enum.Parse(typeof(BattleDotSwag.Locale), locale);
@@ -46,12 +36,18 @@ namespace QueueDodge.Api.Controllers
                 }
                 else if (bracket == "3v3")
                 {
+                    Task.WaitAll(US3v3.Broadcast("clear"));
                     Task.WaitAll(service.GetRecentActivity(bracket, _locale, _region, key, cache, US3v3.Broadcast));
                 }
+                //else if (bracket == "5v5")
+                //{
+                //    Task.WaitAll(service.GetRecentActivity(bracket, _locale, _region, key, cache, US3v3.Broadcast));
+                //}
+                //else if (bracket == "rbg")
+                //{
+                //    Task.WaitAll(service.GetRecentActivity(bracket, _locale, _region, key, cache, US3v3.Broadcast));
+                //}
             }
-
-            
         }
-
     }
 }

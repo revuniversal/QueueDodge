@@ -4,9 +4,6 @@
     {
         public int ID { get; set; }
 
-        public int PreviousRequestID { get; set; }
-        public int CurrentRequestID { get; set; }
-
         public string Bracket { get; set; }
         public string Name { get; set; }
 
@@ -34,11 +31,7 @@
         public int DetectedGenderID { get; set; }
         
         public Realm Realm { get; set; }
-        public virtual BattleNetRequest PreviousRequest { get; set; }
-        public virtual BattleNetRequest CurrentRequest { get; set; }
 
-        public LadderChange()
-        { }
         public LadderChange(LadderEntry previous, LadderEntry detected)
         {
 
@@ -60,7 +53,6 @@
             };
 
             Realm = realm;
-            PreviousRequestID = 0;
             PreviousClass = previous.ClassID;
             PreviousFaction = previous.FactionID;
             PreviousGenderID = previous.GenderID;
@@ -72,7 +64,6 @@
             PreviousSeasonLosses = previous.SeasonLosses;
             PreviousWeeklyWins = previous.WeeklyWins;
             PreviousWeeklyLosses = previous.WeeklyLosses;
-            CurrentRequestID = 0;
             DetectedClass = detected.ClassID;
             DetectedFaction = detected.FactionID;
             DetectedGenderID = detected.GenderID;

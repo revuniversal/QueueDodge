@@ -9,7 +9,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1;
-    var ActivityService;
+    var LiveService;
     return {
         setters:[
             function (core_1_1) {
@@ -19,12 +19,12 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
                 http_1 = http_1_1;
             }],
         execute: function() {
-            ActivityService = (function () {
-                function ActivityService(http) {
-                    this.activityDetected = new core_1.EventEmitter();
+            LiveService = (function () {
+                function LiveService(http) {
                     this.http = http;
+                    this.activityDetected = new core_1.EventEmitter();
                 }
-                ActivityService.prototype.connect = function (bracket, region) {
+                LiveService.prototype.connect = function (bracket, region) {
                     var _this = this;
                     this.socket = new WebSocket("wss://localhost/ws/" + region + "/" + bracket);
                     this.socket.onopen = function (event) { return _this.onConnect(event, region, bracket); };
@@ -32,35 +32,42 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
                     this.socket.onclose = function (event) { return _this.onClose(event, region, bracket); };
                     this.socket.onerror = function (event) { return _this.onError(event, region, bracket); };
                 };
-                ActivityService.prototype.disconnect = function () {
+                LiveService.prototype.disconnect = function () {
                     this.socket.close();
                 };
-                ActivityService.prototype.onConnect = function (ev, region, bracket) {
+                LiveService.prototype.onConnect = function (ev, region, bracket) {
                     console.log("connected " + region + " " + bracket);
                 };
-                ActivityService.prototype.onMessage = function (ev, service) {
-                    service.activityDetected.emit(JSON.parse(ev.data));
+                LiveService.prototype.onMessage = function (ev, service) {
+                    var message;
+                    if (ev.data === "clear") {
+                        message = "clear";
+                    }
+                    else {
+                        message = JSON.parse(ev.data);
+                    }
+                    service.activityDetected.emit(message);
                 };
-                ActivityService.prototype.onClose = function (ev, region, bracket) {
+                LiveService.prototype.onClose = function (ev, region, bracket) {
                     console.log("closed " + region + " " + bracket);
                 };
-                ActivityService.prototype.onError = function (ev, region, bracket) {
+                LiveService.prototype.onError = function (ev, region, bracket) {
                     console.log("error " + region + " " + bracket);
                 };
-                ActivityService.prototype.getActivity = function (region, bracket) {
+                LiveService.prototype.getActivity = function (region, bracket) {
                     return this
                         .http
                         .get("api/leaderboard/activity?region=" + region + "&bracket=" + bracket + "&locale=en_us")
                         .map(function (res) { return res.json(); });
                 };
-                ActivityService = __decorate([
+                LiveService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])
-                ], ActivityService);
-                return ActivityService;
+                ], LiveService);
+                return LiveService;
             })();
-            exports_1("ActivityService", ActivityService);
+            exports_1("LiveService", LiveService);
         }
     }
 });
-//# sourceMappingURL=activity.service.js.map
+//# sourceMappingURL=live.service.js.map

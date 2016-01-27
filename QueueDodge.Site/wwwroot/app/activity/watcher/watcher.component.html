@@ -1,7 +1,6 @@
 ﻿<div>
-    <h1>The Watcher <small>{{bracket}} {{region | uppercase}}</small></h1>
-    <!--<form ng-submit="vm.watchPlayer()">
-        <div class="row">
+    <h1>The Watcher</h1>
+        <!--<div class="row">
             <div class="col-md-4">
                 <label>Realm</label>
                 <br />
@@ -19,9 +18,7 @@
                 <br />
                 <button type="submit" class="btn btn-primary">Watch Player</button>
             </div>
-        </div>
-
-    </form>-->
+        </div>-->
     <table class="table table-condensed">
         <thead>
             <tr>
@@ -34,30 +31,26 @@
                 <th>Remove</th>
             </tr>
         </thead>
-     <!--   <tbody>
-            <tr ng-repeat="player in vm.players">
-                <td><img ng-src="{{'app/images/region/' + player.region + '.png'}}" /></td>
+        <tbody>
+            <tr *ngFor="#player of watcher.watchedPlayers">
+                <td><img src="app/images/region/{{player.regionID}}.png" /></td>
                 <td>
-                    <img class="icon-frame" ng-src="{{'app/images/race/race_' + player.race + '_' + player.gender + '.jpg'}}" />
-                    <img class="icon-frame" ng-src="{{'app/images/class/class_' + player.playerClass + '.jpg'}}" />
-                    <img class="icon-frame" ng-src="{{'app/images/spec/spec_' + player.specialization + '.jpg'}}" />
+                    <img class="icon-frame" src="app/images/race/race_{{player.raceID}}_{{player.genderID}}.jpg" />
+                    <img class="icon-frame" src="app/images/class/class_{{player.classID}}.jpg" />
+                    <img class="icon-frame" src="app/images/spec/spec_{{player.specializationID}}.jpg" />
                     {{player.name}}
                 </td>
                 <td>
-                    <img class="icon-frame" ng-src="{{'app/images/faction/faction_' + player.faction + '.jpg'}}" />
-                    <span ng-class="{
-                          'text-primary': player.faction === 0,
-                          'text-danger': player.faction === 1
-
-                          }">
+                    <img class="icon-frame" src="app/images/faction/faction_{{player.factionID}}.jpg" />
+                    <span>
                         {{player.realm}}
                     </span>
                 </td>
-                <td>{{player.ratingProgression}}</td>
-                <td>{{player.rankingProgression}}</td>
+                <td>{{player.ratingProgress}}</td>
+                <td>{{player.rankingProgress}}</td>
                 <td>{{player.timesSeen}}</td>
-                <td class="text-center pointer text-danger" ng-click="vm.removeWatch(player)"><i class="fa fa-times"></i></td>
+                <td class="text-center pointer text-danger" (click)="removeWatch(player)"><i class="fa fa-times"></i></td>
             </tr>
-        </tbody>-->
+        </tbody>
     </table>
 </div>

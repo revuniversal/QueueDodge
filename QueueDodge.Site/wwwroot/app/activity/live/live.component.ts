@@ -1,42 +1,46 @@
 ﻿import {Component, Input, OnInit, OnDestroy} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
-import {ActivityService} from '../../services/activity.service';
+import {LiveService} from './live.service';
+import {WatcherService} from '../watcher/watcher.service';
+import {LadderChange} from '../../models/LadderChange';
+
 @Component({
     selector: 'live',
     templateUrl: '../app/activity/live/live.component.html',
-    directives: [CORE_DIRECTIVES],
-    providers: [ActivityService]
+    directives: [CORE_DIRECTIVES]
 })
 export class LiveComponent implements OnInit, OnDestroy{
     @Input() region: string;
     @Input() bracket: string;
 
-    public activityService: ActivityService;
-    public activity: Array<any>;
+    public liveService: LiveService;
+    private watcher: WatcherService;
+    public activity: Array<LadderChange>;
 
-    constructor(activityService: ActivityService) {
+    constructor(liveService: LiveService, watcher: WatcherService) {
         this.activity = [];
-        this.activityService = activityService;
+        this.liveService = liveService;
+        this.watcher = watcher;
     }
 
-    ngOnInit()
-    {
-        this.activityService.connect(this.bracket, this.region);
-        this.activityService.activityDetected.subscribe(activity => this.addActivity(activity));
+    public ngOnInit(): void {
+        this.liveService.connect(this.bracket, this.region);
+        this.liveService.activityDetected.subscribe((activity:any) => this.addActivity(activity));
+    }    
+    public ngOnDestroy(): void {
+        this.liveService.activityDetected.unsubscribe();
+        this.liveService.disconnect();
     }
-    
-    ngOnDestroy() {
-        this.activityService.activityDetected.unsubscribe();
-        this.activityService.disconnect();
-    }
-
     public addActivity(activity: any): void {
-
-        if (this.activity.length === 50) {
-            this.activity.shift();
+        if (activity === "clear") {
+            this.activity = [];
         }
-
-        this.activity.push(activity);
+        else {
+            this.activity.push(activity);
+        }
+    }
+    public watch(player: LadderChange) {
+        this.watcher.watch(player);
     }
 
     public ratingIncrease(previousRating: number, detectedRating: number): boolean {

@@ -5,7 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Http;
-
+using Microsoft.AspNet.Routing;
+using Microsoft.AspNet.Routing.Template;
 namespace QueueDodge.Site
 {
     public class Startup
@@ -26,6 +27,8 @@ namespace QueueDodge.Site
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            //app.UseAngularServer("app", "/index.html");
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.Run(async context =>

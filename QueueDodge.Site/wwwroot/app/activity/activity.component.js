@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './live/live.component', './watcher/watcher.component', '../services/region.service'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', './live/live.component', './watcher/watcher.component', '../services/region.service', './watcher/watcher.service', './live/live.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', './live/live.component', '.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, live_component_1, watcher_component_1, region_service_1;
+    var core_1, router_1, live_component_1, watcher_component_1, region_service_1, watcher_service_1, live_service_1;
     var ActivityComponent;
     return {
         setters:[
@@ -26,26 +26,43 @@ System.register(['angular2/core', 'angular2/router', './live/live.component', '.
             },
             function (region_service_1_1) {
                 region_service_1 = region_service_1_1;
+            },
+            function (watcher_service_1_1) {
+                watcher_service_1 = watcher_service_1_1;
+            },
+            function (live_service_1_1) {
+                live_service_1 = live_service_1_1;
             }],
         execute: function() {
             ActivityComponent = (function () {
-                function ActivityComponent(regionService, routeParams, router) {
-                    var _this = this;
+                function ActivityComponent(regionService, watcherService, liveService, routeParams, router) {
                     this.region = routeParams.get("region");
                     this.bracket = routeParams.get("bracket");
-                    regionService.regionChanged.subscribe(function (region) { return _this.regionChanged(region); });
                     this.router = router;
+                    this.watcherService = watcherService;
+                    this.regionService = regionService;
+                    this.liveService = liveService;
                 }
+                ActivityComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.subscription = this.regionService.regionChanged.subscribe(function (region) { return _this.regionChanged(region); });
+                };
+                ActivityComponent.prototype.ngOnDestroy = function () {
+                    this.subscription.unsubscribe();
+                };
                 ActivityComponent.prototype.regionChanged = function (region) {
+                    var hostComponent = this.router.hostComponent.name;
+                    alert(hostComponent);
                     this.router.navigate(['Activity', { region: region, bracket: this.bracket }]);
                 };
                 ActivityComponent = __decorate([
                     core_1.Component({
                         selector: 'activity',
                         templateUrl: '../app/activity/activity.component.html',
-                        directives: [live_component_1.LiveComponent, watcher_component_1.WatcherComponent]
+                        directives: [live_component_1.LiveComponent, watcher_component_1.WatcherComponent],
+                        providers: [watcher_service_1.WatcherService, live_service_1.LiveService]
                     }), 
-                    __metadata('design:paramtypes', [region_service_1.RegionService, router_1.RouteParams, router_1.Router])
+                    __metadata('design:paramtypes', [region_service_1.RegionService, watcher_service_1.WatcherService, live_service_1.LiveService, router_1.RouteParams, router_1.Router])
                 ], ActivityComponent);
                 return ActivityComponent;
             })();

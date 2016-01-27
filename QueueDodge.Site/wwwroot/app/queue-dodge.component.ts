@@ -16,7 +16,7 @@ import 'rxjs/Rx';
 ])
 export class QueueDodgeComponent {
     private regionService: RegionService;
-    public region;
+    public region:any;
 
     constructor(regionService: RegionService) {
         this.regionService = regionService;

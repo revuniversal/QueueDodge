@@ -3,6 +3,26 @@
   "version": 2,
   "targets": {
     "DNXCore,Version=v5.0": {
+      "Microsoft.AspNet.FileProviders/1.0.0-beta5-11261": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.FileProviders.Interfaces": "1.0.0-beta5-11261",
+          "System.Collections.Concurrent": "4.0.10-beta-22811",
+          "System.IO.FileSystem": "4.0.0-beta-22811",
+          "System.IO.FileSystem.Watcher": "4.0.0-beta-22811",
+          "System.Linq": "4.0.0-beta-22811",
+          "System.Reflection": "4.0.10-beta-22811",
+          "System.Runtime.Extensions": "4.0.10-beta-22811",
+          "System.Text.RegularExpressions": "4.0.10-beta-22811",
+          "System.Threading": "4.0.10-beta-22811"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.AspNet.FileProviders.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.AspNet.FileProviders.dll": {}
+        }
+      },
       "Microsoft.AspNet.FileProviders.Abstractions/1.0.0-rc2-15922": {
         "type": "package",
         "dependencies": {
@@ -15,6 +35,19 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.AspNet.FileProviders.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNet.FileProviders.Interfaces/1.0.0-beta5-11268": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Caching.Interfaces": "1.0.0-beta5-11245",
+          "System.IO": "4.0.10-beta-22811"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.AspNet.FileProviders.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.AspNet.FileProviders.Interfaces.dll": {}
         }
       },
       "Microsoft.AspNet.FileProviders.Physical/1.0.0-rc2-15922": {
@@ -154,6 +187,40 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.AspNet.Http.Features.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Routing/1.0.0-rc2-16139": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Extensions": "1.0.0-rc2-16106",
+          "Microsoft.AspNet.Routing.Abstractions": "1.0.0-rc2-16139",
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc2-15958",
+          "Microsoft.Extensions.ObjectPool": "1.0.0-rc2-15967",
+          "Microsoft.Extensions.Options": "1.0.0-rc2-15942",
+          "System.Collections": "4.0.11-rc2-23623",
+          "System.Runtime": "4.0.21-rc2-23623",
+          "System.Text.RegularExpressions": "4.0.11-rc2-23623"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.AspNet.Routing.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.AspNet.Routing.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Routing.Abstractions/1.0.0-rc2-16139": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc2-16106",
+          "System.Collections.Concurrent": "4.0.11-rc2-23623",
+          "System.Reflection.Extensions": "4.0.1-rc2-23623",
+          "System.Threading.Tasks": "4.0.11-rc2-23623"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.AspNet.Routing.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.AspNet.Routing.Abstractions.dll": {}
         }
       },
       "Microsoft.AspNet.Server.Kestrel/1.0.0-rc2-16236": {
@@ -410,6 +477,22 @@
           "lib/dotnet5.4/Microsoft.Extensions.Logging.Debug.dll": {}
         }
       },
+      "Microsoft.Extensions.ObjectPool/1.0.0-rc2-15967": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.Debug": "4.0.11-rc2-23623",
+          "System.Resources.ResourceManager": "4.0.1-rc2-23623",
+          "System.Runtime": "4.0.21-rc2-23623",
+          "System.Runtime.Extensions": "4.0.11-rc2-23623",
+          "System.Threading": "4.0.11-rc2-23623"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.Extensions.ObjectPool.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.Extensions.ObjectPool.dll": {}
+        }
+      },
       "Microsoft.Extensions.Options/1.0.0-rc2-15942": {
         "type": "package",
         "dependencies": {
@@ -480,6 +563,18 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.Extensions.WebEncoders.dll": {}
+        }
+      },
+      "Microsoft.Framework.Caching.Interfaces/1.0.0-beta5-11245": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime": "4.0.20-beta-22811"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Caching.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Caching.Interfaces.dll": {}
         }
       },
       "Microsoft.Net.Http.Headers/1.0.0-rc2-16106": {
@@ -1185,6 +1280,26 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x86": {
+      "Microsoft.AspNet.FileProviders/1.0.0-beta5-11261": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.FileProviders.Interfaces": "1.0.0-beta5-11261",
+          "System.Collections.Concurrent": "4.0.10-beta-22811",
+          "System.IO.FileSystem": "4.0.0-beta-22811",
+          "System.IO.FileSystem.Watcher": "4.0.0-beta-22811",
+          "System.Linq": "4.0.0-beta-22811",
+          "System.Reflection": "4.0.10-beta-22811",
+          "System.Runtime.Extensions": "4.0.10-beta-22811",
+          "System.Text.RegularExpressions": "4.0.10-beta-22811",
+          "System.Threading": "4.0.10-beta-22811"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.AspNet.FileProviders.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.AspNet.FileProviders.dll": {}
+        }
+      },
       "Microsoft.AspNet.FileProviders.Abstractions/1.0.0-rc2-15922": {
         "type": "package",
         "dependencies": {
@@ -1197,6 +1312,19 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.AspNet.FileProviders.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNet.FileProviders.Interfaces/1.0.0-beta5-11268": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Caching.Interfaces": "1.0.0-beta5-11245",
+          "System.IO": "4.0.10-beta-22811"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.AspNet.FileProviders.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.AspNet.FileProviders.Interfaces.dll": {}
         }
       },
       "Microsoft.AspNet.FileProviders.Physical/1.0.0-rc2-15922": {
@@ -1336,6 +1464,40 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.AspNet.Http.Features.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Routing/1.0.0-rc2-16139": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Extensions": "1.0.0-rc2-16106",
+          "Microsoft.AspNet.Routing.Abstractions": "1.0.0-rc2-16139",
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc2-15958",
+          "Microsoft.Extensions.ObjectPool": "1.0.0-rc2-15967",
+          "Microsoft.Extensions.Options": "1.0.0-rc2-15942",
+          "System.Collections": "4.0.11-rc2-23623",
+          "System.Runtime": "4.0.21-rc2-23623",
+          "System.Text.RegularExpressions": "4.0.11-rc2-23623"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.AspNet.Routing.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.AspNet.Routing.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Routing.Abstractions/1.0.0-rc2-16139": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc2-16106",
+          "System.Collections.Concurrent": "4.0.11-rc2-23623",
+          "System.Reflection.Extensions": "4.0.1-rc2-23623",
+          "System.Threading.Tasks": "4.0.11-rc2-23623"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.AspNet.Routing.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.AspNet.Routing.Abstractions.dll": {}
         }
       },
       "Microsoft.AspNet.Server.Kestrel/1.0.0-rc2-16236": {
@@ -1595,6 +1757,22 @@
           "lib/dotnet5.4/Microsoft.Extensions.Logging.Debug.dll": {}
         }
       },
+      "Microsoft.Extensions.ObjectPool/1.0.0-rc2-15967": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.Debug": "4.0.11-rc2-23623",
+          "System.Resources.ResourceManager": "4.0.1-rc2-23623",
+          "System.Runtime": "4.0.21-rc2-23623",
+          "System.Runtime.Extensions": "4.0.11-rc2-23623",
+          "System.Threading": "4.0.11-rc2-23623"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.Extensions.ObjectPool.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.Extensions.ObjectPool.dll": {}
+        }
+      },
       "Microsoft.Extensions.Options/1.0.0-rc2-15942": {
         "type": "package",
         "dependencies": {
@@ -1665,6 +1843,18 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.Extensions.WebEncoders.dll": {}
+        }
+      },
+      "Microsoft.Framework.Caching.Interfaces/1.0.0-beta5-11245": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime": "4.0.20-beta-22811"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Caching.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Caching.Interfaces.dll": {}
         }
       },
       "Microsoft.Net.Http.Headers/1.0.0-rc2-16106": {
@@ -2767,6 +2957,26 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x64": {
+      "Microsoft.AspNet.FileProviders/1.0.0-beta5-11261": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.FileProviders.Interfaces": "1.0.0-beta5-11261",
+          "System.Collections.Concurrent": "4.0.10-beta-22811",
+          "System.IO.FileSystem": "4.0.0-beta-22811",
+          "System.IO.FileSystem.Watcher": "4.0.0-beta-22811",
+          "System.Linq": "4.0.0-beta-22811",
+          "System.Reflection": "4.0.10-beta-22811",
+          "System.Runtime.Extensions": "4.0.10-beta-22811",
+          "System.Text.RegularExpressions": "4.0.10-beta-22811",
+          "System.Threading": "4.0.10-beta-22811"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.AspNet.FileProviders.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.AspNet.FileProviders.dll": {}
+        }
+      },
       "Microsoft.AspNet.FileProviders.Abstractions/1.0.0-rc2-15922": {
         "type": "package",
         "dependencies": {
@@ -2779,6 +2989,19 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.AspNet.FileProviders.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNet.FileProviders.Interfaces/1.0.0-beta5-11268": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Caching.Interfaces": "1.0.0-beta5-11245",
+          "System.IO": "4.0.10-beta-22811"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.AspNet.FileProviders.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.AspNet.FileProviders.Interfaces.dll": {}
         }
       },
       "Microsoft.AspNet.FileProviders.Physical/1.0.0-rc2-15922": {
@@ -2918,6 +3141,40 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.AspNet.Http.Features.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Routing/1.0.0-rc2-16139": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Extensions": "1.0.0-rc2-16106",
+          "Microsoft.AspNet.Routing.Abstractions": "1.0.0-rc2-16139",
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc2-15958",
+          "Microsoft.Extensions.ObjectPool": "1.0.0-rc2-15967",
+          "Microsoft.Extensions.Options": "1.0.0-rc2-15942",
+          "System.Collections": "4.0.11-rc2-23623",
+          "System.Runtime": "4.0.21-rc2-23623",
+          "System.Text.RegularExpressions": "4.0.11-rc2-23623"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.AspNet.Routing.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.AspNet.Routing.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Routing.Abstractions/1.0.0-rc2-16139": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc2-16106",
+          "System.Collections.Concurrent": "4.0.11-rc2-23623",
+          "System.Reflection.Extensions": "4.0.1-rc2-23623",
+          "System.Threading.Tasks": "4.0.11-rc2-23623"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.AspNet.Routing.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.AspNet.Routing.Abstractions.dll": {}
         }
       },
       "Microsoft.AspNet.Server.Kestrel/1.0.0-rc2-16236": {
@@ -3177,6 +3434,22 @@
           "lib/dotnet5.4/Microsoft.Extensions.Logging.Debug.dll": {}
         }
       },
+      "Microsoft.Extensions.ObjectPool/1.0.0-rc2-15967": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.Debug": "4.0.11-rc2-23623",
+          "System.Resources.ResourceManager": "4.0.1-rc2-23623",
+          "System.Runtime": "4.0.21-rc2-23623",
+          "System.Runtime.Extensions": "4.0.11-rc2-23623",
+          "System.Threading": "4.0.11-rc2-23623"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.Extensions.ObjectPool.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.Extensions.ObjectPool.dll": {}
+        }
+      },
       "Microsoft.Extensions.Options/1.0.0-rc2-15942": {
         "type": "package",
         "dependencies": {
@@ -3247,6 +3520,18 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.Extensions.WebEncoders.dll": {}
+        }
+      },
+      "Microsoft.Framework.Caching.Interfaces/1.0.0-beta5-11245": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime": "4.0.20-beta-22811"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Caching.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Caching.Interfaces.dll": {}
         }
       },
       "Microsoft.Net.Http.Headers/1.0.0-rc2-16106": {
@@ -4350,6 +4635,22 @@
     }
   },
   "libraries": {
+    "Microsoft.AspNet.FileProviders/1.0.0-beta5-11261": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "h6sLSo7OaIeMX8TtWpC36J81AoR+GueLdjl0AHcZm+LqLDryops6pehrebh4mizO/Nw7RyMGLLQvbB7aZ5s/NA==",
+      "files": [
+        "lib/dnx451/Microsoft.AspNet.FileProviders.dll",
+        "lib/dnx451/Microsoft.AspNet.FileProviders.xml",
+        "lib/dnxcore50/Microsoft.AspNet.FileProviders.dll",
+        "lib/dnxcore50/Microsoft.AspNet.FileProviders.xml",
+        "lib/net45/Microsoft.AspNet.FileProviders.dll",
+        "lib/net45/Microsoft.AspNet.FileProviders.xml",
+        "Microsoft.AspNet.FileProviders.1.0.0-beta5-11261.nupkg",
+        "Microsoft.AspNet.FileProviders.1.0.0-beta5-11261.nupkg.sha512",
+        "Microsoft.AspNet.FileProviders.nuspec"
+      ]
+    },
     "Microsoft.AspNet.FileProviders.Abstractions/1.0.0-rc2-15922": {
       "type": "package",
       "serviceable": true,
@@ -4362,6 +4663,22 @@
         "Microsoft.AspNet.FileProviders.Abstractions.1.0.0-rc2-15922.nupkg",
         "Microsoft.AspNet.FileProviders.Abstractions.1.0.0-rc2-15922.nupkg.sha512",
         "Microsoft.AspNet.FileProviders.Abstractions.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.FileProviders.Interfaces/1.0.0-beta5-11268": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "DOQOnEmsHFLHHEc49mMxBUYSzf+t8GtoVeae9FiwFFBO3jpz83q5tzRdyUT7EOashObXVLkeFjvMkLTpSkZ5/w==",
+      "files": [
+        "lib/dnx451/Microsoft.AspNet.FileProviders.Interfaces.dll",
+        "lib/dnx451/Microsoft.AspNet.FileProviders.Interfaces.xml",
+        "lib/dnxcore50/Microsoft.AspNet.FileProviders.Interfaces.dll",
+        "lib/dnxcore50/Microsoft.AspNet.FileProviders.Interfaces.xml",
+        "lib/net45/Microsoft.AspNet.FileProviders.Interfaces.dll",
+        "lib/net45/Microsoft.AspNet.FileProviders.Interfaces.xml",
+        "Microsoft.AspNet.FileProviders.Interfaces.1.0.0-beta5-11268.nupkg",
+        "Microsoft.AspNet.FileProviders.Interfaces.1.0.0-beta5-11268.nupkg.sha512",
+        "Microsoft.AspNet.FileProviders.Interfaces.nuspec"
       ]
     },
     "Microsoft.AspNet.FileProviders.Physical/1.0.0-rc2-15922": {
@@ -4474,6 +4791,34 @@
         "Microsoft.AspNet.Http.Features.1.0.0-rc2-16106.nupkg",
         "Microsoft.AspNet.Http.Features.1.0.0-rc2-16106.nupkg.sha512",
         "Microsoft.AspNet.Http.Features.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.Routing/1.0.0-rc2-16139": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "hBX6zFLXA57ZQXValpFo8Y2jQpmKvIi4z5BKq0hhn660M22ITF2ZLhrThz2a8XuyqAg5RqQNtVfu2O966nNWsw==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.AspNet.Routing.dll",
+        "lib/dotnet5.4/Microsoft.AspNet.Routing.xml",
+        "lib/net451/Microsoft.AspNet.Routing.dll",
+        "lib/net451/Microsoft.AspNet.Routing.xml",
+        "Microsoft.AspNet.Routing.1.0.0-rc2-16139.nupkg",
+        "Microsoft.AspNet.Routing.1.0.0-rc2-16139.nupkg.sha512",
+        "Microsoft.AspNet.Routing.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.Routing.Abstractions/1.0.0-rc2-16139": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "5TQMheaQJzw+HoZk/7n75eiCG9tE3bJybr7ENkYjPGo0g7FFRwyHPnq6O707N2Xst4FQew7C4/YmuwHKV4AhWw==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.AspNet.Routing.Abstractions.dll",
+        "lib/dotnet5.4/Microsoft.AspNet.Routing.Abstractions.xml",
+        "lib/net451/Microsoft.AspNet.Routing.Abstractions.dll",
+        "lib/net451/Microsoft.AspNet.Routing.Abstractions.xml",
+        "Microsoft.AspNet.Routing.Abstractions.1.0.0-rc2-16139.nupkg",
+        "Microsoft.AspNet.Routing.Abstractions.1.0.0-rc2-16139.nupkg.sha512",
+        "Microsoft.AspNet.Routing.Abstractions.nuspec"
       ]
     },
     "Microsoft.AspNet.Server.Kestrel/1.0.0-rc2-16236": {
@@ -4733,6 +5078,18 @@
         "Microsoft.Extensions.Logging.Debug.nuspec"
       ]
     },
+    "Microsoft.Extensions.ObjectPool/1.0.0-rc2-15967": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "wwyfGpmIs3IGow2zSTASn7nmxhapKVe14oNMFUUU6ujVMcoBRQtl7hnAd0aRjJkARYR5aRj/rdXePjlZ0/CcOw==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.Extensions.ObjectPool.dll",
+        "lib/net451/Microsoft.Extensions.ObjectPool.dll",
+        "Microsoft.Extensions.ObjectPool.1.0.0-rc2-15967.nupkg",
+        "Microsoft.Extensions.ObjectPool.1.0.0-rc2-15967.nupkg.sha512",
+        "Microsoft.Extensions.ObjectPool.nuspec"
+      ]
+    },
     "Microsoft.Extensions.Options/1.0.0-rc2-15942": {
       "type": "package",
       "serviceable": true,
@@ -4786,6 +5143,24 @@
         "Microsoft.Extensions.WebEncoders.1.0.0-rc2-16105.nupkg",
         "Microsoft.Extensions.WebEncoders.1.0.0-rc2-16105.nupkg.sha512",
         "Microsoft.Extensions.WebEncoders.nuspec"
+      ]
+    },
+    "Microsoft.Framework.Caching.Interfaces/1.0.0-beta5-11245": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "4UKM6sSdwd+odU0xlJ1SOSPFvQSSWfGIXFsCQL88HFAOWjkBWvQvOJBdajZOQ7cWSZBCBCWGyypjCgS1CzP44Q==",
+      "files": [
+        "lib/dnx451/Microsoft.Framework.Caching.Interfaces.dll",
+        "lib/dnx451/Microsoft.Framework.Caching.Interfaces.xml",
+        "lib/dnxcore50/Microsoft.Framework.Caching.Interfaces.dll",
+        "lib/dnxcore50/Microsoft.Framework.Caching.Interfaces.xml",
+        "lib/net45/Microsoft.Framework.Caching.Interfaces.dll",
+        "lib/net45/Microsoft.Framework.Caching.Interfaces.xml",
+        "lib/win81/Microsoft.Framework.Caching.Interfaces.dll",
+        "lib/win81/Microsoft.Framework.Caching.Interfaces.xml",
+        "Microsoft.Framework.Caching.Interfaces.1.0.0-beta5-11245.nupkg",
+        "Microsoft.Framework.Caching.Interfaces.1.0.0-beta5-11245.nupkg.sha512",
+        "Microsoft.Framework.Caching.Interfaces.nuspec"
       ]
     },
     "Microsoft.Net.Http.Headers/1.0.0-rc2-16106": {
@@ -7501,6 +7876,8 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.AspNet.Hosting >= 1.0.0-rc2-*",
+      "Microsoft.AspNet.Routing >= 1.0.0-rc2-16139",
+      "Microsoft.AspNet.FileProviders >= 1.0.0-beta5-11261",
       "Microsoft.AspNet.Server.Kestrel >= 1.0.0-rc2-*",
       "Microsoft.AspNet.StaticFiles >= 1.0.0-rc2-*",
       "Microsoft.Extensions.Configuration.FileProviderExtensions >= 1.0.0-rc2-*",

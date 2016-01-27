@@ -1,50 +1,54 @@
-﻿<div class="col-md-7 col-sm-12">
-    <h1>Live Activity <small>{{bracket}} {{region | uppercase}}</small></h1>
-    <table class="table table-condensed">
-        <thead>
-            <tr>
-                <th>Region</th>
-                <th>Name</th>
-                <th>Realm</th>
-                <th class="text-center">Rank</th>
-                <th class="text-center">Rating</th>
-                <th>Watch</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="#change of activity">
-                <td>
-                    <img src="app/images/region/{{change.realm.region.id}}.png" />
-                </td>
-                <td>
-                    <img class="icon-frame" src="app/images/race/race_{{change.detectedRace}}_{{change.detectedGenderID}}.jpg" />
-                    <img class="icon-frame" src="app/images/class/class_{{change.detectedClass}}.jpg" />
-                    <img class="icon-frame" src="app/images/spec/spec_{{change.detectedSpec}}.jpg" />
-                    {{change.name}}
-                </td>
-                <td>
-                    <img class="icon-frame" src="app/images/faction/faction_{{change.detectedFaction}}.jpg" />
-                    <span [ngClass]="{'text-primary': isAlliance(change.detectedFaction),'text-danger':isHorde(change.detectedFaction)}">
-                        {{change.realm.name}}
-                    </span>
-                </td>
-                <td class="text-center">
-                    {{change.detectedRanking}}
-                    <small [ngClass]="{'text-success': rankingIncrease(change.previousRanking, change.detectedRanking),'text-danger':!(rankingIncrease(change.previousRanking, change.detectedRanking))}">
-                        ({{change.detectedRanking-change.previousRanking}})
-                    </small>
-                </td>
-                <td class="text-center">
-                    {{change.detectedRating}}
-                    <small [ngClass]="{'text-success': ratingIncrease(change.previousRating,change.detectedRating),'text-danger':!(ratingIncrease(change.previousRating,change.detectedRating))}">
+﻿<div class="row">
+    <div class="col-xs-12">
+        <h1>Live Activity <small>{{bracket}} {{region | uppercase}}</small></h1>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Region</th>
+                    <th>Name</th>
+                    <th>Realm</th>
+                    <th class="text-center">Rank</th>
+                    <th class="text-center">Rating</th>
+                    <th>Watch</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="#change of activity">
+                    <td>
+                        <img src="app/images/region/{{change.realm.region.id}}.png" />
+                    </td>
+                    <td>
+                        <img class="icon-frame" src="app/images/race/race_{{change.detectedRace}}_{{change.detectedGenderID}}.jpg" />
+                        <img class="icon-frame" src="app/images/class/class_{{change.detectedClass}}.jpg" />
+                        <img class="icon-frame" src="app/images/spec/spec_{{change.detectedSpec}}.jpg" />
+                        <span class="_{{change.detectedClass}}">
+                            {{change.name}}
+                        </span>
+                    </td>
+                    <td>
+                        <img class="icon-frame" src="app/images/faction/faction_{{change.detectedFaction}}.jpg" />
+                        <span [ngClass]="{'text-primary': isAlliance(change.detectedFaction),'text-danger':isHorde(change.detectedFaction)}">
+                            {{change.realm.name}}
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        {{change.detectedRanking}}
+                        <small [ngClass]="{'text-success': rankingIncrease(change.previousRanking, change.detectedRanking),'text-danger':!(rankingIncrease(change.previousRanking, change.detectedRanking))}">
+                            ({{change.detectedRanking-change.previousRanking}})
+                        </small>
+                    </td>
+                    <td class="text-center">
+                        {{change.detectedRating}}
+                        <small [ngClass]="{'text-success': ratingIncrease(change.previousRating,change.detectedRating),'text-danger':!(ratingIncrease(change.previousRating,change.detectedRating))}">
                             ({{change.detectedRating - change.previousRating}})
-                    </small>
-                </td>
-                <td>
-                    <a class="text-success" (click)="watchPlayer(change)">WATCH</a>
-                </td>
-            </tr>
-        </tbody>
-        <tfoot></tfoot>
-    </table>
+                        </small>
+                    </td>
+                    <td>
+                        <a class="text-success" (click)="watch(change)">WATCH</a>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
 </div>

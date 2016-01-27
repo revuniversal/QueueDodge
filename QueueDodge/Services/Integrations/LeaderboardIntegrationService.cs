@@ -41,26 +41,13 @@ namespace QueueDodge.Integrations
             string bracket,
             BattleDotSwag.Locale locale,
             BattleDotSwag.Region region,
-            string key,
+            string apiKey,
             IMemoryCache cache,
             Func<string, Task> Send)
         {
-            var endpoint = new LeaderboardEndpoint(bracket, locale, key);
+            var endpoint = new LeaderboardEndpoint(bracket, locale, apiKey);
             var requestor = new BattleNetService();
             var leaderboard = new List<LadderEntry>();
-            var request = new QueueDodge.Models.BattleNetRequest()
-            {
-                Bracket = bracket,
-                Locale = locale.ToString(),
-                RegionID = (int)region,
-                RequestDate = DateTime.Now,
-                RequestType = "leaderboard",
-                Url = requestor.GetUri(endpoint, region).ToString(),
-                Duration = 0
-            };
-
-            var addedRequest = data.BattleNetRequests.Add(request).Entity;
-            data.SaveChanges();
 
             var json = requestor.Get(endpoint, region).Result;
 
@@ -70,51 +57,34 @@ namespace QueueDodge.Integrations
             {
                 var ladderEntry = new LadderEntry(entry, region, bracket);
                 leaderboard.Add(ladderEntry);
-                CompareWithCache(ladderEntry, cache, Send, region);
+                CompareWithCache(ladderEntry, cache, Send, region,bracket);
             };
-
-            cache.Set(region + ":" + bracket, leaderboard);
+            // HACK:  Make this a type.
+            var key = region + ":" + bracket;
+            cache.Set(key, leaderboard);
         }
 
-        private async Task CompareWithCache(LadderEntry entry, IMemoryCache cache, Func<string, Task> Send, BattleDotSwag.Region region)
+        private async Task CompareWithCache(LadderEntry entry, IMemoryCache cache, Func<string, Task> Send, BattleDotSwag.Region region, string bracket)
         {
-            var key = (int)region + ":" + entry.RealmID + ":" + entry.Name;
-
-            LadderEntry cachedEntry = default(LadderEntry);
+            var cachedEntry = default(LadderEntry);
+            // HACK:  Make this a type.
+            var key = (int)region + ":" + entry.RealmID + ":" + entry.Name + ":" + bracket;
 
             var cached = cache.TryGetValue(key, out cachedEntry);
-
             cache.Set(key, entry);
 
             if (cached)
             {
                 var change = new LadderChange(cachedEntry, entry);
-
-                if (change.Changed())
-                {
-                  //  SaveChange(change);
-                    BroadcastChange(change, Send);
-                }
+                if (change.Changed()) BroadcastChange(change, Send);
             }
         }
 
         private async Task BroadcastChange(LadderChange change, Func<string, Task> Send)
         {
-            var json = JsonConvert.SerializeObject(change, new JsonSerializerSettings() { ContractResolver = new CamelCasePropertyNamesContractResolver()});
+            var serializerOptions = new JsonSerializerSettings() { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+            var json = JsonConvert.SerializeObject(change, serializerOptions);
             await Send(json);
-        }
-
-        private async Task SaveChange(LadderChange change)
-        {
-            data.LadderChanges.Add(change);
-            await data.SaveChangesAsync();
-        }
-
-        private int ValidateRealmID(string id)
-        {
-            int realmID = 999;
-            int.TryParse(id, out realmID);
-            return realmID;
         }
     }
 }

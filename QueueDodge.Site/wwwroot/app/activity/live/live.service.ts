@@ -2,14 +2,15 @@
 import {Http, Response, HTTP_PROVIDERS} from 'angular2/http';
 
 @Injectable()
-export class ActivityService {
-    public activityDetected: EventEmitter<any> = new EventEmitter<any>();
+export class LiveService {
+    public activityDetected: EventEmitter<any>; 
     private socket: WebSocket;
     private http: Http;
 
     constructor(http: Http) {
         this.http = http;
-    }
+        this.activityDetected = new EventEmitter<any>();
+    }  
 
     public connect(bracket: string, region: string) {
         this.socket = new WebSocket("wss://localhost/ws/" + region + "/" + bracket);
@@ -19,6 +20,7 @@ export class ActivityService {
         this.socket.onclose = event => this.onClose(event, region, bracket);
         this.socket.onerror = event => this.onError(event, region, bracket);
     }
+
     public disconnect() {
         this.socket.close();
     }
@@ -26,8 +28,15 @@ export class ActivityService {
     public onConnect(ev: Event, region: string, bracket: string) {
         console.log("connected " + region + " " + bracket);
     }
-    public onMessage(ev: MessageEvent, service: ActivityService) {
-        service.activityDetected.emit(JSON.parse(ev.data));
+    public onMessage(ev: MessageEvent, service: LiveService) {
+        let message: any;
+        if (ev.data === "clear") {
+            message = "clear"
+        }
+        else {
+            message = JSON.parse(ev.data);
+        }
+        service.activityDetected.emit(message);
     }
     public onClose(ev: CloseEvent, region: string, bracket: string) {
         console.log("closed " + region + " " + bracket);
