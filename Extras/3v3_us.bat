@@ -1,0 +1,1 @@
+powershell -executionpolicy remotesigned -File "3v3_us.ps1"

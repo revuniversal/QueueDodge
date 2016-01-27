@@ -1,0 +1,1 @@
+powershell -executionpolicy remotesigned -File "2v2_us.ps1"
