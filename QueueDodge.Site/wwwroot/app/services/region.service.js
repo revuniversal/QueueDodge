@@ -30,12 +30,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
                     this.region = region;
                     this.regionChanged.emit(region);
                 };
-                RegionService.prototype.getRegions = function () {
-                    return this
-                        .http
-                        .get("api/region")
-                        .map(function (res) { return res.json(); });
-                };
                 RegionService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

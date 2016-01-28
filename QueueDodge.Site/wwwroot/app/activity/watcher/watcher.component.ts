@@ -2,7 +2,7 @@
 import {CORE_DIRECTIVES} from 'angular2/common';
 import {WatcherService} from './watcher.service';
 import {WatchedPlayer} from './WatchedPlayer';
-import 'rxjs/Rx';
+import {ActivityService} from '../activity.service';
 
 @Component({
     selector: 'watcher',
@@ -11,10 +11,13 @@ import 'rxjs/Rx';
 })
 export class WatcherComponent{
     private watcher: WatcherService;
-    public players: Array<WatchedPlayer>;
 
-    constructor(watcher:WatcherService) {
+    public players: Array<WatchedPlayer>;
+    public activityService: ActivityService;
+
+    constructor(watcher: WatcherService, activityService: ActivityService) {
         this.watcher = watcher;
+        this.activityService = activityService;
     }
 
 }

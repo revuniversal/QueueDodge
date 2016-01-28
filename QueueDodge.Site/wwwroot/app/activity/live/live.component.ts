@@ -3,30 +3,33 @@ import {CORE_DIRECTIVES} from 'angular2/common';
 import {LiveService} from './live.service';
 import {WatcherService} from '../watcher/watcher.service';
 import {LadderChange} from '../../models/LadderChange';
-
+import {ActivityService} from '../activity.service';
+import {WatchedPlayer} from '../watcher/WatchedPlayer';
 @Component({
     selector: 'live',
     templateUrl: '../app/activity/live/live.component.html',
     directives: [CORE_DIRECTIVES]
 })
-export class LiveComponent implements OnInit, OnDestroy{
+export class LiveComponent implements OnInit, OnDestroy {
     @Input() region: string;
     @Input() bracket: string;
 
     public liveService: LiveService;
     private watcher: WatcherService;
     public activity: Array<LadderChange>;
+    public activityService: ActivityService;
 
-    constructor(liveService: LiveService, watcher: WatcherService) {
+    constructor(activityService: ActivityService, liveService: LiveService, watcher: WatcherService) {
         this.activity = [];
         this.liveService = liveService;
         this.watcher = watcher;
+        this.activityService = activityService;
     }
 
     public ngOnInit(): void {
         this.liveService.connect(this.bracket, this.region);
-        this.liveService.activityDetected.subscribe((activity:any) => this.addActivity(activity));
-    }    
+        this.liveService.activityDetected.subscribe((activity: any) => this.addActivity(activity));
+    }
     public ngOnDestroy(): void {
         this.liveService.activityDetected.unsubscribe();
         this.liveService.disconnect();
@@ -36,23 +39,18 @@ export class LiveComponent implements OnInit, OnDestroy{
             this.activity = [];
         }
         else {
-            this.activity.push(activity);
+            this.watcher.detected(activity);
+
+            if (!this.watcher.playerIsWatched(activity)) {
+                console.log("this player is watched, not displaying in live component");
+            } else {
+                this.activity.push(activity);
+            }
         }
     }
     public watch(player: LadderChange) {
         this.watcher.watch(player);
-    }
-
-    public ratingIncrease(previousRating: number, detectedRating: number): boolean {
-        return detectedRating > previousRating;
-    }
-    public rankingIncrease(previousRanking: number, detectedRanking: number): boolean {
-        return detectedRanking < previousRanking;
-    }
-    public isAlliance(faction: number): boolean {
-        return faction === 0
-    }
-    public isHorde(faction: number): boolean {
-        return faction === 1
+        let index: number = this.activity.indexOf(player);
+        this.activity.splice(index,1);
     }
 }

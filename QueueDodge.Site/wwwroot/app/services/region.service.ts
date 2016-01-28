@@ -19,11 +19,4 @@ export class RegionService {
         this.region = region;
         this.regionChanged.emit(region);
     }
-
-    public getRegions() {
-        return this
-            .http
-            .get("api/region")
-            .map((res: Response) => res.json());
-    }
 }

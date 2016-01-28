@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', './watcher.service', 'rxjs/Rx'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', './watcher.service', '../activity.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', './watcher.service', 'rxjs/
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, watcher_service_1;
+    var core_1, common_1, watcher_service_1, activity_service_1;
     var WatcherComponent;
     return {
         setters:[
@@ -21,11 +21,14 @@ System.register(['angular2/core', 'angular2/common', './watcher.service', 'rxjs/
             function (watcher_service_1_1) {
                 watcher_service_1 = watcher_service_1_1;
             },
-            function (_1) {}],
+            function (activity_service_1_1) {
+                activity_service_1 = activity_service_1_1;
+            }],
         execute: function() {
             WatcherComponent = (function () {
-                function WatcherComponent(watcher) {
+                function WatcherComponent(watcher, activityService) {
                     this.watcher = watcher;
+                    this.activityService = activityService;
                 }
                 WatcherComponent = __decorate([
                     core_1.Component({
@@ -33,7 +36,7 @@ System.register(['angular2/core', 'angular2/common', './watcher.service', 'rxjs/
                         templateUrl: '../app/activity/watcher/watcher.component.html',
                         directives: [common_1.CORE_DIRECTIVES]
                     }), 
-                    __metadata('design:paramtypes', [watcher_service_1.WatcherService])
+                    __metadata('design:paramtypes', [watcher_service_1.WatcherService, activity_service_1.ActivityService])
                 ], WatcherComponent);
                 return WatcherComponent;
             })();

@@ -16,5 +16,6 @@
     "jquery": "2.2.0"
   },
   "devDependencies": {
+    "typescript": "^1.7.5"
   }
 }

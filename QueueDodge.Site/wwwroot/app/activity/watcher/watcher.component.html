@@ -1,24 +1,24 @@
 ﻿<div>
     <h1>The Watcher</h1>
-        <!--<div class="row">
-            <div class="col-md-4">
-                <label>Realm</label>
-                <br />
-                <select ng-options="x as x.name group by x.region.name for x in vm.realms"
-                        ng-model="vm.player.realm"
-                        class="form-control input-sm"></select>
-            </div>
-            <div class="col-md-4">
-                <label>Name</label>
-                <br />
-                <input class="form-control input-sm"
-                       ng-model="vm.player.name" />
-            </div>
-            <div class="col-md-4">
-                <br />
-                <button type="submit" class="btn btn-primary">Watch Player</button>
-            </div>
-        </div>-->
+    <!--<div class="row">
+        <div class="col-md-4">
+            <label>Realm</label>
+            <br />
+            <select ng-options="x as x.name group by x.region.name for x in vm.realms"
+                    ng-model="vm.player.realm"
+                    class="form-control input-sm"></select>
+        </div>
+        <div class="col-md-4">
+            <label>Name</label>
+            <br />
+            <input class="form-control input-sm"
+                   ng-model="vm.player.name" />
+        </div>
+        <div class="col-md-4">
+            <br />
+            <button type="submit" class="btn btn-primary">Watch Player</button>
+        </div>
+    </div>-->
     <table class="table table-condensed">
         <thead>
             <tr>
@@ -38,16 +38,26 @@
                     <img class="icon-frame" src="app/images/race/race_{{player.raceID}}_{{player.genderID}}.jpg" />
                     <img class="icon-frame" src="app/images/class/class_{{player.classID}}.jpg" />
                     <img class="icon-frame" src="app/images/spec/spec_{{player.specializationID}}.jpg" />
-                    {{player.name}}
+                    <span class="_{{player.classID}}">
+                        {{player.name}}
+                    </span>
                 </td>
                 <td>
                     <img class="icon-frame" src="app/images/faction/faction_{{player.factionID}}.jpg" />
-                    <span>
+                    <span [ngClass]="{'text-primary': activityService.isAlliance(player.factionID),'text-danger':activityService.isHorde(player.factionID)}">
                         {{player.realm}}
                     </span>
                 </td>
-                <td>{{player.ratingProgress}}</td>
-                <td>{{player.rankingProgress}}</td>
+                <td>
+                    <small [ngClass]="{'text-success': activityService.positive(player.ratingProgress),'text-danger':!(activityService.positive(player.ratingProgress))}">
+                        {{player.ratingProgress}}
+                    </small>
+                </td>
+                <td>
+                    <small [ngClass]="{'text-success': !activityService.positive(player.rankingProgress),'text-danger':(activityService.positive(player.rankingProgress))}">
+                        {{player.rankingProgress}}
+                    </small>
+                </td>
                 <td>{{player.timesSeen}}</td>
                 <td class="text-center pointer text-danger" (click)="removeWatch(player)"><i class="fa fa-times"></i></td>
             </tr>

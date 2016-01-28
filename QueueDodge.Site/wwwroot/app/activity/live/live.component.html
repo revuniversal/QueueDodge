@@ -27,19 +27,19 @@
                     </td>
                     <td>
                         <img class="icon-frame" src="app/images/faction/faction_{{change.detectedFaction}}.jpg" />
-                        <span [ngClass]="{'text-primary': isAlliance(change.detectedFaction),'text-danger':isHorde(change.detectedFaction)}">
+                        <span [ngClass]="{'text-primary': activityService.isAlliance(change.detectedFaction),'text-danger':activityService.isHorde(change.detectedFaction)}">
                             {{change.realm.name}}
                         </span>
                     </td>
                     <td class="text-center">
                         {{change.detectedRanking}}
-                        <small [ngClass]="{'text-success': rankingIncrease(change.previousRanking, change.detectedRanking),'text-danger':!(rankingIncrease(change.previousRanking, change.detectedRanking))}">
+                        <small [ngClass]="{'text-success': activityService.rankingIncrease(change.previousRanking, change.detectedRanking),'text-danger':!(activityService.rankingIncrease(change.previousRanking, change.detectedRanking))}">
                             ({{change.detectedRanking-change.previousRanking}})
                         </small>
                     </td>
                     <td class="text-center">
                         {{change.detectedRating}}
-                        <small [ngClass]="{'text-success': ratingIncrease(change.previousRating,change.detectedRating),'text-danger':!(ratingIncrease(change.previousRating,change.detectedRating))}">
+                        <small [ngClass]="{'text-success': activityService.ratingIncrease(change.previousRating,change.detectedRating),'text-danger':!(activityService.ratingIncrease(change.previousRating,change.detectedRating))}">
                             ({{change.detectedRating - change.previousRating}})
                         </small>
                     </td>

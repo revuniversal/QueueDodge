@@ -1,4 +1,5 @@
-﻿import {Injectable, EventEmitter} from 'angular2/core';
+﻿/// <reference path="../../../typings/lodash/lodash.d.ts" />
+import {Injectable, EventEmitter} from 'angular2/core';
 import {WatchedPlayer} from './WatchedPlayer';
 import {LadderChange} from '../../models/LadderChange';
 import {Realm} from '../../models/Realm';
@@ -12,14 +13,33 @@ export class WatcherService {
         this.watchedPlayers = [];
     }
 
-    public watch(player: LadderChange) {
+    public watch(player: LadderChange): void {
         let watchedPlayer = this.convert(player);
         this.watchedPlayers.push(watchedPlayer);
     }
 
-    //public ignore(player: WatchedPlayer) {
-    //    this.playerIgnored.emit(player);
-    //}
+    public detected(player: LadderChange): void {
+        let watchedPlayer = this.findPlayer(player);
+
+        if (watchedPlayer != undefined) {
+            console.log(watchedPlayer.name + " spotted!");
+            // TODO:  Play sound here.
+            watchedPlayer.rankingProgress += (player.previousRanking - player.detectedRanking)
+            watchedPlayer.ratingProgress += (player.detectedRating - player.previousRating);
+            watchedPlayer.timesSeen += 1;
+        }
+    }
+
+    public playerIsWatched(player: LadderChange): boolean {
+        let foundPlayer: WatchedPlayer = this.findPlayer(player);
+        return foundPlayer !== undefined;
+    }
+
+    private findPlayer(player: LadderChange): WatchedPlayer {
+        let watchedPlayer = _.find(this.watchedPlayers, { 'name': player.name, 'realm': player.realm.name, 'regionID': player.realm.region.id });
+
+        return watchedPlayer;
+    }
 
     private convert(player: LadderChange): WatchedPlayer {
         let watchedPlayer = new WatchedPlayer();

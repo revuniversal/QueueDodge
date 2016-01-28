@@ -27,9 +27,24 @@ System.register(['angular2/core', './WatchedPlayer'], function(exports_1) {
                     var watchedPlayer = this.convert(player);
                     this.watchedPlayers.push(watchedPlayer);
                 };
-                //public ignore(player: WatchedPlayer) {
-                //    this.playerIgnored.emit(player);
-                //}
+                WatcherService.prototype.detected = function (player) {
+                    var watchedPlayer = this.findPlayer(player);
+                    if (watchedPlayer != undefined) {
+                        console.log(watchedPlayer.name + " spotted!");
+                        // TODO:  Play sound here.
+                        watchedPlayer.rankingProgress += (player.previousRanking - player.detectedRanking);
+                        watchedPlayer.ratingProgress += (player.detectedRating - player.previousRating);
+                        watchedPlayer.timesSeen += 1;
+                    }
+                };
+                WatcherService.prototype.playerIsWatched = function (player) {
+                    var foundPlayer = this.findPlayer(player);
+                    return foundPlayer !== undefined;
+                };
+                WatcherService.prototype.findPlayer = function (player) {
+                    var watchedPlayer = _.find(this.watchedPlayers, { 'name': player.name, 'realm': player.realm.name, 'regionID': player.realm.region.id });
+                    return watchedPlayer;
+                };
                 WatcherService.prototype.convert = function (player) {
                     var watchedPlayer = new WatchedPlayer_1.WatchedPlayer();
                     watchedPlayer.name = player.name;

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', './live.service', '../watcher/watcher.service'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', './live.service', '../watcher/watcher.service', '../activity.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', './live.service', '../watch
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, live_service_1, watcher_service_1;
+    var core_1, common_1, live_service_1, watcher_service_1, activity_service_1;
     var LiveComponent;
     return {
         setters:[
@@ -23,13 +23,17 @@ System.register(['angular2/core', 'angular2/common', './live.service', '../watch
             },
             function (watcher_service_1_1) {
                 watcher_service_1 = watcher_service_1_1;
+            },
+            function (activity_service_1_1) {
+                activity_service_1 = activity_service_1_1;
             }],
         execute: function() {
             LiveComponent = (function () {
-                function LiveComponent(liveService, watcher) {
+                function LiveComponent(activityService, liveService, watcher) {
                     this.activity = [];
                     this.liveService = liveService;
                     this.watcher = watcher;
+                    this.activityService = activityService;
                 }
                 LiveComponent.prototype.ngOnInit = function () {
                     var _this = this;
@@ -45,23 +49,19 @@ System.register(['angular2/core', 'angular2/common', './live.service', '../watch
                         this.activity = [];
                     }
                     else {
-                        this.activity.push(activity);
+                        this.watcher.detected(activity);
+                        if (!this.watcher.playerIsWatched(activity)) {
+                            console.log("this player is watched, not displaying in live component");
+                        }
+                        else {
+                            this.activity.push(activity);
+                        }
                     }
                 };
                 LiveComponent.prototype.watch = function (player) {
                     this.watcher.watch(player);
-                };
-                LiveComponent.prototype.ratingIncrease = function (previousRating, detectedRating) {
-                    return detectedRating > previousRating;
-                };
-                LiveComponent.prototype.rankingIncrease = function (previousRanking, detectedRanking) {
-                    return detectedRanking < previousRanking;
-                };
-                LiveComponent.prototype.isAlliance = function (faction) {
-                    return faction === 0;
-                };
-                LiveComponent.prototype.isHorde = function (faction) {
-                    return faction === 1;
+                    var index = this.activity.indexOf(player);
+                    this.activity.splice(index, 1);
                 };
                 __decorate([
                     core_1.Input(), 
@@ -77,7 +77,7 @@ System.register(['angular2/core', 'angular2/common', './live.service', '../watch
                         templateUrl: '../app/activity/live/live.component.html',
                         directives: [common_1.CORE_DIRECTIVES]
                     }), 
-                    __metadata('design:paramtypes', [live_service_1.LiveService, watcher_service_1.WatcherService])
+                    __metadata('design:paramtypes', [activity_service_1.ActivityService, live_service_1.LiveService, watcher_service_1.WatcherService])
                 ], LiveComponent);
                 return LiveComponent;
             })();
