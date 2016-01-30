@@ -20,4 +20,7 @@ export class WatcherComponent{
         this.activityService = activityService;
     }
 
+    public ignore(player: WatchedPlayer):void {
+        this.watcher.ignore(player);
+    }
 }

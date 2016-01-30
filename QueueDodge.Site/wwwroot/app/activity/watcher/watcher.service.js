@@ -27,23 +27,43 @@ System.register(['angular2/core', './WatchedPlayer'], function(exports_1) {
                     var watchedPlayer = this.convert(player);
                     this.watchedPlayers.push(watchedPlayer);
                 };
+                WatcherService.prototype.ignore = function (player) {
+                    var watchedPlayer = this.findPlayerByWatch(player);
+                    this.watchedPlayers.splice(watchedPlayer, 1);
+                };
                 WatcherService.prototype.detected = function (player) {
-                    var watchedPlayer = this.findPlayer(player);
+                    var watchedPlayer = this.findPlayerByLadderChange(player);
                     if (watchedPlayer != undefined) {
                         console.log(watchedPlayer.name + " spotted!");
                         // TODO:  Play sound here.
+                        var audio = new Audio('audio_file.mp3');
+                        audio.play();
                         watchedPlayer.rankingProgress += (player.previousRanking - player.detectedRanking);
                         watchedPlayer.ratingProgress += (player.detectedRating - player.previousRating);
                         watchedPlayer.timesSeen += 1;
                     }
                 };
                 WatcherService.prototype.playerIsWatched = function (player) {
-                    var foundPlayer = this.findPlayer(player);
-                    return foundPlayer !== undefined;
+                    var foundPlayer = this.findPlayerByLadderChange(player);
+                    return foundPlayer != null;
                 };
-                WatcherService.prototype.findPlayer = function (player) {
-                    var watchedPlayer = _.find(this.watchedPlayers, { 'name': player.name, 'realm': player.realm.name, 'regionID': player.realm.region.id });
-                    return watchedPlayer;
+                WatcherService.prototype.findPlayerByLadderChange = function (player) {
+                    //let watchedPlayer = _.find(this.watchedPlayers, { 'name': player.name, 'realm': player.realm.name, 'regionID': player.realm.region.id });
+                    for (var x = 0; x < this.watchedPlayers.length; x++) {
+                        var p = this.watchedPlayers[x];
+                        if (p.name === player.name && p.realm === player.realm.name && p.regionID === player.realm.region.id) {
+                            return p;
+                        }
+                    }
+                };
+                WatcherService.prototype.findPlayerByWatch = function (player) {
+                    //let watchedPlayer = _.find(this.watchedPlayers, { 'name': player.name, 'realm': player.realm.name, 'regionID': player.realm.region.id });
+                    for (var x = 0; x < this.watchedPlayers.length; x++) {
+                        var p = this.watchedPlayers[x];
+                        if (p.name === player.name && p.realm === player.realm && p.regionID === player.regionID) {
+                            return x;
+                        }
+                    }
                 };
                 WatcherService.prototype.convert = function (player) {
                     var watchedPlayer = new WatchedPlayer_1.WatchedPlayer();

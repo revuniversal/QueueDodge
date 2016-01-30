@@ -30,6 +30,9 @@ System.register(['angular2/core', 'angular2/common', './watcher.service', '../ac
                     this.watcher = watcher;
                     this.activityService = activityService;
                 }
+                WatcherComponent.prototype.ignore = function (player) {
+                    this.watcher.ignore(player);
+                };
                 WatcherComponent = __decorate([
                     core_1.Component({
                         selector: 'watcher',

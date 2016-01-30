@@ -28,7 +28,7 @@
                 <th>Rating Progress</th>
                 <th>Ranking Progress</th>
                 <th>Times Seen</th>
-                <th>Remove</th>
+                <th>Ignore</th>
             </tr>
         </thead>
         <tbody>
@@ -59,7 +59,9 @@
                     </small>
                 </td>
                 <td>{{player.timesSeen}}</td>
-                <td class="text-center pointer text-danger" (click)="removeWatch(player)"><i class="fa fa-times"></i></td>
+                <td>
+                    <a class="text-danger" (click)="ignore(player)">IGNORE</a>
+                </td>
             </tr>
         </tbody>
     </table>

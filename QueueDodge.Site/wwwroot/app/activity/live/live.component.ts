@@ -1,4 +1,5 @@
-﻿import {Component, Input, OnInit, OnDestroy} from 'angular2/core';
+﻿
+import {Component, Input, OnInit, OnDestroy} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 import {LiveService} from './live.service';
 import {WatcherService} from '../watcher/watcher.service';
@@ -42,9 +43,9 @@ export class LiveComponent implements OnInit, OnDestroy {
             this.watcher.detected(activity);
 
             if (!this.watcher.playerIsWatched(activity)) {
-                console.log("this player is watched, not displaying in live component");
-            } else {
                 this.activity.push(activity);
+            } else {
+                console.log("this player is watched, not displaying in live component");
             }
         }
     }

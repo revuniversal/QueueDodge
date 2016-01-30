@@ -51,10 +51,10 @@ System.register(['angular2/core', 'angular2/common', './live.service', '../watch
                     else {
                         this.watcher.detected(activity);
                         if (!this.watcher.playerIsWatched(activity)) {
-                            console.log("this player is watched, not displaying in live component");
+                            this.activity.push(activity);
                         }
                         else {
-                            this.activity.push(activity);
+                            console.log("this player is watched, not displaying in live component");
                         }
                     }
                 };
