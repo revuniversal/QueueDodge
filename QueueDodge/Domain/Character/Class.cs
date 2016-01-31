@@ -5,10 +5,11 @@ namespace QueueDodge.Models
 {
     public class Class
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
-        public string Name { get; set; }
 
-        public virtual List<Specialization> Specializations { get; set; }
+        public Class(int id)
+        {
+            ID = id;
+        }
     }
 }

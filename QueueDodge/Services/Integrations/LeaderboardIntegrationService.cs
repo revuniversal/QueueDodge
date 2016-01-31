@@ -1,74 +1,58 @@
 ﻿using System;
-using System.Linq;
-using System.Data.SqlClient;
 using QueueDodge.Models;
 using BattleDotSwag;
 using BattleDotSwag.Services;
-using BattleDotSwag.PVP;
-using QueueDodge.Services;
-using Microsoft.Data.Entity;
+using BattleDotSwag.WoW.PVP;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Memory;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Newtonsoft.Json.Serialization;
+using QueueDodge.Data.Cache;
+using QueueDodge.Data;
 
 namespace QueueDodge.Integrations
 {
     public class LeaderboardIntegrationService
     {
         private string apiKey;
-        private BattleNetService leaderboard;
-        private RequestService requests;
-        private QueueDodgeDB data;
+        private BattleNetService<Leaderboard> requestor; // TODO:  This name sucks.
+        private IMemoryCache cache;
+        private Func<string, Task> sendMessage;
 
-        public LeaderboardIntegrationService(QueueDodgeDB data, string apiKey)
-        {
-            this.apiKey = apiKey;
-            this.data = data;
-            leaderboard = new BattleNetService();
-            requests = new RequestService(data);
-        }
-        public LeaderboardIntegrationService(string apiKey)
-        {
-            this.apiKey = apiKey;
-            leaderboard = new BattleNetService();
-            requests = new RequestService(data);
-            data = new QueueDodgeDB();
-        }
-
-        public async Task GetRecentActivity(
-            string bracket,
-            BattleDotSwag.Locale locale,
-            BattleDotSwag.Region region,
+        public LeaderboardIntegrationService(
             string apiKey,
+            BattleNetService<Leaderboard> requestor,
             IMemoryCache cache,
-            Func<string, Task> Send)
+            Func<string, Task> sendMessage) // TODO:  This is too sketchy.
+        {
+            this.apiKey = apiKey;
+            this.requestor = requestor;
+            this.cache = cache;
+            this.sendMessage = sendMessage;
+        }
+
+        public async Task GetRecentActivity(string bracket, Locale locale, Region region)
         {
             var endpoint = new LeaderboardEndpoint(bracket, locale, apiKey);
-            var requestor = new BattleNetService();
-            var leaderboard = new List<LadderEntry>();
+            Leaderboard leaderboard = requestor.Get(endpoint, region).Result;
+            var ladder = new List<LadderEntry>();
 
-            var json = requestor.Get(endpoint, region).Result;
-
-            var ladder = JsonConvert.DeserializeObject<Leaderboard>(json);
-
-            foreach (var entry in ladder.Rows)
+            foreach (var entry in leaderboard.Rows)
             {
-                var ladderEntry = new LadderEntry(entry, region, bracket);
-                leaderboard.Add(ladderEntry);
-                CompareWithCache(ladderEntry, cache, Send, region,bracket);
+                var ladderEntry = LadderEntry.Create(entry, bracket, region);
+                ladder.Add(ladderEntry);
+                CompareWithCache(ladderEntry, region, bracket);
             };
-            // HACK:  Make this a type.
-            var key = region + ":" + bracket;
+
+            var key = new LadderKey(region.ToString(),bracket);
             cache.Set(key, leaderboard);
         }
 
-        private async Task CompareWithCache(LadderEntry entry, IMemoryCache cache, Func<string, Task> Send, BattleDotSwag.Region region, string bracket)
+        private async Task CompareWithCache(LadderEntry entry, Region region, string bracket)
         {
             var cachedEntry = default(LadderEntry);
-            // HACK:  Make this a type.
-            var key = (int)region + ":" + entry.RealmID + ":" + entry.Name + ":" + bracket;
+            var key = new LadderEntryKey((int)region,entry.Character.Realm.ID,entry.Character.Name,bracket);
 
             var cached = cache.TryGetValue(key, out cachedEntry);
             cache.Set(key, entry);
@@ -76,15 +60,15 @@ namespace QueueDodge.Integrations
             if (cached)
             {
                 var change = new LadderChange(cachedEntry, entry);
-                if (change.Changed()) BroadcastChange(change, Send);
+                if (change.Changed()) BroadcastChange(change);
             }
         }
 
-        private async Task BroadcastChange(LadderChange change, Func<string, Task> Send)
+        private async Task BroadcastChange(LadderChange change)
         {
             var serializerOptions = new JsonSerializerSettings() { ContractResolver = new CamelCasePropertyNamesContractResolver() };
             var json = JsonConvert.SerializeObject(change, serializerOptions);
-            await Send(json);
+            await sendMessage(json);
         }
     }
 }

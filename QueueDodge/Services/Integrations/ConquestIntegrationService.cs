@@ -2,7 +2,6 @@
 using BattleDotSwag.Services;
 using QueueDodge.Models;
 using BattleDotSwag.PVP;
-using QueueDodge.Services;
 
 namespace QueueDodge.Integrations
 {
@@ -10,32 +9,16 @@ namespace QueueDodge.Integrations
     {
         private BattleNetService<ConquestCap> conquestCapService;
         private QueueDodgeDB data;
-        private RequestService requests;
 
         public ConquestIntegrationService()
         {
             conquestCapService = new BattleNetService<ConquestCap>();
             data = new QueueDodgeDB();
-            requests = new RequestService(data);
         }
 
         public ConquestCap GetConquestCap(BattleDotSwag.Region region, string host, BattleDotSwag.Game game, BattleDotSwag.Locale locale, int arenaRating, int bgRating)
         {
             var endpoint = new ConquestEndpoint(locale, arenaRating, bgRating);
-
-            BattleNetRequest newRequest = new BattleNetRequest()
-            {
-                Locale = locale.ToString(),
-                RegionID = (int)region,
-                RequestDate = DateTime.Now,
-                RequestType = "leaderboards",
-                Bracket = "",
-                Url = conquestCapService.GetUri(endpoint, region).ToString()
-            };
-
-           // BattleNetRequest request =
-                data.BattleNetRequests.Add(newRequest);
-            data.SaveChanges();
             ConquestCap cap = new ConquestCap();
 
             // TODO:  Fix Conquest Cap call.
