@@ -31,8 +31,8 @@ export class WatcherService {
             var audio = new Audio('audio_file.mp3');
             audio.play();
 
-            watchedPlayer.rankingProgress += (player.previousRanking - player.detectedRanking)
-            watchedPlayer.ratingProgress += (player.detectedRating - player.previousRating);
+            watchedPlayer.rankingProgress += (player.previous.ranking - player.current.ranking)
+            watchedPlayer.ratingProgress += (player.current.rating - player.previous.rating);
             watchedPlayer.timesSeen += 1;
         }
     }
@@ -43,17 +43,15 @@ export class WatcherService {
     }
 
     private findPlayerByLadderChange(player: LadderChange): WatchedPlayer {
-        //let watchedPlayer = _.find(this.watchedPlayers, { 'name': player.name, 'realm': player.realm.name, 'regionID': player.realm.region.id });
         for (let x = 0; x < this.watchedPlayers.length; x++){
             let p = this.watchedPlayers[x];
-            if (p.name === player.name && p.realm === player.realm.name && p.regionID === player.realm.region.id){
+            if (p.name === player.current.character.name && p.realm === player.current.character.realm.name && p.regionID === player.current.character.realm.region.id){
                 return p;
             }
         }
     }
 
     private findPlayerByWatch(player: WatchedPlayer): number {
-        //let watchedPlayer = _.find(this.watchedPlayers, { 'name': player.name, 'realm': player.realm.name, 'regionID': player.realm.region.id });
         for (let x = 0; x < this.watchedPlayers.length; x++) {
             let p = this.watchedPlayers[x];
             if (p.name === player.name && p.realm === player.realm && p.regionID === player.regionID) {
@@ -65,16 +63,16 @@ export class WatcherService {
     private convert(player: LadderChange): WatchedPlayer {
         let watchedPlayer = new WatchedPlayer();
 
-        watchedPlayer.name = player.name;
-        watchedPlayer.realm = player.realm.name;
-        watchedPlayer.regionID = player.realm.region.id;
-        watchedPlayer.raceID = player.detectedRace;
-        watchedPlayer.factionID = player.detectedFaction;
-        watchedPlayer.classID = player.detectedClass;
-        watchedPlayer.specializationID = player.detectedSpec;
-        watchedPlayer.genderID = player.detectedGenderID;
-        watchedPlayer.rankingProgress = player.detectedRanking - player.previousRanking;
-        watchedPlayer.ratingProgress = player.detectedRating - player.previousRating;
+        watchedPlayer.name = player.current.character.name;
+        watchedPlayer.realm = player.current.character.realm.name;
+        watchedPlayer.regionID = player.current.character.realm.region.id;
+        watchedPlayer.raceID = player.current.character.race.id;
+        watchedPlayer.factionID = player.current.character.race.faction.id  ;
+        watchedPlayer.classID = player.current.character.class.id;
+        watchedPlayer.specializationID = player.current.character.specialization.id;
+        watchedPlayer.genderID = player.current.character.gender;
+        watchedPlayer.rankingProgress = player.current.ranking - player.previous.ranking;
+        watchedPlayer.ratingProgress = player.current.rating - player.previous.rating;
         watchedPlayer.timesSeen = 1;
 
         return watchedPlayer;

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Collections.Generic;
-using QueueDodge.Api.Websockets;
 
 namespace QueueDodge.Api
 {
@@ -43,6 +42,7 @@ namespace QueueDodge.Api
             //services.AddEntityFramework()
             //    .AddSqlServer()
             //    .AddDbContext<QueueDodge.QueueDodgeDB>(options => options.UseSqlServer(connection));
+            
             services.AddMvc();
             services.AddCaching();
 
@@ -62,35 +62,15 @@ namespace QueueDodge.Api
 
             app.UseWebSockets();
 
-            var us2v2 = new Tuple<string, string>("us", "2v2");
-            var us3v3 = new Tuple<string, string>("us", "2v2");
-            var us5v5 = new Tuple<string, string>("us", "2v2");
-            var usRbg = new Tuple<string, string>("us", "2v2");
+            app.Map("/ws/us/2v2", us2v2.Connect);
+            app.Map("/ws/us/3v3", us3v3.Connect);
+            app.Map("/ws/us/5v5", us5v5.Connect);
+            app.Map("/ws/us/RBG", usRbg.Connect);
 
-            var eu2v2 = new Tuple<string, string>("us", "2v2");
-            var eu3v3 = new Tuple<string, string>("us", "2v2");
-            var eu5v5 = new Tuple<string, string>("us", "2v2");
-            var euRbg = new Tuple<string, string>("us", "2v2");
-
-            WebSocketMultiton.Instances.Add(us2v2, new WebSocketServer());
-            WebSocketMultiton.Instances.Add(us3v3, new WebSocketServer());
-            WebSocketMultiton.Instances.Add(us5v5, new WebSocketServer());
-            WebSocketMultiton.Instances.Add(usRbg, new WebSocketServer());
-
-            WebSocketMultiton.Instances.Add(eu2v2, new WebSocketServer());
-            WebSocketMultiton.Instances.Add(eu3v3, new WebSocketServer());
-            WebSocketMultiton.Instances.Add(eu5v5, new WebSocketServer());
-            WebSocketMultiton.Instances.Add(euRbg, new WebSocketServer());
-
-            app.Map("/ws/us/2v2", builder => WebSocketMultiton.Connect(builder, us2v2));
-            app.Map("/ws/us/3v3", builder => WebSocketMultiton.Connect(builder, us3v3));
-            app.Map("/ws/us/5v5", builder => WebSocketMultiton.Connect(builder, us5v5));
-            app.Map("/ws/us/RBG", builder => WebSocketMultiton.Connect(builder, usRbg));
-
-            app.Map("/ws/eu/2v2", builder => WebSocketMultiton.Connect(builder, eu2v2));
-            app.Map("/ws/eu/3v3", builder => WebSocketMultiton.Connect(builder, eu3v3));
-            app.Map("/ws/eu/5v5", builder => WebSocketMultiton.Connect(builder, eu5v5));
-            app.Map("/ws/eu/RBG", builder => WebSocketMultiton.Connect(builder, euRbg));
+            app.Map("/ws/eu/2v2", eu2v2.Connect);
+            app.Map("/ws/eu/3v3", eu3v3.Connect);
+            app.Map("/ws/eu/5v5", eu5v5.Connect);
+            app.Map("/ws/eu/RBG", euRbg.Connect);
 
             app.Run(async context =>
             {

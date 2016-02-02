@@ -15,32 +15,32 @@
             <tbody>
                 <tr *ngFor="#change of activity">
                     <td>
-                        <img src="app/images/region/{{change.realm.region.id}}.png" />
+                        <img src="app/images/region/{{change.current.character.realm.region.id}}.png" />
                     </td>
                     <td>
-                        <img class="icon-frame" src="app/images/race/race_{{change.detectedRace}}_{{change.detectedGenderID}}.jpg" />
-                        <img class="icon-frame" src="app/images/class/class_{{change.detectedClass}}.jpg" />
-                        <img class="icon-frame" src="app/images/spec/spec_{{change.detectedSpec}}.jpg" />
-                        <span class="_{{change.detectedClass}}">
-                            {{change.name}}
+                        <img class="icon-frame" src="app/images/race/race_{{change.current.character.race.id}}_{{change.current.character.gender}}.jpg" />
+                        <img class="icon-frame" src="app/images/class/class_{{change.current.character.class.id}}.jpg" />
+                        <img class="icon-frame" src="app/images/spec/spec_{{change.current.character.specialization.id}}.jpg" />
+                        <span class="_{{change.current.character.class.id}}">
+                            {{change.current.character.name}}
                         </span>
                     </td>
                     <td>
-                        <img class="icon-frame" src="app/images/faction/faction_{{change.detectedFaction}}.jpg" />
-                        <span [ngClass]="{'text-primary': activityService.isAlliance(change.detectedFaction),'text-danger':activityService.isHorde(change.detectedFaction)}">
-                            {{change.realm.name}}
+                        <img class="icon-frame" src="app/images/faction/faction_{{change.current.character.race.faction.id}}.jpg" />
+                        <span [ngClass]="{'text-primary': activityService.isAlliance(change.current.character.race.faction.id),'text-danger':activityService.isHorde(change.current.character.race.faction.id)}">
+                            {{change.current.character.realm.name}}
                         </span>
                     </td>
                     <td class="text-center">
-                        {{change.detectedRanking}}
-                        <small [ngClass]="{'text-success': activityService.rankingIncrease(change.previousRanking, change.detectedRanking),'text-danger':!(activityService.rankingIncrease(change.previousRanking, change.detectedRanking))}">
-                            ({{change.detectedRanking-change.previousRanking}})
+                        {{change.current.ranking}}
+                        <small [ngClass]="{'text-success': activityService.rankingIncrease(change.previons.ranking, change.current.ranking),'text-danger':!(activityService.rankingIncrease(change.previous.ranking, change.current.ranking))}">
+                            ({{change.current.ranking-change.previous.ranking}})
                         </small>
                     </td>
                     <td class="text-center">
-                        {{change.detectedRating}}
-                        <small [ngClass]="{'text-success': activityService.ratingIncrease(change.previousRating,change.detectedRating),'text-danger':!(activityService.ratingIncrease(change.previousRating,change.detectedRating))}">
-                            ({{change.detectedRating - change.previousRating}})
+                        {{change.current.rating}}
+                        <small [ngClass]="{'text-success': activityService.ratingIncrease(change.previous.rating,change.current.rating),'text-danger':!(activityService.ratingIncrease(change.previous.rating,change.current.rating))}">
+                            ({{change.current.rating - change.previous.rating}})
                         </small>
                     </td>
                     <td>

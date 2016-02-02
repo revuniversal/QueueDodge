@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QueueDodge.Api
 {
-    public static class WebSocketServer
+    public static class us3v3
     {
         public static List<WebSocket> sockets { get; set; } = new List<WebSocket>();
 

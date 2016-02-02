@@ -42,17 +42,17 @@ namespace QueueDodge.Integrations
             {
                 var ladderEntry = LadderEntry.Create(entry, bracket, region);
                 ladder.Add(ladderEntry);
-                CompareWithCache(ladderEntry, region, bracket);
+                CompareWithCache(ladderEntry, bracket);
             };
 
             var key = new LadderKey(region.ToString(),bracket);
-            cache.Set(key, leaderboard);
+            cache.Set(key, ladder);
         }
 
-        private async Task CompareWithCache(LadderEntry entry, Region region, string bracket)
+        private async Task CompareWithCache(LadderEntry entry, string bracket)
         {
             var cachedEntry = default(LadderEntry);
-            var key = new LadderEntryKey((int)region,entry.Character.Realm.ID,entry.Character.Name,bracket);
+            var key = new LadderEntryKey((int)entry.Character.Realm.Region,entry.Character.Realm.ID,entry.Character.Name,bracket);
 
             var cached = cache.TryGetValue(key, out cachedEntry);
             cache.Set(key, entry);
