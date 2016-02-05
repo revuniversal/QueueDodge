@@ -21,7 +21,7 @@
             Realm = realm;
             Race = race;
             Class = characterClass;
-            Specialization = Specialization;
+            Specialization = specialization;
         }
     }
 }

@@ -25,8 +25,8 @@
                 <th>Region</th>
                 <th>Character</th>
                 <th>Realm</th>
-                <th>Rating Progress</th>
-                <th>Ranking Progress</th>
+                <th>Rating/Progress</th>
+                <th>Ranking/Progress</th>
                 <th>Times Seen</th>
                 <th>Ignore</th>
             </tr>
@@ -49,13 +49,16 @@
                     </span>
                 </td>
                 <td>
+                    {{player.rating}}
+
                     <small [ngClass]="{'text-success': activityService.positive(player.ratingProgress),'text-danger':!(activityService.positive(player.ratingProgress))}">
-                        {{player.ratingProgress}}
+                        ({{player.ratingProgress}})
                     </small>
                 </td>
                 <td>
+                    {{player.ranking}}
                     <small [ngClass]="{'text-success': !activityService.positive(player.rankingProgress),'text-danger':(activityService.positive(player.rankingProgress))}">
-                        {{player.rankingProgress}}
+                        ({{player.rankingProgress}})
                     </small>
                 </td>
                 <td>{{player.timesSeen}}</td>

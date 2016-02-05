@@ -4,6 +4,7 @@ import {WatchedPlayer} from './WatchedPlayer';
 import {LadderChange} from '../../models/LadderChange';
 import {Realm} from '../../models/Realm';
 import {Region} from '../../models/Region';
+
 @Injectable()
 export class WatcherService {
     public watchedPlayers: Array<WatchedPlayer>;
@@ -28,7 +29,7 @@ export class WatcherService {
         if (watchedPlayer != undefined) {
             console.log(watchedPlayer.name + " spotted!");
             // TODO:  Play sound here.
-            var audio = new Audio('audio_file.mp3');
+            var audio = new Audio('chime.wav');
             audio.play();
 
             watchedPlayer.rankingProgress += (player.previous.ranking - player.current.ranking)
@@ -45,7 +46,7 @@ export class WatcherService {
     private findPlayerByLadderChange(player: LadderChange): WatchedPlayer {
         for (let x = 0; x < this.watchedPlayers.length; x++){
             let p = this.watchedPlayers[x];
-            if (p.name === player.current.character.name && p.realm === player.current.character.realm.name && p.regionID === player.current.character.realm.region.id){
+            if (p.name === player.current.character.name && p.realm === player.current.character.realm.name && p.regionID === player.current.character.realm.region){
                 return p;
             }
         }
@@ -65,13 +66,15 @@ export class WatcherService {
 
         watchedPlayer.name = player.current.character.name;
         watchedPlayer.realm = player.current.character.realm.name;
-        watchedPlayer.regionID = player.current.character.realm.region.id;
+        watchedPlayer.regionID = player.current.character.realm.region;
         watchedPlayer.raceID = player.current.character.race.id;
         watchedPlayer.factionID = player.current.character.race.faction.id  ;
         watchedPlayer.classID = player.current.character.class.id;
         watchedPlayer.specializationID = player.current.character.specialization.id;
         watchedPlayer.genderID = player.current.character.gender;
+        watchedPlayer.ranking = player.current.ranking;
         watchedPlayer.rankingProgress = player.current.ranking - player.previous.ranking;
+        watchedPlayer.rating = player.current.rating;
         watchedPlayer.ratingProgress = player.current.rating - player.previous.rating;
         watchedPlayer.timesSeen = 1;
 

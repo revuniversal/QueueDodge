@@ -25,7 +25,6 @@ namespace QueueDodge.Api.Controllers
             var _locale = (BattleDotSwag.Locale)Enum.Parse(typeof(BattleDotSwag.Locale), locale);
             var _region = (BattleDotSwag.Region)Enum.Parse(typeof(BattleDotSwag.Region), region);
 
-            var socketKey = new Tuple<string, string>(region, bracket);
             var battleNet = new BattleNetService<Leaderboard>();
 
             Func<string, Task> socket = default(Func<string,Task>);

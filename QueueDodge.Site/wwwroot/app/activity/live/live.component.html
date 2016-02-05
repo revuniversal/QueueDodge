@@ -15,7 +15,7 @@
             <tbody>
                 <tr *ngFor="#change of activity">
                     <td>
-                        <img src="app/images/region/{{change.current.character.realm.region.id}}.png" />
+                        <img src="app/images/region/{{change.current.character.realm.region}}.png" />
                     </td>
                     <td>
                         <img class="icon-frame" src="app/images/race/race_{{change.current.character.race.id}}_{{change.current.character.gender}}.jpg" />
@@ -33,7 +33,7 @@
                     </td>
                     <td class="text-center">
                         {{change.current.ranking}}
-                        <small [ngClass]="{'text-success': activityService.rankingIncrease(change.previons.ranking, change.current.ranking),'text-danger':!(activityService.rankingIncrease(change.previous.ranking, change.current.ranking))}">
+                        <small [ngClass]="{'text-success': activityService.rankingIncrease(change.previous.ranking, change.current.ranking),'text-danger':!(activityService.rankingIncrease(change.previous.ranking, change.current.ranking))}">
                             ({{change.current.ranking-change.previous.ranking}})
                         </small>
                     </td>

@@ -27,12 +27,11 @@ namespace QueueDodge.Site
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            //app.UseAngularServer("app", "/index.html");
-
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.Run(async context =>
             {
+                context.Response.Redirect("/");
                 Console.WriteLine("{0} {1}{2}{3}",
                     context.Request.Method,
                     context.Request.PathBase,

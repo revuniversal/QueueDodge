@@ -25,7 +25,7 @@ namespace QueueDodge.Models
 
         public static LadderEntry Create(Row row, string bracket, Region region)
         {
-            var realm = new Realm(row.RealmID, row.RealmSlug, row.RealmName, region);
+            var realm = new Realm(row.RealmID, row.RealmName, row.RealmSlug, region);
             var faction = new Faction(row.FactionID);
             var race = new Race(row.RaceID, faction);
             var characterClass = new Class(row.ClassID);

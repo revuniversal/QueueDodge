@@ -53,9 +53,9 @@ namespace QueueDodge.Integrations
         {
             var cachedEntry = default(LadderEntry);
             var key = new LadderEntryKey((int)entry.Character.Realm.Region,entry.Character.Realm.ID,entry.Character.Name,bracket);
-
-            var cached = cache.TryGetValue(key, out cachedEntry);
-            cache.Set(key, entry);
+            var realKey = entry.Character.Name + ":" + entry.Character.Realm.ID + ":" + entry.Character.Realm.Region.ToString() + ":" + bracket;
+            var cached = cache.TryGetValue(realKey, out cachedEntry);
+            cache.Set(realKey, entry);
 
             if (cached)
             {
