@@ -1,7 +1,7 @@
 ﻿using System;
 using BattleDotSwag.Services;
 using QueueDodge.Models;
-using BattleDotSwag.PVP;
+using BattleDotSwag.WoW.PVP;
 
 namespace QueueDodge.Integrations
 {
