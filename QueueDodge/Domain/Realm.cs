@@ -1,7 +1,4 @@
-﻿using BattleDotSwag;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace QueueDodge.Models
+﻿namespace QueueDodge
 {
     public class Realm
     {

@@ -46,7 +46,7 @@ export class WatcherService {
     private findPlayerByLadderChange(player: LadderChange): WatchedPlayer {
         for (let x = 0; x < this.watchedPlayers.length; x++){
             let p = this.watchedPlayers[x];
-            if (p.name === player.current.character.name && p.realm === player.current.character.realm.name && p.regionID === player.current.character.realm.region){
+            if (p.name === player.current.character.name && p.realm === player.current.character.realm.name && p.regionID === player.current.character.realm.region.id){
                 return p;
             }
         }
@@ -66,7 +66,7 @@ export class WatcherService {
 
         watchedPlayer.name = player.current.character.name;
         watchedPlayer.realm = player.current.character.realm.name;
-        watchedPlayer.regionID = player.current.character.realm.region;
+        watchedPlayer.regionID = player.current.character.realm.region.id;
         watchedPlayer.raceID = player.current.character.race.id;
         watchedPlayer.factionID = player.current.character.race.faction.id  ;
         watchedPlayer.classID = player.current.character.class.id;

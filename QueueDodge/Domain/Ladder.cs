@@ -1,67 +1,69 @@
 ﻿using System;
-using QueueDodge.Models;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
+using QueueDodge.Data;
 using BattleDotSwag;
 using BattleDotSwag.Services;
 using BattleDotSwag.WoW.PVP;
-using Newtonsoft.Json;
-using Microsoft.Extensions.Caching.Memory;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Newtonsoft.Json.Serialization;
-using QueueDodge.Data.Cache;
-using QueueDodge.Data;
 
-namespace QueueDodge.Integrations
+namespace QueueDodge
 {
-    public class LeaderboardIntegrationService
+    public class Ladder
     {
         private string apiKey;
-        private BattleNetService<Leaderboard> requestor; // TODO:  This name sucks.
+        private BattleNetService<Leaderboard> leaderboardService;
         private IMemoryCache cache;
         private Func<string, Task> sendMessage;
 
-        public LeaderboardIntegrationService(
+        public IList<LadderEntry> Data { get; set; }
+
+        public Ladder(
             string apiKey,
             BattleNetService<Leaderboard> requestor,
             IMemoryCache cache,
             Func<string, Task> sendMessage) // TODO:  This is too sketchy.
         {
             this.apiKey = apiKey;
-            this.requestor = requestor;
+            this.leaderboardService = requestor;
             this.cache = cache;
             this.sendMessage = sendMessage;
+            this.Data = new List<LadderEntry>();
         }
 
         public async Task GetRecentActivity(string bracket, Locale locale, Region region)
         {
             var endpoint = new LeaderboardEndpoint(bracket, locale, apiKey);
-            Leaderboard leaderboard = requestor.Get(endpoint, region).Result;
-            var ladder = new List<LadderEntry>();
+            var data = leaderboardService.Get(endpoint, (BattleDotSwag.Region)region.ID).Result;
 
-            foreach (var entry in leaderboard.Rows)
+            foreach (var entry in data.Rows)
             {
                 var ladderEntry = LadderEntry.Create(entry, bracket, region);
-                ladder.Add(ladderEntry);
+                Data.Add(ladderEntry);
                 CompareWithCache(ladderEntry, bracket);
             };
 
             var key = new LadderKey(region.ToString(),bracket);
-            cache.Set(key, ladder);
+            cache.Set(key, Data);
         }
 
         private async Task CompareWithCache(LadderEntry entry, string bracket)
         {
-            var cachedEntry = default(LadderEntry);
-            var key = new LadderEntryKey((int)entry.Character.Realm.Region,entry.Character.Realm.ID,entry.Character.Name,bracket);
             var realKey = entry.Character.Name + ":" + entry.Character.Realm.ID + ":" + entry.Character.Realm.Region.ToString() + ":" + bracket;
-            var cached = cache.TryGetValue(realKey, out cachedEntry);
-            cache.Set(realKey, entry);
 
+            var cachedEntry = default(LadderEntry);
+            var cached = cache.TryGetValue(realKey, out cachedEntry);
+            
             if (cached)
             {
                 var change = new LadderChange(cachedEntry, entry);
                 if (change.Changed()) BroadcastChange(change);
             }
+
+            cache.Set(realKey, entry);
         }
 
         private async Task BroadcastChange(LadderChange change)

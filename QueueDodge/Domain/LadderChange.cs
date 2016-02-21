@@ -1,7 +1,8 @@
-﻿namespace QueueDodge.Models
+﻿namespace QueueDodge
 {
     public class LadderChange
     {
+        public int ID { get; set; }
         public LadderEntry Previous { get; set; }
         public LadderEntry Current { get; set; }
 

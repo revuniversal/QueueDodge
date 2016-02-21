@@ -1,7 +1,8 @@
-﻿namespace QueueDodge.Models
+﻿namespace QueueDodge
 {
     public class Character
     {
+        public int ID { get; set; }
         public string Name { get; }
         public int Gender { get; }
         public Realm Realm { get; }
