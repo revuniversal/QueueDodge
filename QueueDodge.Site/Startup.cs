@@ -53,14 +53,6 @@ namespace QueueDodge.Site
             });
         }
 
-        public static void Main(string[] args)
-        {
-            var application = new WebApplicationBuilder()
-                 .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
-                 .UseStartup<Startup>()
-                 .Build();
-
-            application.Run();
-        }
+        public static void Main(string[] args) => Microsoft.AspNet.Hosting.WebApplication.Run<Startup>(args);
     }
 }

@@ -1,11 +1,10 @@
-﻿using BattleDotSwag;
-using BattleDotSwag.WoW.PVP;
-using System.ComponentModel.DataAnnotations;
+﻿using BattleDotSwag.WoW.PVP;
 
-namespace QueueDodge.Models
+namespace QueueDodge
 {
     public class LadderEntry
     {
+        public int ID { get; set; }
         public Character Character { get; }
         public string Bracket { get; }
         public int Ranking { get; }
@@ -22,7 +21,7 @@ namespace QueueDodge.Models
             Season = season;
             Weekly = weekly;
         }
-
+        // TODO:  Think about making a factory class for this.
         public static LadderEntry Create(Row row, string bracket, Region region)
         {
             var realm = new Realm(row.RealmID, row.RealmName, row.RealmSlug, region);

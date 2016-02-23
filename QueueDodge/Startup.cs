@@ -28,8 +28,8 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddEntityFramework()
-            .AddSqlServer()
-            .AddDbContext<QueueDodgeDB>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+            .AddNpgsql()
+            .AddDbContext<QueueDodgeDB>(options => options.UseNpgsql(Configuration["Data:DefaultConnection:ConnectionString"]));
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

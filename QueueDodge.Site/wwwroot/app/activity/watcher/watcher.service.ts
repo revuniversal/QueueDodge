@@ -4,13 +4,16 @@ import {WatchedPlayer} from './WatchedPlayer';
 import {LadderChange} from '../../models/LadderChange';
 import {Realm} from '../../models/Realm';
 import {Region} from '../../models/Region';
+import {RegionService} from '../../services/region.service';
 
 @Injectable()
 export class WatcherService {
+    private regionService: RegionService;
     public watchedPlayers: Array<WatchedPlayer>;
-
-    constructor() {
+    
+    constructor(regionService:RegionService) {
         this.watchedPlayers = [];
+        this.regionService = regionService;
     }
 
     public watch(player: LadderChange): void {
@@ -46,7 +49,7 @@ export class WatcherService {
     private findPlayerByLadderChange(player: LadderChange): WatchedPlayer {
         for (let x = 0; x < this.watchedPlayers.length; x++){
             let p = this.watchedPlayers[x];
-            if (p.name === player.current.character.name && p.realm === player.current.character.realm.name && p.regionID === player.current.character.realm.region){
+            if (p.name === player.current.character.name && p.realm === player.current.character.realm.name && p.regionID === player.current.character.realm.region.id){
                 return p;
             }
         }
@@ -66,7 +69,7 @@ export class WatcherService {
 
         watchedPlayer.name = player.current.character.name;
         watchedPlayer.realm = player.current.character.realm.name;
-        watchedPlayer.regionID = player.current.character.realm.region;
+        watchedPlayer.regionID = player.current.character.realm.region.id;
         watchedPlayer.raceID = player.current.character.race.id;
         watchedPlayer.factionID = player.current.character.race.faction.id  ;
         watchedPlayer.classID = player.current.character.class.id;
@@ -79,5 +82,18 @@ export class WatcherService {
         watchedPlayer.timesSeen = 1;
 
         return watchedPlayer;
+    }
+
+    private addToLocalStorage(player: LadderChange) {
+        let region: string = this.regionService.region;
+        let bracket: string = '';
+        let key:string = 'watched:' + region + ':' + bracket;
+        let json = localStorage.getItem(key);
+        let players: Array<WatchedPlayer> = JSON.parse(json);
+        let watchedPlayer: WatchedPlayer = this.convert(player);
+
+        players.push(watchedPlayer);
+
+         
     }
 }

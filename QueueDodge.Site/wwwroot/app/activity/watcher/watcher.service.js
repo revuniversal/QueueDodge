@@ -50,7 +50,7 @@ System.register(['angular2/core', './WatchedPlayer'], function(exports_1) {
                 WatcherService.prototype.findPlayerByLadderChange = function (player) {
                     for (var x = 0; x < this.watchedPlayers.length; x++) {
                         var p = this.watchedPlayers[x];
-                        if (p.name === player.current.character.name && p.realm === player.current.character.realm.name && p.regionID === player.current.character.realm.region) {
+                        if (p.name === player.current.character.name && p.realm === player.current.character.realm.name && p.regionID === player.current.character.realm.region.id) {
                             return p;
                         }
                     }
@@ -67,7 +67,7 @@ System.register(['angular2/core', './WatchedPlayer'], function(exports_1) {
                     var watchedPlayer = new WatchedPlayer_1.WatchedPlayer();
                     watchedPlayer.name = player.current.character.name;
                     watchedPlayer.realm = player.current.character.realm.name;
-                    watchedPlayer.regionID = player.current.character.realm.region;
+                    watchedPlayer.regionID = player.current.character.realm.region.id;
                     watchedPlayer.raceID = player.current.character.race.id;
                     watchedPlayer.factionID = player.current.character.race.faction.id;
                     watchedPlayer.classID = player.current.character.class.id;

@@ -5,22 +5,22 @@
   },
 
   "dependencies": {
-    "Microsoft.AspNet.Mvc": "6.0.0-rc2-*",
-    "Microsoft.AspNet.Hosting": "1.0.0-rc2-*",
-    "Microsoft.AspNet.Http": "1.0.0-rc2-*",
-    "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc2-*",
-    "Microsoft.AspNet.Cors": "6.0.0-rc2-*",
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc2-*",
-    "System.Net.WebSockets": "4.0.0-rc2-*",
-    "Microsoft.AspNet.WebSockets.Server": "1.0.0-rc2-16106",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-rc2-*",
-    "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc2-*",
-    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-*",
-    "Microsoft.Extensions.Logging": "1.0.0-rc2-*",
-    "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-*",
-    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-*",
-    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc2-*",
-    "Microsoft.Extensions.Caching.Abstractions": "1.0.0-rc2-*"
+    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
+    "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Http": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Cors": "6.0.0-rc1-final",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
+    "System.Net.WebSockets": "4.0.0-beta-23516",
+    "Microsoft.AspNet.WebSockets.Server": "1.0.0-rc1-final",
+    "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Logging": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Caching.Abstractions": "1.0.0-rc1-final"
 
   },
 

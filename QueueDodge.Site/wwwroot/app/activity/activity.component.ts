@@ -7,6 +7,7 @@ import {WatcherService} from './watcher/watcher.service';
 import {LiveService} from './live/live.service';
 import {ActivityService} from './activity.service';
 import {LadderChange} from '../models/LadderChange';
+
 @Component({
     selector: 'activity',
     templateUrl: '../app/activity/activity.component.html',

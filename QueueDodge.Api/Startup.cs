@@ -1,15 +1,10 @@
 ﻿using System;
-using static System.Console;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Http;
-using System.Threading.Tasks;
-using System.Net.WebSockets;
-using System.Threading;
-using System.Collections.Generic;
 
 namespace QueueDodge.Api
 {
@@ -23,29 +18,15 @@ namespace QueueDodge.Api
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json");
 
-            if (env.IsEnvironment("Development"))
-            {
-                // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
-                //    builder.AddApplicationInsightsSettings(developerMode: true);
-            }
-
             builder.AddEnvironmentVariables();
-            Configuration = builder.Build().ReloadOnChanged("appsettings.json");
+            Configuration = builder.Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            // services.AddApplicationInsightsTelemetry(Configuration);
-            // var connection = @"Server=(localdb)\mssqllocaldb;Database=QueueDodge;Trusted_Connection=True;";
-
-            //services.AddEntityFramework()
-            //    .AddSqlServer()
-            //    .AddDbContext<QueueDodge.QueueDodgeDB>(options => options.UseSqlServer(connection));
-            
             services.AddMvc();
             services.AddCaching();
-
+            services.AddScoped<QueueDodgeDB, QueueDodgeDB>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -104,14 +85,18 @@ namespace QueueDodge.Api
             });
         }
 
+        public static void Main(string[] args) => Microsoft.AspNet.Hosting.WebApplication.Run<Startup>(args);
+
+
+        /*   CoreCLR RC2 Stuff
         public static void Main(string[] args)
         {
-            var application = new WebApplicationBuilder()
-                 .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
-                 .UseStartup<Startup>()
-                 .Build();
+            var application = new Microsoft.AspNet.Hosting.WebHostBuilder()
+                .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
+                .UseStartup<Startup>()
+                .Build();
 
             application.Run();
-        }
+        }*/
     }
 }
