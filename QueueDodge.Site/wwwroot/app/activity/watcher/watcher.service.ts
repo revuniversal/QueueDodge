@@ -4,13 +4,16 @@ import {WatchedPlayer} from './WatchedPlayer';
 import {LadderChange} from '../../models/LadderChange';
 import {Realm} from '../../models/Realm';
 import {Region} from '../../models/Region';
+import {RegionService} from '../../services/region.service';
 
 @Injectable()
 export class WatcherService {
+    private regionService: RegionService;
     public watchedPlayers: Array<WatchedPlayer>;
-
-    constructor() {
+    
+    constructor(regionService:RegionService) {
         this.watchedPlayers = [];
+        this.regionService = regionService;
     }
 
     public watch(player: LadderChange): void {
@@ -79,5 +82,18 @@ export class WatcherService {
         watchedPlayer.timesSeen = 1;
 
         return watchedPlayer;
+    }
+
+    private addToLocalStorage(player: LadderChange) {
+        let region: string = this.regionService.region;
+        let bracket: string = '';
+        let key:string = 'watched:' + region + ':' + bracket;
+        let json = localStorage.getItem(key);
+        let players: Array<WatchedPlayer> = JSON.parse(json);
+        let watchedPlayer: WatchedPlayer = this.convert(player);
+
+        players.push(watchedPlayer);
+
+         
     }
 }

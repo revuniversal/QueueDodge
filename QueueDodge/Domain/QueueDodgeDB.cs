@@ -23,7 +23,7 @@ namespace QueueDodge
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // TODO:  Use the new configuration options to store this connection string.
-            optionsBuilder.UseNpgsql("CONNECTION STRING GOES HERE");
+            optionsBuilder.UseNpgsql("User ID=QueueDodge;Password=queuedodge;Host=localhost;Port=5432;Database=QueueDodge;Pooling=true;Connection Lifetime=0;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
