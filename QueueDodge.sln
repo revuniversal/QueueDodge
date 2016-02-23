@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{21934933-D0BC-45D3-AF09-469C0C1F62FE}"
-EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "QueueDodge", "QueueDodge\QueueDodge.xproj", "{7480BE47-F870-46B4-A194-A53A48053CD3}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "QueueDodge.Api", "QueueDodge.Api\QueueDodge.Api.xproj", "{A5009C22-8B9A-4516-91C9-FA7B96E95521}"
