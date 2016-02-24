@@ -1,5 +1,4 @@
-﻿/// <reference path="../../../typings/lodash/lodash.d.ts" />
-import {Injectable, EventEmitter} from 'angular2/core';
+﻿import {Injectable, EventEmitter} from 'angular2/core';
 import {WatchedPlayer} from './WatchedPlayer';
 import {LadderChange} from '../../models/LadderChange';
 import {Realm} from '../../models/Realm';
