@@ -10,7 +10,7 @@
 *.js.map
 artifacts
 vs
-.vs
+.vs/*.*
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

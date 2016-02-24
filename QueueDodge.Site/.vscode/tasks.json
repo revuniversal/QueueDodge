@@ -1,13 +1,26 @@
 {
     "version": "0.1.0",
-    "command": "gulp",
+    "command": "powershell",
     "isShellCommand": true,
+        "args": [
+        "-c"
+    ],
     "tasks": [
-        {
-            "taskName": "default",
+                {
+            "taskName": "Typescript",
+            "suppressTaskName": true,
             "isBuildCommand": true,
             "showOutput": "always",
-            "isWatching": true
+            "isWatching": true,
+            "args":["tsc -w"]
+        },
+        {
+            "taskName": "SASS/Markdown",
+            "suppressTaskName": true,
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "isWatching": true,
+            "args":["gulp default"]
         }
     ]
 }
