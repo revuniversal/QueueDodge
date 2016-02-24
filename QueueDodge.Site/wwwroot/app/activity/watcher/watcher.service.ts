@@ -31,7 +31,6 @@ export class WatcherService {
 
         if (watchedPlayer != undefined) {
             console.log(watchedPlayer.name + " spotted!");
-            // TODO:  Play sound here.
             var audio = new Audio('chime.wav');
             audio.play();
 
