@@ -1,5 +1,4 @@
-﻿
-import {Component, Input, OnInit, OnDestroy} from 'angular2/core';
+﻿import {Component, Input, OnInit, OnDestroy} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 import {LiveService} from './live.service';
 import {WatcherService} from '../watcher/watcher.service';

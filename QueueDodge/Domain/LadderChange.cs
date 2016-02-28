@@ -11,6 +11,6 @@
             Previous = previous;
             Current = current;
         }
-        public bool Changed() => (Previous.Season.Wins != Current.Season.Wins) || (Previous.Season.Losses != Current.Season.Losses);
+        public bool Changed() => (Previous.SeasonWins != Current.SeasonWins) || (Previous.SeasonLosses != Current.SeasonLosses);
     }
 }

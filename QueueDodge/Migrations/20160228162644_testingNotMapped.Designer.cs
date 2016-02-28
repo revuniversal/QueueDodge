@@ -8,9 +8,10 @@ using QueueDodge;
 namespace QueueDodge.Migrations
 {
     [DbContext(typeof(QueueDodgeDB))]
-    partial class QueueDodgeDBModelSnapshot : ModelSnapshot
+    [Migration("20160228162644_testingNotMapped")]
+    partial class testingNotMapped
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348");
@@ -75,14 +76,6 @@ namespace QueueDodge.Migrations
                     b.Property<int>("Ranking");
 
                     b.Property<int>("Rating");
-
-                    b.Property<int>("SeasonLosses");
-
-                    b.Property<int>("SeasonWins");
-
-                    b.Property<int>("WeeklyLosses");
-
-                    b.Property<int>("WeeklyWins");
 
                     b.HasKey("ID");
                 });

@@ -49,8 +49,6 @@ export class ActivityComponent implements OnInit, OnDestroy{
     }
 
     public regionChanged(region: string): void {
-        let hostComponent = this.router.hostComponent.name;
-        alert(hostComponent);
         this.router.navigate(['Activity', { region: region, bracket: this.bracket }]);
     }
 } 

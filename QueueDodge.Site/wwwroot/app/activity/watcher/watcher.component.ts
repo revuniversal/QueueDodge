@@ -9,7 +9,10 @@ import {ActivityService} from '../activity.service';
     templateUrl: '../app/activity/watcher/watcher.component.html',
     directives: [CORE_DIRECTIVES]
 })
-export class WatcherComponent{
+export class WatcherComponent implements OnInit {
+    @Input() region: string;
+    @Input() bracket: string;
+
     private watcher: WatcherService;
 
     public players: Array<WatchedPlayer>;
@@ -20,7 +23,15 @@ export class WatcherComponent{
         this.activityService = activityService;
     }
 
-    public ignore(player: WatchedPlayer):void {
-        this.watcher.ignore(player);
+    public ngOnInit(): void {
+        let players: Array<WatchedPlayer> = this.watcher.getFromLocalStorage(this.region, this.bracket);
+
+        this.players = players;
+        this.watcher.watchedPlayers = players;
+
+    }
+
+    public ignore(player: WatchedPlayer): void {
+        this.watcher.ignore(player, this.region, this.bracket);
     }
 }

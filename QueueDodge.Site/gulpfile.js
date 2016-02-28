@@ -1,6 +1,19 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var markdown = require('gulp-markdown');
+//var typescript = require('gulp-typescript'); // Doesn't work properly.  Use tsc -w
+
+
+//gulp.task('typescript', function () {
+//    var tsProject = typescript.createProject('wwwroot/tsconfig.json', { noResolve: true });
+//    var tsResult = tsProject
+//        .src()
+//        .pipe(typescript(tsProject));
+
+//    return tsResult.js.pipe(gulp.dest(function (f) {
+//        return f.base;
+//    }));
+//});
 
 gulp.task('dependencies', function () {
     gulp.src([
@@ -34,6 +47,7 @@ gulp.task('markdown', function () {
 });
 
 gulp.task('default', function () {
+    gulp.start('dependencies')
     gulp.watch('./wwwroot/app/styles/style.scss', ['sass']);
     gulp.watch('**/*.md', ['markdown']);
 });
