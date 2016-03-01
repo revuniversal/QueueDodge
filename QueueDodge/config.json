@@ -1,7 +1,7 @@
 ﻿{
   "Data": {
     "DefaultConnection": {
-      "ConnectionString": "CONNECTION STRING GOES HERE"
+      "ConnectionString": "USER ID=Queuedodge;Password=queuedodge;Host=localhost;Port=5432;Database=QueueDodge;Pooling=true;Connection Lifetime=0;"
     }
   }
 }

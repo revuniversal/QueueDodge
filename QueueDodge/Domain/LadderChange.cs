@@ -1,5 +1,8 @@
-﻿namespace QueueDodge
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace QueueDodge
 {
+    [NotMapped]
     public class LadderChange
     {
         public int ID { get; set; }

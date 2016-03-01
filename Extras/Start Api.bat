@@ -1,2 +1,2 @@
-cd c:/users/nicka_000/documents/githubvisualstudio/QueueDodge/QueueDodge.Api
+cd c:/users/nick/documents/githubvisualstudio/QueueDodge/QueueDodge.Api
 dnx web --server.urls "http://localhost:5001"

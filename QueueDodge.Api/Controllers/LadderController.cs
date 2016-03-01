@@ -6,15 +6,16 @@ using System.Linq;
 
 using BattleDotSwag.Services;
 using BattleDotSwag.WoW.PVP;
-
+using System.Collections;
+using System.Collections.Generic;
 
 namespace QueueDodge.Api.Controllers
 {
     [Route("api/region/{region}/bracket/{bracket}")]
     public class LadderController : Controller
     {
-        private IMemoryCache cache { get;}
-        private QueueDodgeDB queueDodge { get;}
+        private IMemoryCache cache { get; }
+        private QueueDodgeDB queueDodge { get; }
 
         public LadderController(IMemoryCache cache, QueueDodgeDB queueDodge)
         {
@@ -29,18 +30,29 @@ namespace QueueDodge.Api.Controllers
             var key = "vftjkwdyvev3p4m9jrnfxgsdu2dz68yd";
             var _locale = (BattleDotSwag.Locale)Enum.Parse(typeof(BattleDotSwag.Locale), locale);
             var _regionEnum = (BattleDotSwag.Region)Enum.Parse(typeof(BattleDotSwag.Region), region);
-            var _region = queueDodge.Regions.Where(r => r.ID == (int)_regionEnum).Single();
+            var _region = queueDodge.Regions.Where(r => r.ID == ((int)_regionEnum)+1).Single(); // HACK: Fix the enum.
             var battleNet = new BattleNetService<Leaderboard>();
 
             var socket = GetSocket(_regionEnum, bracket);
 
-            var ladder = new Ladder(key, battleNet, cache, socket);
-       
-             // TODO:  Replace this with an standardized message before it's too late.
+            var ladder = new Ladder(key, battleNet, new QueueDodgeDB(), cache, socket);
+
+            // TODO:  Replace this with an standardized message before it's too late.
             Task.WaitAll(socket("clear"));
-            Task.WaitAll(ladder.GetRecentActivity(bracket, _locale, _region));
+            ladder.GetActivity(bracket, _locale, _region);
         }
 
+        [HttpGet]
+        [Route("recent")]
+        public IEnumerable<LadderChange> GetRecentActivity(string region, string bracket)
+        {
+            // TODO:  magic strings are getting out of hand, in here and in the ladder file.
+            var key = "changes:" + region + ":" + bracket;
+            var activity = new List<LadderChange>();
+            cache.TryGetValue(key, out activity);
+
+            return activity;
+        }
         private Func<string, Task> GetSocket(BattleDotSwag.Region region, string bracket)
         {
             // TODO:  This and everything below is a pile of crap.  How do I web socket?

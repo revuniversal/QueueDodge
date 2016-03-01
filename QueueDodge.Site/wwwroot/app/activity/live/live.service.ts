@@ -1,16 +1,16 @@
 ﻿import {Injectable, EventEmitter} from 'angular2/core';
 import {Http, Response, HTTP_PROVIDERS} from 'angular2/http';
-
+import {LadderChange} from '../../models/LadderChange';
 @Injectable()
 export class LiveService {
-    public activityDetected: EventEmitter<any>; 
+    public activityDetected: EventEmitter<any>;
     private socket: WebSocket;
     private http: Http;
 
     constructor(http: Http) {
         this.http = http;
         this.activityDetected = new EventEmitter<any>();
-    }  
+    }
 
     public connect(bracket: string, region: string) {
         this.socket = new WebSocket("wss://localhost/ws/" + region + "/" + bracket);
@@ -44,11 +44,10 @@ export class LiveService {
     public onError(ev: Event, region: string, bracket: string) {
         console.log("error " + region + " " + bracket);
     }
-
-    public getActivity(region: string, bracket: string) {
+    public getActivity(region: string, bracket: string){
         return this
             .http
-            .get("api/leaderboard/activity?region=" + region + "&bracket=" + bracket + "&locale=en_us")
+            .get("api/region/" + region + "/bracket/" + bracket + "/recent")
             .map((res: Response) => res.json());
     }
 }

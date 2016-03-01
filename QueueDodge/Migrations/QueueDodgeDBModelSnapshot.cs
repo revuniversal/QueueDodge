@@ -20,25 +20,64 @@ namespace QueueDodge.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ClassID");
+                    b.Property<int>("ClassID");
 
                     b.Property<int>("Gender");
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("RaceID");
+                    b.Property<int>("RaceID");
 
-                    b.Property<int?>("RealmID");
+                    b.Property<int>("RealmID");
 
-                    b.Property<int?>("SpecializationID");
+                    b.Property<int>("SpecializationID");
 
                     b.HasKey("ID");
                 });
 
             modelBuilder.Entity("QueueDodge.Class", b =>
                 {
+                    b.Property<int>("ID");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("PowerType");
+
+                    b.HasKey("ID");
+                });
+
+            modelBuilder.Entity("QueueDodge.Data.LadderChangeModel", b =>
+                {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Bracket");
+
+                    b.Property<int>("CharacterID");
+
+                    b.Property<int>("CurrentRanking");
+
+                    b.Property<int>("CurrentRating");
+
+                    b.Property<int>("CurrentSeasonLosses");
+
+                    b.Property<int>("CurrentSeasonWins");
+
+                    b.Property<int>("CurrentWeeklyLosses");
+
+                    b.Property<int>("CurrentWeeklyWins");
+
+                    b.Property<int>("PreviousRanking");
+
+                    b.Property<int>("PreviousRating");
+
+                    b.Property<int>("PreviousSeasonLosses");
+
+                    b.Property<int>("PreviousSeasonWins");
+
+                    b.Property<int>("PreviousWeeklyLosses");
+
+                    b.Property<int>("PreviousWeeklyWins");
 
                     b.HasKey("ID");
                 });
@@ -48,63 +87,29 @@ namespace QueueDodge.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.HasKey("ID");
-                });
-
-            modelBuilder.Entity("QueueDodge.LadderChange", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("CurrentID");
-
-                    b.Property<int?>("PreviousID");
-
-                    b.HasKey("ID");
-                });
-
-            modelBuilder.Entity("QueueDodge.LadderEntry", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Bracket");
-
-                    b.Property<int?>("CharacterID");
-
-                    b.Property<int>("Ranking");
-
-                    b.Property<int>("Rating");
-
-                    b.Property<int>("SeasonLosses");
-
-                    b.Property<int>("SeasonWins");
-
-                    b.Property<int>("WeeklyLosses");
-
-                    b.Property<int>("WeeklyWins");
+                    b.Property<string>("Name");
 
                     b.HasKey("ID");
                 });
 
             modelBuilder.Entity("QueueDodge.Race", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("ID");
 
-                    b.Property<int?>("FactionID");
+                    b.Property<int>("FactionID");
+
+                    b.Property<string>("Name");
 
                     b.HasKey("ID");
                 });
 
             modelBuilder.Entity("QueueDodge.Realm", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("ID");
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("RegionID");
+                    b.Property<int>("RegionID");
 
                     b.Property<string>("Slug");
 
@@ -123,8 +128,9 @@ namespace QueueDodge.Migrations
 
             modelBuilder.Entity("QueueDodge.Specialization", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("ID");
+
+                    b.Property<string>("Name");
 
                     b.HasKey("ID");
                 });
@@ -148,18 +154,7 @@ namespace QueueDodge.Migrations
                         .HasForeignKey("SpecializationID");
                 });
 
-            modelBuilder.Entity("QueueDodge.LadderChange", b =>
-                {
-                    b.HasOne("QueueDodge.LadderEntry")
-                        .WithMany()
-                        .HasForeignKey("CurrentID");
-
-                    b.HasOne("QueueDodge.LadderEntry")
-                        .WithMany()
-                        .HasForeignKey("PreviousID");
-                });
-
-            modelBuilder.Entity("QueueDodge.LadderEntry", b =>
+            modelBuilder.Entity("QueueDodge.Data.LadderChangeModel", b =>
                 {
                     b.HasOne("QueueDodge.Character")
                         .WithMany()

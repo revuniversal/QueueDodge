@@ -1430,8 +1430,8 @@
         "dependencies": {
           "BattleDotSwag": "1.0.10",
           "EntityFramework.Commands": "7.0.0-rc1-final",
-          "EntityFramework.Relational": "7.0.0",
-          "EntityFramework7.Npgsql": "3.1.0-rc1",
+          "EntityFramework.Relational": "7.0.0-rc1-final",
+          "EntityFramework7.Npgsql": "3.1.0-rc1-3",
           "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc1-final",
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Microsoft.Extensions.Caching.Memory": "1.0.0-rc1-final",
@@ -3916,8 +3916,8 @@
         "dependencies": {
           "BattleDotSwag": "1.0.10",
           "EntityFramework.Commands": "7.0.0-rc1-final",
-          "EntityFramework.Relational": "7.0.0",
-          "EntityFramework7.Npgsql": "3.1.0-rc1",
+          "EntityFramework.Relational": "7.0.0-rc1-final",
+          "EntityFramework7.Npgsql": "3.1.0-rc1-3",
           "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc1-final",
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Microsoft.Extensions.Caching.Memory": "1.0.0-rc1-final",
@@ -6944,8 +6944,8 @@
         "dependencies": {
           "BattleDotSwag": "1.0.10",
           "EntityFramework.Commands": "7.0.0-rc1-final",
-          "EntityFramework.Relational": "7.0.0",
-          "EntityFramework7.Npgsql": "3.1.0-rc1",
+          "EntityFramework.Relational": "7.0.0-rc1-final",
+          "EntityFramework7.Npgsql": "3.1.0-rc1-3",
           "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc1-final",
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Microsoft.Extensions.Caching.Memory": "1.0.0-rc1-final",

@@ -1,14 +1,21 @@
-﻿namespace QueueDodge
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace QueueDodge
 {
     public class Race
     {
-        public int ID { get; }
-        public Faction Faction { get; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int FactionID { get; set; }
+        public virtual Faction Faction { get; set; }
 
-        public Race(int id, Faction faction)
+        public Race() { }
+        public Race(int id, string name, int factionId)
         {
             ID = id;
-            Faction = faction;
+            Name = name;
+            FactionID = factionId;
         }
     }
 }
