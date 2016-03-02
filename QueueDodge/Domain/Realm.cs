@@ -11,13 +11,12 @@ namespace QueueDodge
         public int RegionID { get; set; }
         public virtual Region Region { get; set; }
         public Realm() { }
-        public Realm(int id, string name, string slug, Region region)
+        public Realm(int id, string name, string slug, int regionId)
         {
             ID = id;
             Name = name;
             Slug = slug;
-            RegionID = region.ID;
-            Region = region;
+            RegionID = regionId;
         }
     }
 }

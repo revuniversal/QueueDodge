@@ -12,7 +12,7 @@ namespace QueueDodge.Data
         public int CharacterID { get; set; }
 
         public virtual Character Character { get; set; }
-        public string Bracket { get; }
+        public string Bracket { get; set; }
 
         public int PreviousRanking { get; set; }
         public int PreviousRating { get; set; }

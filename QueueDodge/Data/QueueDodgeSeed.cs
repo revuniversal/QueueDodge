@@ -1,20 +1,27 @@
 ﻿using Microsoft.Data.Entity;
+using Microsoft.Extensions.OptionsModel;
 using QueueDodge;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BattleDotSwag;
+using BattleDotSwag.Services;
+using BattleDotSwag.WoW.PVP;
 
 namespace QueueDodge.Data
 {
-    public class DatabaseSeed
+    public class QueueDodgeSeed
     {
-        QueueDodgeDB queueDodge;
+        private QueueDodgeOptions options;
+        private QueueDodgeDB queueDodge;
 
-        public DatabaseSeed(QueueDodgeDB queueDodge)
+        public QueueDodgeSeed(QueueDodgeDB queueDodge, IOptions<QueueDodgeOptions> options)
         {
             this.queueDodge = queueDodge;
+            this.options = options.Value;
         }
+
         public void Seed()
         {
             Clear();
@@ -23,9 +30,12 @@ namespace QueueDodge.Data
             Races();
             Classes();
             Specializations();
+            Realms();
         }
         private void Clear()
         {
+            queueDodge.LadderChanges.Clear();
+            queueDodge.Characters.Clear();
             queueDodge.Regions.Clear();
             queueDodge.Classes.Clear();
             queueDodge.Specializations.Clear();
@@ -78,6 +88,26 @@ namespace QueueDodge.Data
         }
         private void Realms()
         {
+            var service = new BattleNetService<Leaderboard>();
+            var endpoint = new LeaderboardEndpoint("3v3", Locale.en_us, options.apiKey);
+            var data = service.Get(endpoint, BattleDotSwag.Region.us).Result;
+            var region = queueDodge.Regions.Where(p => p.ID == 1).Single();
+
+            var realms = new List<Realm>();
+
+            foreach (var row in data.Rows)
+            {
+                var newRealm = realms.Where(p => p.ID == row.RealmID).Count() == 0;
+               
+                if (newRealm && row.RealmID > 0)
+                {
+                    var realm = new Realm(row.RealmID, row.RealmName, row.RealmSlug, region.ID);
+                    realms.Add(realm);
+                }
+            }
+
+            queueDodge.Realms.AddRange(realms);
+            queueDodge.SaveChanges();
         }
         private void Specializations()
         {

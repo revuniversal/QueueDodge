@@ -13,7 +13,7 @@
       "launchBrowser": true,
       "launchUrl": "http://localhost:5001",
       "environmentVariables": {
-        "Hosting:Environment": "Development"
+        "ASPNET_ENV": "Development"
       }
     },
     "IIS Express": {

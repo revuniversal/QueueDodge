@@ -8,8 +8,8 @@ using QueueDodge;
 namespace QueueDodge.Migrations
 {
     [DbContext(typeof(QueueDodgeDB))]
-    [Migration("20160301073043_edits")]
-    partial class edits
+    [Migration("20160301225741_initnpgsql3")]
+    partial class initnpgsql3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -106,7 +106,8 @@ namespace QueueDodge.Migrations
 
             modelBuilder.Entity("QueueDodge.Realm", b =>
                 {
-                    b.Property<int>("ID");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 

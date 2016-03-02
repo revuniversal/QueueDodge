@@ -8,34 +8,37 @@ using BattleDotSwag.Services;
 using BattleDotSwag.WoW.PVP;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Extensions.OptionsModel;
 
 namespace QueueDodge.Api.Controllers
 {
     [Route("api/region/{region}/bracket/{bracket}")]
     public class LadderController : Controller
     {
-        private IMemoryCache cache { get; }
-        private QueueDodgeDB queueDodge { get; }
+        private IMemoryCache cache;
+        private QueueDodgeDB queueDodge;
+        private QueueDodgeApiOptions options;
 
-        public LadderController(IMemoryCache cache, QueueDodgeDB queueDodge)
+        public LadderController(IMemoryCache cache, QueueDodgeDB queueDodge, IOptions<QueueDodgeApiOptions> options)
         {
             this.cache = cache;
             this.queueDodge = queueDodge;
+            this.options = options.Value;
         }
 
         // TODO:  Think about adding a realm filter here so users can see where they stand on their realm.  Not that it matters.
         [HttpGet]
         public void GetActivity(string region, string bracket, string locale)
         {
-            var key = "vftjkwdyvev3p4m9jrnfxgsdu2dz68yd";
+            var key = options.apiKey;
             var _locale = (BattleDotSwag.Locale)Enum.Parse(typeof(BattleDotSwag.Locale), locale);
             var _regionEnum = (BattleDotSwag.Region)Enum.Parse(typeof(BattleDotSwag.Region), region);
-            var _region = queueDodge.Regions.Where(r => r.ID == ((int)_regionEnum)+1).Single(); // HACK: Fix the enum.
+            var _region = queueDodge.Regions.Where(r => r.ID == ((int)_regionEnum)).Single();
             var battleNet = new BattleNetService<Leaderboard>();
 
             var socket = GetSocket(_regionEnum, bracket);
 
-            var ladder = new Ladder(key, battleNet, new QueueDodgeDB(), cache, socket);
+            var ladder = new Ladder(key, battleNet, queueDodge, cache, socket);
 
             // TODO:  Replace this with an standardized message before it's too late.
             Task.WaitAll(socket("clear"));

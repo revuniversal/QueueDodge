@@ -1,9 +1,9 @@
-﻿{
+{
   "version": "1.0.0-*",
+  "userSecretsId": "QueueDodge.Api",
   "compilationOptions": {
     "emitEntryPoint": true
   },
-
   "dependencies": {
     "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
     "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
@@ -20,13 +20,12 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
     "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Caching.Abstractions": "1.0.0-rc1-final"
+    "Microsoft.Extensions.Caching.Abstractions": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final"
   },
-
   "commands": {
     "web": "QueueDodge.Api"
   },
-
   "frameworks": {
     "dnxcore50": {
       "dependencies": {
@@ -34,7 +33,6 @@
       }
     }
   },
-
   "exclude": [
     "wwwroot",
     "node_modules"

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Http;
+using QueueDodge.Data;
 
 namespace QueueDodge.Api
 {
@@ -16,9 +17,9 @@ namespace QueueDodge.Api
         {
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json");
+            .AddEnvironmentVariables()
+            .AddUserSecrets();
 
-            builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
@@ -26,14 +27,26 @@ namespace QueueDodge.Api
         {
             services.AddMvc();
             services.AddCaching();
+            services.AddOptions();
             services.AddScoped<QueueDodgeDB, QueueDodgeDB>();
+
+            services.Configure<QueueDodgeOptions>(options =>
+            {
+                options.apiKey = Configuration["apiKey"];
+                options.connection = Configuration["connection"];
+            });
+
+            services.Configure<QueueDodgeApiOptions>(options =>
+            {
+                options.apiKey = Configuration["apiKey"];
+                options.connection = Configuration["connection"];
+            });
+
+            services.AddScoped<QueueDodgeSeed, QueueDodgeSeed>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -86,17 +99,5 @@ namespace QueueDodge.Api
         }
 
         public static void Main(string[] args) => Microsoft.AspNet.Hosting.WebApplication.Run<Startup>(args);
-
-
-        /*   CoreCLR RC2 Stuff
-        public static void Main(string[] args)
-        {
-            var application = new Microsoft.AspNet.Hosting.WebHostBuilder()
-                .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
-                .UseStartup<Startup>()
-                .Build();
-
-            application.Run();
-        }*/
     }
 }

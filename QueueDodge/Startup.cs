@@ -13,23 +13,31 @@ using QueueDodge;
 /// </summary>
 public class Startup
 {
+    public IConfigurationRoot Configuration { get; set; }
+
     public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
     {
         var builder = new ConfigurationBuilder()
             .SetBasePath(appEnv.ApplicationBasePath)
-            .AddJsonFile("config.json");
+            .AddEnvironmentVariables()
+            .AddUserSecrets();
 
-        builder.AddEnvironmentVariables();
         Configuration = builder.Build();
     }
-
-    public IConfigurationRoot Configuration { get; set; }
 
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddEntityFramework()
             .AddNpgsql()
-            .AddDbContext<QueueDodgeDB>(options => options.UseNpgsql(Configuration["Data:DefaultConnection:ConnectionString"]));
+            .AddDbContext<QueueDodgeDB>(options => options.UseNpgsql(Configuration["connection"]));
+
+        services.AddOptions();
+
+        services.Configure<QueueDodgeOptions>(options =>
+        {
+            options.apiKey = Configuration["apiKey"];
+            options.connection = Configuration["connection"];
+        });
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

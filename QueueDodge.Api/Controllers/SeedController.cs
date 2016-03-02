@@ -12,18 +12,20 @@ namespace QueueDodge.Api.Controllers
     public class SeedController : Controller
     {
         private QueueDodgeDB queueDodge;
+        private QueueDodgeSeed seed;
 
-        public SeedController(QueueDodgeDB queueDodge)
+        public SeedController(QueueDodgeDB queueDodge, QueueDodgeSeed seed)
         {
             this.queueDodge = queueDodge;
+            this.seed = seed;
         }
 
         [HttpGet]
         [Route("")]
-        public void Seed()
+        public HttpOkResult Seed()
         {
-             var seed = new DatabaseSeed(queueDodge);
             seed.Seed();
+            return Ok();
         }
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace QueueDodge.Migrations
 {
-    public partial class initn : Migration
+    public partial class initnpgsql3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -77,7 +77,8 @@ namespace QueueDodge.Migrations
                 name: "Realm",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:Serial", true),
                     Name = table.Column<string>(nullable: true),
                     RegionID = table.Column<int>(nullable: false),
                     Slug = table.Column<string>(nullable: true)

@@ -11,11 +11,12 @@ using BattleDotSwag.Services;
 using BattleDotSwag.WoW.PVP;
 using Microsoft.Data.Entity;
 using System.Linq;
+using QueueDodge.Domain;
 
 namespace QueueDodge
 {
     /// <summary>
-    /// SIDE EFFECTS GALORE!
+    /// TODO:  HACK:  SIDE EFFECTS GALORE!  Refactor this whole thing until it isn't so messy.
     /// </summary>
     public class Ladder
     {
@@ -48,22 +49,24 @@ namespace QueueDodge
         {
             var endpoint = new LeaderboardEndpoint(bracket, locale, apiKey);
             var data = leaderboardService.Get(endpoint, (BattleDotSwag.Region)region.ID).Result;
+            var factory = new LadderEntryFactory(queueDodge);
+            var realms = queueDodge.Realms.AsEnumerable();
 
             foreach (var entry in data.Rows)
             {
-                var ladderEntry = LadderEntry.Create(entry, bracket, region);
+                var ladderEntry = factory.Create(entry, bracket, region);
                 Data.Add(ladderEntry);
-                CompareWithCache(ladderEntry, bracket);
+                CompareWithCache(ladderEntry, bracket, region);
             };
 
-            var key = new LadderKey(region.ToString(), bracket);
+            var key = region.ToString() + ":" + bracket;
             cache.Set(key, Data);
             queueDodge.SaveChanges();
         }
 
-        private void CompareWithCache(LadderEntry entry, string bracket)
+        private void CompareWithCache(LadderEntry entry, string bracket, Region region)
         {
-            var realKey = entry.Character.Name + ":" + entry.Character.Realm.ID + ":" + entry.Character.Realm.Region.ToString() + ":" + bracket;
+            var realKey = entry.Character.Name + ":" + entry.Character.RealmID + ":" + bracket;
 
             var cachedEntry = default(LadderEntry);
             var cached = cache.TryGetValue(realKey, out cachedEntry);
@@ -73,32 +76,10 @@ namespace QueueDodge
                 var change = new LadderChange(cachedEntry, entry);
                 if (change.Changed())
                 {
+                    var realm = GetRealm(entry, region);
+                    var character = GetCharacter(entry, region);
                     var changeModel = new LadderChangeModel(change);
-
-                    var realm = queueDodge.Realms.Where(p => p.Name == entry.Character.Realm.Name && p.RegionID == entry.Character.Realm.RegionID).FirstOrDefault();
-
-                    if (realm == null)
-                    {
-                        queueDodge.Realms.Add(entry.Character.Realm);
-                        queueDodge.SaveChanges();
-                    }
- 
-
-                    var character = queueDodge.Characters.Where(p => p.Name == entry.Character.Name
-                    && p.RealmID == entry.Character.RealmID
-                    && p.Realm.RegionID == entry.Character.Realm.RegionID).FirstOrDefault();
-
-                    if (character == null)
-                    {
-                        changeModel.Character = queueDodge.Characters.Add(entry.Character).Entity;
-                        queueDodge.SaveChanges();
-                    }
-                    else {
-                        changeModel.Character = queueDodge.Characters.Update(entry.Character).Entity;
-                        queueDodge.SaveChanges();
-                    }
-
-
+                    changeModel.CharacterID = character.ID;
 
                     queueDodge.LadderChanges.Add(changeModel, GraphBehavior.SingleObject);
                     BroadcastChange(change);
@@ -112,6 +93,48 @@ namespace QueueDodge
         {
             var json = JsonConvert.SerializeObject(change, options);
             sendMessage(json);
+        }
+        private Realm GetRealm(LadderEntry entry, Region region)
+        {
+            var realmCheck = queueDodge
+                .Realms
+                .Where(p => p.ID == entry.Character.RealmID)
+                .FirstOrDefault();
+
+            if (realmCheck == null)
+            {
+                var realm = new Realm(entry.Character.RealmID, entry.Character.Realm.Name, entry.Character.Realm.Slug, region.ID);
+                var trackedRealm = queueDodge.Realms.Add(realm);
+                queueDodge.SaveChanges();
+                return trackedRealm.Entity;
+            }
+            else
+            {
+                return realmCheck;
+            }
+        }
+        private Character GetCharacter(LadderEntry entry, Region region)
+        {
+            var characterCheck = queueDodge
+                .Characters
+                .Where(p => p.Name == entry.Character.Name
+                && p.RealmID == entry.Character.RealmID
+                && p.Realm.RegionID == region.ID)
+                .FirstOrDefault();
+
+            if (characterCheck == null)
+            {
+                var character = new Character(entry.Character.Name, entry.Character.Gender, entry.Character.RealmID, entry.Character.RaceID, entry.Character.ClassID, entry.Character.SpecializationID);
+                var attachedCharacter = queueDodge.Add(character).Entity;
+                queueDodge.SaveChanges();
+                return attachedCharacter;
+            }
+            else
+            {
+                return characterCheck;
+            }
+
+
         }
     }
 }

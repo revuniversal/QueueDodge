@@ -8,8 +8,8 @@ using QueueDodge;
 namespace QueueDodge.Migrations
 {
     [DbContext(typeof(QueueDodgeDB))]
-    [Migration("20160301070813_initn")]
-    partial class initn
+    [Migration("20160302034545_realmIDNOIDENTITY")]
+    partial class realmIDNOIDENTITY
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -1,7 +1,10 @@
 {
-  "authors": [ "Nick" ],
+  "authors": [
+    "Nick"
+  ],
+  "userSecretsId": "QueueDodge",
   "dependencies": {
-    "BattleDotSwag": "1.0.10",
+    "BattleDotSwag": "2.0.0",
     "EntityFramework.Commands": "7.0.0-rc1-final",
     "EntityFramework7.Npgsql": "3.1.0-rc1-3",
     "EntityFramework.Relational": "7.0.0-rc1-final",
@@ -19,8 +22,8 @@
     "System.Net.Http": "4.0.1-beta-23516",
     "System.Runtime": "4.0.21-beta-23516",
     "System.Threading": "4.0.11-beta-23516",
-    "System.Threading.Tasks.Parallel": "4.0.1-beta-23516"
-
+    "System.Threading.Tasks.Parallel": "4.0.1-beta-23516",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final"
   },
   "commands": {
     "ef": "EntityFramework.Commands"
@@ -28,12 +31,13 @@
   "description": "QueueDodge Class Library",
   "frameworks": {
     "dnxcore50": {
-      "dependencies": {
-      }
+      "dependencies": {}
     }
   },
   "licenseUrl": "",
   "projectUrl": "",
-  "tags": [ "" ],
+  "tags": [
+    ""
+  ],
   "version": "1.0.0-*"
 }

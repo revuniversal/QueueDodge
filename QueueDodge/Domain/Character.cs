@@ -17,24 +17,18 @@
         public Character() { }
         public Character(string name,
             int gender,
-            Realm realm,
-            Race race,
-            Class characterClass,
-            Specialization specialization)
+            int realmId,
+            int raceId,
+            int characterClassId,
+            int specializationId)
         {
             Name = name;
             Gender = gender;
-            RealmID = realm.ID;
-            Realm = realm;
-
-            RaceID = race.ID;
-            Race = race;
-
-            ClassID = characterClass.ID;
-            Class = characterClass;
-
-            SpecializationID = specialization.ID;
-            Specialization = specialization;
+            RealmID = realmId;
+            RaceID = raceId;
+            ClassID = characterClassId;
+            SpecializationID = specializationId;
+            
         }
     }
 }
