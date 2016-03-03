@@ -27,7 +27,6 @@ namespace QueueDodge
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // TODO:  Use the new configuration options to store this connection string.
             optionsBuilder.UseNpgsql(options.connection);
         }
 
