@@ -6,7 +6,6 @@ namespace QueueDodge
     [NotMapped]
     public class LadderEntry
     {
-        public int ID { get; set; }
         public Character Character { get; set; }
         public string Bracket { get; set; }
         public int Ranking { get; set; }

@@ -33,16 +33,14 @@ namespace QueueDodge.Api.Controllers
             var key = options.apiKey;
             var _locale = (BattleDotSwag.Locale)Enum.Parse(typeof(BattleDotSwag.Locale), locale);
             var _regionEnum = (BattleDotSwag.Region)Enum.Parse(typeof(BattleDotSwag.Region), region);
-            var _region = queueDodge.Regions.Where(r => r.ID == ((int)_regionEnum)).Single();
-            var battleNet = new BattleNetService<Leaderboard>();
 
             var socket = GetSocket(_regionEnum, bracket);
 
-            var ladder = new Ladder(key, battleNet, queueDodge, cache, socket);
+            var ladder = new Ladder(key, queueDodge, cache, socket);
 
             // TODO:  Replace this with an standardized message before it's too late.
             Task.WaitAll(socket("clear"));
-            ladder.GetActivity(bracket, _locale, _region);
+            ladder.DetectChanges(bracket, _locale, _regionEnum);
         }
 
         [HttpGet]
