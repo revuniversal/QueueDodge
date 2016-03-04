@@ -38,7 +38,7 @@ In QueueDodge and QueueDodge.Api:
     user-secret set connection "User ID=Queuedodge; password=queuedodge;Host=localhost;5432;Database=QueueDodge;Pooling=true;Connection Lifetime=0;"
 
 ## Database
-Your database will need an Entity Framework 7 provider.
+Your database will need an Entity Framework 7 provider.  [Providers are listed here](http://docs.efproject.net/en/latest/providers/index.html)
 
 If you aren't using PostgreSQL there are a couple changes to make.  First, you will need to reference the appropriate library in your project.JSON file.
 
