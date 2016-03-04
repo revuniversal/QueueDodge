@@ -15,9 +15,9 @@ I don't like people accusing me of harvesting IP addresses so I made it open sou
 2. [Get your favorite Entity Framework 7 compatible database.](http://ef.readthedocs.org/en/latest/providers/)
 3. Clone this repository.
 4. There are three projects:  
-   a. **QueueDodge**:  The library  
-   b. **QueueDodge.Api**:  The api  
-   b. **QueueDodge.Site**:  The client  
+   a. **QueueDodge**
+   b. **QueueDodge.Api**  
+   b. **QueueDodge.Site**  
 
 In each of these projects, restore packages and build.
 
@@ -71,6 +71,13 @@ Navigate to the "QueueDodge" folder and run the following commands.
     dnx ef migrations add init
     dnx ef database update
 
+## The Front End
+Navigate to QueueDodge.Site and run:
+
+    npm install
+    gulp sass
+    gulp dependencies
+    tsc
 
 ## Running the api and site.
 To run QueueDodge.Api, navigate to QueueDodge.Api and run:
