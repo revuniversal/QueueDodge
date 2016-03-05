@@ -15,7 +15,7 @@ I don't like people accusing me of harvesting IP addresses so I made it open sou
 2. [Get your favorite Entity Framework 7 compatible database.](http://ef.readthedocs.org/en/latest/providers/)
 3. Clone this repository.
 4. There are three projects:  
-   a. **QueueDodge**
+   a. **QueueDodge**  
    b. **QueueDodge.Api**  
    b. **QueueDodge.Site**  
 
