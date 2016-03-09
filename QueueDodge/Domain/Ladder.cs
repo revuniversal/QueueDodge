@@ -31,6 +31,7 @@ namespace QueueDodge
             this.sendMessage = sendMessage;
         }
 
+        // TODO:  Some side effects are happening in here.
         public void DetectChanges(string bracket, Locale locale, BattleDotSwag.Region region)
         {
             var leaderboard = GetActivity(bracket, locale, region);
@@ -48,8 +49,12 @@ namespace QueueDodge
                         var character = AddOrUpdateCharacter(change);
                         var changeModel = new LadderChangeModel(change);
                         changeModel.CharacterID = character.ID;
-
                         queueDodge.LadderChanges.Add(changeModel, GraphBehavior.SingleObject);
+
+                        // HACK:  This will interfere with detecting race and faction changes.
+                        change.Current.Character = character;
+                        change.Previous.Character = character;
+
                         BroadcastChange(change);
                     }
                 };
@@ -110,7 +115,7 @@ namespace QueueDodge
                 var realm = new Realm(change.Current.Character.RealmID,
                     change.Current.Character.Realm.Name,
                     change.Current.Character.Realm.Slug,
-                    change.Current.Character.Realm.Region.ID);
+                    change.Current.Character.Realm.RegionID);
 
                 var trackedRealm = queueDodge.Realms.Add(realm);
                 queueDodge.SaveChanges();
@@ -126,8 +131,7 @@ namespace QueueDodge
             var characterCheck = queueDodge
                 .Characters
                 .Where(p => p.Name == change.Current.Character.Name
-                && p.RealmID == change.Current.Character.RealmID
-                && p.Realm.RegionID == change.Current.Character.Realm.RegionID)
+                && p.RealmID == change.Current.Character.RealmID)
                 .FirstOrDefault();
 
             if (characterCheck == null)
@@ -141,14 +145,22 @@ namespace QueueDodge
 
                 var attachedCharacter = queueDodge.Add(character).Entity;
                 queueDodge.SaveChanges();
-                return attachedCharacter;
-            }
-            else
-            {
-                return characterCheck;
             }
 
+            // HACK:  Totally lame, child objects aren't populated so I have to re-query what I just inserted.
+            var filledCharacter = queueDodge
+                .Characters
+                .Include(p => p.Class)
+                .Include(p => p.Realm)
+                .Include(p => p.Specialization)
+                .Include(p => p.Race)
+                .Include(p => p.Realm.Region)
+                .Include(p => p.Race.Faction)
+                .Where(p => p.Name == change.Current.Character.Name &&
+                p.RealmID == change.Current.Character.RealmID)
+                .Single();
 
+            return filledCharacter;
         }
     }
 }

@@ -14,9 +14,9 @@ export class ActivityService {
         return detectedRanking < previousRanking;
     }
     public isAlliance(faction: number): boolean {
-        return faction === 0
+        return faction === 1
     }
     public isHorde(faction: number): boolean {
-        return faction === 1
+        return faction === 2
     }
 }

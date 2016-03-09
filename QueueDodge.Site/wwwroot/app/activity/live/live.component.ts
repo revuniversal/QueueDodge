@@ -29,13 +29,13 @@ export class LiveComponent implements OnInit, OnDestroy {
     public ngOnInit(): void {
         this.liveService.connect(this.bracket, this.region);
         this.liveService.activityDetected.subscribe((activity: any) => this.addActivity(activity));
-        this.liveService
-            .getActivity(this.region, this.bracket)
-            .subscribe(activity =>
-                activity.forEach((entry: any) =>
-                    this.addActivity(entry)
-                )
-        );
+        //this.liveService
+        //    .getActivity(this.region, this.bracket)
+        //    .subscribe(activity =>
+        //        activity.forEach((entry: any) =>
+        //            this.addActivity(entry)
+        //        )
+        //);
     }
     public ngOnDestroy(): void {
         this.liveService.activityDetected.unsubscribe();
