@@ -24,7 +24,7 @@
     "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final"
   },
   "commands": {
-    "web": "QueueDodge.Api"
+    "web": "QueueDodge.Api --server.urls 'http://localhost:5001'"
   },
   "frameworks": {
     "dnxcore50": {
