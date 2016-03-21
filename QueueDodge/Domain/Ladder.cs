@@ -36,30 +36,42 @@ namespace QueueDodge
         {
             var leaderboard = GetActivity(bracket, locale, region);
 
+            // HACK:  Zyrith is appearing multiple times on the same ladder.  Keep track of who is processed and dont process the same character more than once.
+            var processed = new List<Row>();
+
             foreach (var row in leaderboard.Rows)
             {
-                var entry = ConvertToLadderEntry(row, bracket, region);
-                var cachedEntry = Cached(entry);
-                if (cachedEntry != null)
+                var multiple = processed
+                    .Where(p => p.Name == row.Name && p.RealmID == row.RealmID)
+                    .Any();
+
+                if (!multiple)
                 {
-                    var change = new LadderChange(cachedEntry, entry);
-                    if (change.Changed())
+                    processed.Add(row);
+                    var entry = ConvertToLadderEntry(row, bracket, region);
+                    var cachedEntry = Cached(entry);
+
+                    if (cachedEntry != null)
                     {
-                        var realm = AddOrUpdateRealm(change);
-                        var character = AddOrUpdateCharacter(change);
-                        var changeModel = new LadderChangeModel(change);
-                        changeModel.CharacterID = character.ID;
-                        queueDodge.LadderChanges.Add(changeModel, GraphBehavior.SingleObject);
+                        var change = new LadderChange(cachedEntry, entry);
+                        if (change.Changed())
+                        {
+                            var realm = AddOrUpdateRealm(change);
+                            var character = AddOrUpdateCharacter(change);
+                            var changeModel = new LadderChangeModel(change);
+                            changeModel.CharacterID = character.ID;
+                            queueDodge.LadderChanges.Add(changeModel, GraphBehavior.SingleObject);
 
-                        // HACK:  This will interfere with detecting race and faction changes.
-                        change.Current.Character = character;
-                        change.Previous.Character = character;
+                            // HACK:  This will interfere with detecting race and faction changes.
+                            change.Current.Character = character;
+                            change.Previous.Character = character;
 
-                        BroadcastChange(change);
-                    }
-                };
+                            BroadcastChange(change);
+                        }
+                    };
+                    queueDodge.SaveChanges();
+                }
             }
-            queueDodge.SaveChanges();
         }
 
         private Leaderboard GetActivity(string bracket, Locale locale, BattleDotSwag.Region region)
