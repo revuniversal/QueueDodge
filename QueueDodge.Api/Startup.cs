@@ -17,8 +17,12 @@ namespace QueueDodge.Api
         {
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
-            .AddEnvironmentVariables()
-            .AddUserSecrets();
+            .AddEnvironmentVariables("APPSETTING_");
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets();
+            }
 
             Configuration = builder.Build();
         }
