@@ -19,7 +19,7 @@
   },
 
   "commands": {
-    "web": "QueueDodge.Site"
+    "web": "QueueDodge.Site --server.urls 'http://0.0.0.0:5000'"
   },
 
   "frameworks": {
