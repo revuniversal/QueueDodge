@@ -4,13 +4,11 @@ sudo: required
 dist: trusty
 
 before_install:
-- sudo apt-get -qq update
-- sudo apt-get install unzip 
-- sudo apt-get install curl
+- sudo apt-get -qq update -y
+- sudo apt-get install unzip -y
+- sudo apt-get install curl -y
 - curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | DNX_BRANCH=dev sh 
 - source ~/.dnx/dnvm/dnvm.sh
-
-install: 
 - sudo apt-get install libunwind8 -y
 - sudo apt-get install gettext -y
 - sudo apt-get install libssl-dev -y 
@@ -22,6 +20,9 @@ install:
 - sudo apt-get install npm -y
 - npm install typescript -g
 - npm install gulp -g
+
+install: 
+
 - cd ~
 - git clone https://github.com/NickolasAcosta/QueueDodge.git
 - cd QueueDodge/QueueDodge
