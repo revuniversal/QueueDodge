@@ -33,6 +33,14 @@
       }
     }
   },
+  "scripts": {
+    "prebuild": [""],
+    "postbuild": [""],
+    "prepack": [""],
+    "postpack": [""],
+    "prerestore": [""],
+    "postrestore": [""]
+  },
   "exclude": [
     "wwwroot",
     "node_modules"

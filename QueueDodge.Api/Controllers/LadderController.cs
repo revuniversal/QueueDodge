@@ -2,11 +2,6 @@
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System.Threading.Tasks;
-using System.Linq;
-
-using BattleDotSwag.Services;
-using BattleDotSwag.WoW.PVP;
-using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Extensions.OptionsModel;
 

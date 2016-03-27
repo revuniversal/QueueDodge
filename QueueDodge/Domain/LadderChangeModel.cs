@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace QueueDodge.Data
+﻿namespace QueueDodge.Data
 {
     // TODO:  having one copy of character doesnt allow tracking of race changes or faction changes etc.
     public class LadderChangeModel

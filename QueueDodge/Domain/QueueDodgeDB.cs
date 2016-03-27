@@ -1,6 +1,5 @@
 ﻿using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Metadata;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.OptionsModel;
 using QueueDodge.Data;
 using System.Linq;

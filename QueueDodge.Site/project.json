@@ -25,7 +25,14 @@
   "frameworks": {
     "dnxcore50": { }
   },
-
+  "scripts": {
+    "prebuild": ["npm install", "gulp dependencies", "gulp sass"],
+    "postbuild": ["tsc"],
+    "prepack": [""],
+    "postpack": [""],
+    "prerestore": ["npm install typescript -g", "npm install gulp -g"],
+    "postrestore": [""]
+  },
   "exclude": [
     "wwwroot",
     "node_modules"

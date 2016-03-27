@@ -1,5 +1,4 @@
-﻿using BattleDotSwag.WoW.PVP;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QueueDodge
 {

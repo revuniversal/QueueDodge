@@ -1,10 +1,6 @@
-﻿using Microsoft.Data.Entity;
-using Microsoft.Extensions.OptionsModel;
-using QueueDodge;
-using System;
+﻿using Microsoft.Extensions.OptionsModel;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using BattleDotSwag;
 using BattleDotSwag.Services;
 using BattleDotSwag.WoW.PVP;

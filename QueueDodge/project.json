@@ -34,6 +34,14 @@
       "dependencies": {}
     }
   },
+  "scripts": {
+    "prebuild": [""],
+    "postbuild": [""],
+    "prepack": [""],
+    "postpack": [""],
+    "prerestore": [""],
+    "postrestore": [""]
+  },
   "licenseUrl": "",
   "projectUrl": "",
   "tags": [
