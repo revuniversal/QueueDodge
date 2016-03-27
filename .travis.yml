@@ -22,9 +22,10 @@ before_install:
 - npm install gulp -g
 
 install: 
-
 - cd ~
 - git clone https://github.com/NickolasAcosta/QueueDodge.git
+
+script:
 - cd QueueDodge/QueueDodge
 - dnu restore
 - dnu build
@@ -38,17 +39,3 @@ install:
 - gulp dependencies
 - gulp sass
 - tsc
-
-# for kestrel!
-#sudo apt-get install make automake libtool curl
-#curl -sSL https://github.com/libuv/libuv/archive/v1.8.0.tar.gz | sudo tar zxfv - -C /usr/local/src
-#cd /usr/local/src/libuv-1.8.0
-#sudo sh autogen.sh
-#sudo ./configure
-#sudo make
-#sudo make install
-#sudo rm -rf /usr/local/src/libuv-1.8.0 && cd ~/
-#sudo ldconfig
-
-script:
-- ./build.sh

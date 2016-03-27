@@ -4,7 +4,7 @@ I don't like people accusing me of harvesting IP addresses so I made it open sou
 
 [![Join the chat at https://gitter.im/NickolasAcosta/QueueDodge](https://badges.gitter.im/NickolasAcosta/QueueDodge.svg)](https://gitter.im/NickolasAcosta/QueueDodge?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build status](https://ci.appveyor.com/api/projects/status/8nxyi7dli2mrukxb?svg=true)](https://ci.appveyor.com/project/NickolasAcosta/queuedodge)
-
+[![Build Status](https://travis-ci.org/NickolasAcosta/QueueDodge.svg?branch=master)](https://travis-ci.org/NickolasAcosta/QueueDodge)
 **Stack**: C#.NET, SQL, Angular2, Typescript  
 **Server**: Kestrel    (Cross platform! Woot!)  
 **Reverse Proxy**: Nginx  
