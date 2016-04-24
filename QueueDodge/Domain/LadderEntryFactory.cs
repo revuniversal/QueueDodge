@@ -4,13 +4,6 @@ namespace QueueDodge.Domain
 {
     public class LadderEntryFactory
     {
-        private QueueDodgeDB queueDodge;
-
-        public LadderEntryFactory(QueueDodgeDB queueDodge)
-        {
-            this.queueDodge = queueDodge;
-        }
-
         public LadderEntry Create(Row row, string bracket, Region region)
         {
             var realm = new Realm(row.RealmID, row.RealmName, row.RealmSlug, region.ID);
