@@ -31,7 +31,7 @@ namespace QueueDodge.Api.Controllers
 
             var socket = GetSocket(_regionEnum, bracket);
 
-            var ladder = new Ladder(key, queueDodge, cache, socket);
+            var ladder = new LadderInspector(key, queueDodge, cache, socket);
 
             // TODO:  Replace this with an standardized message before it's too late.
             Task.WaitAll(socket("clear"));
