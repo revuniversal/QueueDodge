@@ -6,6 +6,7 @@ using Microsoft.Extensions.Caching.Memory;
 using BattleDotSwag;
 using BattleDotSwag.Services;
 using BattleDotSwag.WoW.PVP;
+using System.Linq;
 
 namespace QueueDodge
 {
@@ -31,14 +32,15 @@ namespace QueueDodge
 
             var changes = leaderboard.Rows
                 .Dedupe(processed)
-                .ConvertToLadderEntry(bracket,region)
+                .ConvertToLadderEntry(bracket, region)
                 .ExistsInCache(cache)
                 .CharacterChanged()
-                .NotifyChanged(sendMessage)
                 .SaveRealm(queueDodge)
                 .SaveCharacter(queueDodge)
-                .SaveLadderChange(queueDodge);
-
+                .SaveLadderChange(queueDodge)
+                .NotifyChanged(sendMessage)
+                .ToList();
+                
             queueDodge.SaveChanges();   
             
             return changes;
