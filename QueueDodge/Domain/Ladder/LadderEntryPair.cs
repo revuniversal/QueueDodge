@@ -1,6 +1,9 @@
-using QueueDodge;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class LadderEntryPair
+namespace QueueDodge
+{
+    [NotMapped]
+    public class LadderEntryPair
     {
         public LadderEntry Current { get; }
         public LadderEntry Cached { get; }
@@ -11,3 +14,4 @@ public class LadderEntryPair
             Cached = cached;
         }
     }
+}

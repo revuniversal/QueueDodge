@@ -21,9 +21,8 @@ namespace QueueDodge.Api.Controllers
             this.options = options.Value;
         }
 
-        // TODO:  Think about adding a realm filter here so users can see where they stand on their realm.  Not that it matters.
         [HttpGet]
-        public void GetActivity(string region, string bracket, string locale)
+        public async Task<IEnumerable<LadderChange>> GetActivity(string region, string bracket, string locale)
         {
             var key = options.apiKey;
             var _locale = (BattleDotSwag.Locale)Enum.Parse(typeof(BattleDotSwag.Locale), locale);
@@ -35,7 +34,8 @@ namespace QueueDodge.Api.Controllers
 
             // TODO:  Replace this with an standardized message before it's too late.
             Task.WaitAll(socket("clear"));
-            ladder.DetectChanges(bracket, _locale, _regionEnum);
+            var activity = await ladder.DetectChanges(bracket, _locale, _regionEnum);
+           return activity; 
         }
 
         [HttpGet]
@@ -49,6 +49,7 @@ namespace QueueDodge.Api.Controllers
 
             return activity;
         }
+        
         private Func<string, Task> GetSocket(BattleDotSwag.Region region, string bracket)
         {
             // TODO:  This and everything below is a pile of crap.  How do I web socket?
