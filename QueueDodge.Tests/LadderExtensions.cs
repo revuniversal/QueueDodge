@@ -8,6 +8,7 @@ namespace QueueDodge.Tests
         {
      
         }
+        
         [Fact]
         public void Dedupe()
         {

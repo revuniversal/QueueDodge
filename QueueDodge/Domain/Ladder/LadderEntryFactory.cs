@@ -1,6 +1,6 @@
 ﻿using BattleDotSwag.WoW.PVP;
 
-namespace QueueDodge.Domain
+namespace QueueDodge
 {
     public class LadderEntryFactory
     {

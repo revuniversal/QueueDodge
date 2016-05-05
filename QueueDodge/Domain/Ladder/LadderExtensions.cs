@@ -7,7 +7,6 @@ using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using BattleDotSwag.WoW.PVP;
-using QueueDodge.Domain;
 using Microsoft.Data.Entity;
 using QueueDodge.Data;
 
