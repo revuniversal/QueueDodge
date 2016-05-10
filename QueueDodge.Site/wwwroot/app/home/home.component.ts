@@ -1,6 +1,7 @@
-﻿import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
-import {RegionService} from '../services/region.service';
+﻿import {Component} from '@angular/core';
+import {CORE_DIRECTIVES} from '@angular/common';
+
+import {RegionService} from '../index';
 
 @Component({
     selector: 'home',

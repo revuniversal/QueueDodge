@@ -1,5 +1,5 @@
-﻿import {Injectable, EventEmitter} from 'angular2/core';
-import {Http, Response, HTTP_PROVIDERS} from 'angular2/http';
+﻿import {Injectable, EventEmitter} from '@angular/core';
+import {Http, Response, HTTP_PROVIDERS} from '@angular/http';
 
 @Injectable()
 export class LeaderboardService {

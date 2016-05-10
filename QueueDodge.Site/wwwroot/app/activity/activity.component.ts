@@ -1,12 +1,15 @@
-﻿import {Component, OnInit, OnDestroy, EventEmitter} from 'angular2/core';
-import {RouteParams, Router} from 'angular2/router';
-import {LiveComponent} from './live/live.component';
-import {WatcherComponent} from './watcher/watcher.component';
-import {RegionService} from '../services/region.service';
-import {WatcherService} from './watcher/watcher.service';
-import {LiveService} from './live/live.service';
-import {ActivityService} from './activity.service';
-import {LadderChange} from '../models/LadderChange';
+﻿import {Component, OnInit, OnDestroy, EventEmitter} from '@angular/core';
+import {RouteParams, Router} from '@angular/router-deprecated';
+
+import {
+    LiveComponent,
+    WatcherComponent,
+    RegionService,
+    WatcherService,
+    LiveService,
+    ActivityService,
+    LadderChange
+} from '../index';
 
 @Component({
     selector: 'activity',
