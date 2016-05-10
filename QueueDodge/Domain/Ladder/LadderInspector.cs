@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.Extensions.Caching.Memory;
@@ -6,7 +7,6 @@ using Microsoft.Extensions.Caching.Memory;
 using BattleDotSwag;
 using BattleDotSwag.Services;
 using BattleDotSwag.WoW.PVP;
-using System.Linq;
 
 namespace QueueDodge
 {
@@ -53,5 +53,16 @@ namespace QueueDodge
             var leaderboard = await service.Get(endpoint, region);
             return leaderboard;
         }
+        
+        /*public async Task<IEnumerable<LadderEntry>> GetLadder(LadderFilter filter)
+        {
+            IEnumerable<LadderEntry> ladder;    
+            var ladderExists = cache.TryGetValue("", out ladder);
+            
+            if(ladderExists)
+            {
+                return ladder;
+            }
+        }*/
     }
 }

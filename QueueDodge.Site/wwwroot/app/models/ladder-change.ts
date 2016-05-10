@@ -1,5 +1,5 @@
-﻿import {Realm} from './Realm';
-import {LadderEntry} from './LadderEntry';
+﻿import {Realm, LadderEntry} from '../index';
+
 export class LadderChange {
     public id: number;
     public previous: LadderEntry;

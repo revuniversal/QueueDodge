@@ -9,11 +9,13 @@
         public int RaceID { get; set; }
         public int ClassID { get; set; }
         public int SpecializationID { get; set; }
-
+        public int Rating_3v3 { get; set; }
+        
         public virtual Realm Realm { get; set; }
         public virtual Race Race { get; set; }
         public virtual Class Class { get; set; }
         public virtual Specialization Specialization { get; set; }
+        
         public Character() { }
         public Character(string name,
             int gender,

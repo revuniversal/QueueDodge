@@ -4,6 +4,8 @@
 		"**/.git": true,
 		"**/.DS_Store": true,
         "**/*.js": { "when": "$(basename).ts"},
+        "**/*.js.*": { "when": "$(basename).map"},
+        "**/*.lock.*": { "when": "$(basename).json"},
         ".vs":true,
         "artifacts":true,
         "*.sln":true

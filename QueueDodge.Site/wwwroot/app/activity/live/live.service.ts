@@ -1,6 +1,8 @@
-﻿import {Injectable, EventEmitter} from 'angular2/core';
-import {Http, Response, HTTP_PROVIDERS} from 'angular2/http';
-import {LadderChange} from '../../models/LadderChange';
+﻿import {Injectable, EventEmitter} from '@angular/core';
+import {Http, Response, HTTP_PROVIDERS} from '@angular/http';
+
+import {LadderChange} from '../../index';
+
 @Injectable()
 export class LiveService {
     public activityDetected: EventEmitter<any>;
@@ -28,6 +30,7 @@ export class LiveService {
     public onConnect(ev: Event, region: string, bracket: string) {
         console.log("connected " + region + " " + bracket);
     }
+    
     public onMessage(ev: MessageEvent, service: LiveService) {
         let message: any;
         if (ev.data === "clear") {
@@ -38,12 +41,15 @@ export class LiveService {
         }
         service.activityDetected.emit(message);
     }
+    
     public onClose(ev: CloseEvent, region: string, bracket: string) {
         console.log("closed " + region + " " + bracket);
     }
+    
     public onError(ev: Event, region: string, bracket: string) {
         console.log("error " + region + " " + bracket);
     }
+    
     public getActivity(region: string, bracket: string){
         return this
             .http

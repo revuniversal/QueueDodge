@@ -39,6 +39,13 @@ namespace QueueDodge
                 yield return ladderEntry; 
             }
         }     
+        public static IEnumerable<LadderEntry> CacheLadder(this IEnumerable<LadderEntry> source, IMemoryCache cache, string bracket, BattleDotSwag.Region region)
+        {
+            var key = $"{bracket}:{region}";
+            cache.Set(key,source);
+            return source;
+        }
+        
         public static IEnumerable<LadderEntryPair> ExistsInCache(this IEnumerable<LadderEntry> source, IMemoryCache cache)
         {
             foreach(var entry in source)

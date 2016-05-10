@@ -1,8 +1,11 @@
-﻿import {Injectable, EventEmitter, OnInit} from 'angular2/core';
-import {WatchedPlayer} from './WatchedPlayer';
-import {LadderChange} from '../../models/LadderChange';
-import {Realm} from '../../models/Realm';
-import {Region} from '../../models/Region';
+﻿import {Injectable, EventEmitter, OnInit} from '@angular/core';
+
+import {
+    WatchedPlayer,
+    LadderChange,
+    Realm,
+    Region
+} from '../../index';
 
 @Injectable()
 export class WatcherService {
@@ -17,11 +20,13 @@ export class WatcherService {
         this.watchedPlayers.push(watchedPlayer);
         this.addToLocalStorage(player);
     }
+    
     public ignore(player: WatchedPlayer, region:string, bracket:string): void {
         let watchedPlayer: number = this.findPlayerByWatch(player);
         this.watchedPlayers.splice(watchedPlayer, 1);
         this.removeFromLocalStorage(player, region, bracket);
     }
+    
     public detected(player: LadderChange): void {
         let watchedPlayer = this.findPlayerByLadderChange(player);
 
@@ -35,6 +40,7 @@ export class WatcherService {
             watchedPlayer.timesSeen += 1;
         }
     }
+    
     public playerIsWatched(player: LadderChange): boolean {
         let foundPlayer: WatchedPlayer = this.findPlayerByLadderChange(player);
         return foundPlayer != null;
@@ -48,6 +54,7 @@ export class WatcherService {
             }
         }
     }
+    
     private findPlayerByWatch(player: WatchedPlayer): number {
         for (let x = 0; x < this.watchedPlayers.length; x++) {
             let p = this.watchedPlayers[x];
@@ -56,6 +63,7 @@ export class WatcherService {
             }
         }
     }
+    
     private convert(player: LadderChange): WatchedPlayer {
         let watchedPlayer = new WatchedPlayer();
 

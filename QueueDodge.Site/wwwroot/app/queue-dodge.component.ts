@@ -1,9 +1,11 @@
-﻿import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
-import {HomeComponent} from './home/home.component';
-import {ActivityComponent} from './activity/activity.component';
-import {RegionService} from './services/region.service';
+﻿import {Component} from '@angular/core';
+import {ROUTER_DIRECTIVES, RouteConfig} from '@angular/router-deprecated';
 import 'rxjs/Rx';
+
+import {HomeComponent} from './index';
+import    {ActivityComponent}from './index';
+import    {RegionService} from './index';
+
 
 @Component({
     selector: 'queue-dodge',
