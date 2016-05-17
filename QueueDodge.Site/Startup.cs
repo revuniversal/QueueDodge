@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 using System.IO;
 
 namespace QueueDodge.Site
@@ -13,11 +15,11 @@ namespace QueueDodge.Site
 
         public Startup(IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json");
+          //  var builder = new ConfigurationBuilder()
+              //  .AddJsonFile(@"C:\Users\NickA\Projects\QueueDodge\QueueDodge.Site\appsettings.json");
 
-            builder.AddEnvironmentVariables();
-            Configuration = builder.Build().ReloadOnChanged("appsettings.json");
+         //   builder.AddEnvironmentVariables();
+          //  Configuration = builder.Build().ReloadOnChanged("~/appsettings.json");
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -43,33 +45,33 @@ namespace QueueDodge.Site
             });
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
-            //app.Run(async context =>
-            //{
-            //    //context.Response.Redirect("/");
-            //    Console.WriteLine("{0} {1}{2}{3}",
-            //        context.Request.Method,
-            //        context.Request.PathBase,
-            //        context.Request.Path,
-            //        context.Request.QueryString);
-            //    Console.WriteLine($"Method: {context.Request.Method}");
-            //    Console.WriteLine($"PathBase: {context.Request.PathBase}");
-            //    Console.WriteLine($"Path: {context.Request.Path}");
-            //    Console.WriteLine($"QueryString: {context.Request.QueryString}");
-
-            //    var connectionFeature = context.Connection;
-            //    Console.WriteLine($"Peer: {connectionFeature.RemoteIpAddress?.ToString()} {connectionFeature.RemotePort}");
-            //    Console.WriteLine($"Sock: {connectionFeature.LocalIpAddress?.ToString()} {connectionFeature.LocalPort}");
-            //    Console.WriteLine($"IsLocal: {connectionFeature.IsLocal}");
-
-            //    context.Response.ContentLength = 0;
-            //    context.Response.ContentType = "text/plain";
-            //    await context.Response.WriteAsync("");
-            //});
-     
-
         }
 
-        public static void Main(string[] args) => Microsoft.AspNet.Hosting.WebApplication.Run<Startup>(args);
+        public static void Main(IApplicationBuilder app) {
+
+            app.Run(async context =>
+            {
+                //context.Response.Redirect("/");
+                Console.WriteLine("{0} {1}{2}{3}",
+                    context.Request.Method,
+                    context.Request.PathBase,
+                    context.Request.Path,
+                    context.Request.QueryString);
+                Console.WriteLine($"Method: {context.Request.Method}");
+                Console.WriteLine($"PathBase: {context.Request.PathBase}");
+                Console.WriteLine($"Path: {context.Request.Path}");
+                Console.WriteLine($"QueryString: {context.Request.QueryString}");
+
+                var connectionFeature = context.Connection;
+                Console.WriteLine($"Peer: {connectionFeature.RemoteIpAddress?.ToString()} {connectionFeature.RemotePort}");
+                Console.WriteLine($"Sock: {connectionFeature.LocalIpAddress?.ToString()} {connectionFeature.LocalPort}");
+               // Console.WriteLine($"IsLocal: {connectionFeature.IsLocal}");
+
+                context.Response.ContentLength = 0;
+                context.Response.ContentType = "text/plain";
+                await context.Response.WriteAsync("");
+            });
+        }
+        //Microsoft.AspNetCore.Hosting.WebHost.Run<Startup>(args);
     }
 }

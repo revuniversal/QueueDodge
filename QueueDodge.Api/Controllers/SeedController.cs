@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using QueueDodge.Data;
 
 namespace QueueDodge.Api.Controllers
@@ -18,10 +18,10 @@ namespace QueueDodge.Api.Controllers
 
         [HttpGet]
         [Route("")]
-        public HttpOkResult Seed()
+        public bool Seed()
         {
             seed.Seed();
-            return Ok();
+            return true;
         }
     }
 }

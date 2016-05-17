@@ -1,11 +1,10 @@
 ﻿using System;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNet.Http;
-using QueueDodge.Data;
+using Microsoft.AspNetCore.Http;
 
 namespace QueueDodge.Api
 {
@@ -15,22 +14,22 @@ namespace QueueDodge.Api
 
         public Startup(IHostingEnvironment env)
         {
-            // Set up configuration sources.
-            var builder = new ConfigurationBuilder()
-            .AddEnvironmentVariables("APPSETTING_");
+            //// Set up configuration sources.
+            //var builder = new ConfigurationBuilder()
+            //.AddEnvironmentVariables("APPSETTING_");
 
-            if (env.IsDevelopment())
-            {
-                builder.AddUserSecrets();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    builder.AddUserSecrets();
+            //}
 
-            Configuration = builder.Build();
+            //Configuration = builder.Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddCaching();
+            services.AddMemoryCache();
             services.AddOptions();
             services.AddScoped<QueueDodgeDB, QueueDodgeDB>();
 
@@ -70,6 +69,11 @@ namespace QueueDodge.Api
             app.Map("/ws/eu/5v5", eu5v5.Connect);
             app.Map("/ws/eu/RBG", euRbg.Connect);
 
+          
+        }
+
+        public static void Main(IApplicationBuilder app)
+        {
             app.Run(async context =>
             {
                 try
@@ -87,7 +91,7 @@ namespace QueueDodge.Api
                     var connectionFeature = context.Connection;
                     Console.WriteLine($"Peer: {connectionFeature.RemoteIpAddress?.ToString()} {connectionFeature.RemotePort}");
                     Console.WriteLine($"Sock: {connectionFeature.LocalIpAddress?.ToString()} {connectionFeature.LocalPort}");
-                    Console.WriteLine($"IsLocal: {connectionFeature.IsLocal}");
+                    //Console.WriteLine($"IsLocal: {connectionFeature.IsLocal}");
 
                     context.Response.ContentLength = 0;
                     context.Response.ContentType = "text/plain";
@@ -100,8 +104,6 @@ namespace QueueDodge.Api
                     await context.Response.WriteAsync(ex.Message);
                 }
             });
-        }
-
-        public static void Main(string[] args) => Microsoft.AspNet.Hosting.WebApplication.Run<Startup>(args);
+        } //Microsoft.AspNetCore.Hosting.WebHost.Run<Startup>(args);
     }
 }

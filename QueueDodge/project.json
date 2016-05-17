@@ -5,35 +5,42 @@
   "userSecretsId": "QueueDodge",
   "dependencies": {
     "BattleDotSwag": "2.0.0",
-    "EntityFramework.Commands": "7.0.0-rc1-final",
-    "EntityFramework7.Npgsql": "3.1.0-rc1-3",
-    "EntityFramework.Relational": "7.0.0-rc1-final",
-    "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc1-final",
-    "Microsoft.CSharp": "4.0.1-beta-23516",
-    "Microsoft.Extensions.Caching.Memory": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
-    "Newtonsoft.Json": "8.0.1-beta3",
-    "System.Collections": "4.0.11-beta-23516",
-    "System.ComponentModel.Annotations": "4.0.11-beta-23516",
-    "System.Data.SqlClient": "4.0.0-beta-23516",
-    "System.Linq": "4.0.1-beta-23516",
-    "System.Net.Http": "4.0.1-beta-23516",
-    "System.Runtime": "4.0.21-beta-23516",
-    "System.Threading": "4.0.11-beta-23516",
-    "System.Threading.Tasks.Parallel": "4.0.1-beta-23516",
-    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final"
-  },
-  "commands": {
-    "ef": "EntityFramework.Commands"
+    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.0-rc2-release1",
+    "Microsoft.EntityFrameworkCore.Relational": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.0-rc2-final",
+    "Microsoft.CSharp": "4.0.1-rc2-24027", //4.0.1-beta-23516
+    "Microsoft.Extensions.Caching.Memory": "1.0.0-rc2-final", //1.0.0-rc1-final
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-final", //1.0.0-rc1-final
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0-rc2-final", //1.0.0-rc1-final
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final", //1.0.0-rc1-final
+    "Newtonsoft.Json": "8.0.3", //8.0.1-beta3
+    "System.Collections": "4.0.11-rc2-24027", //4.0.11-beta-23516
+    "System.ComponentModel.Annotations": "4.1.0-rc2-24027", //4.0.11-beta-23516
+    //"System.Data.SqlClient": "4.1.0-rc2-24027",//4.0.0-beta-23516
+    "System.Linq": "4.1.0-rc2-24027", //4.0.1-beta-23516
+    "System.Net.Http": "4.0.1-rc2-24027", //4.0.1-beta-23516
+    "System.Runtime": "4.1.0-rc2-24027", //4.0.21-beta-23516
+    "System.Threading": "4.0.11-rc2-24027", //4.0.11-beta-23516
+    "System.Threading.Tasks.Parallel": "4.0.1-rc2-24027", //4.0.1-beta-23516
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc2-final",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc2-final" //1.0.0-rc1-final
   },
   "description": "QueueDodge Class Library",
   "frameworks": {
-    "dnxcore50": {
+    "netstandard1.5": {
+      "imports": ["dnxcore50", "portable-net45+win8"],
       "dependencies": {}
     }
   },
+  "tools": {
+  "Microsoft.EntityFrameworkCore.Tools": {
+    "version": "1.0.0-preview1-final",
+    "imports": [
+      "portable-net45+win8+dnxcore50",
+      "portable-net45+win8"
+    ]
+  }
+},
   "scripts": {
     "prebuild": [""],
     "postbuild": [""],
@@ -42,10 +49,6 @@
     "prerestore": [""],
     "postrestore": [""]
   },
-  "licenseUrl": "",
-  "projectUrl": "",
-  "tags": [
-    ""
-  ],
+
   "version": "1.0.0-*"
 }

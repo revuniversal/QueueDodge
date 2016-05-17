@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.OptionsModel;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BattleDotSwag;
 using BattleDotSwag.Services;
 using BattleDotSwag.WoW.PVP;
+using Microsoft.Extensions.Options;
 
 namespace QueueDodge
 {

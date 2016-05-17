@@ -7,7 +7,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using BattleDotSwag.WoW.PVP;
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using QueueDodge.Data;
 
 namespace QueueDodge
@@ -145,7 +145,7 @@ namespace QueueDodge
             {
                 var changeModel = new LadderChangeModel(change);
                 changeModel.CharacterID = change.Current.Character.ID; 
-                queueDodge.LadderChanges.Add(changeModel, GraphBehavior.SingleObject);
+                queueDodge.LadderChanges.Add(changeModel);
                   
                 yield return change;
             }

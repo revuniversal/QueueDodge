@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.Data.Entity;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -15,10 +16,9 @@ public class Startup
 {
     public IConfigurationRoot Configuration { get; set; }
 
-    public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+    public Startup(IHostingEnvironment env)
     {
         var builder = new ConfigurationBuilder()
-            .SetBasePath(appEnv.ApplicationBasePath)
             .AddEnvironmentVariables()
             .AddUserSecrets();
 
@@ -27,9 +27,7 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddEntityFramework()
-            .AddNpgsql()
-            .AddDbContext<QueueDodgeDB>(options => options.UseNpgsql(Configuration["connection"]));
+        services.AddDbContext<QueueDodgeDB>(options => options.UseNpgsql(Configuration["connection"]));
 
         services.AddOptions();
 
