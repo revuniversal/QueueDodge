@@ -2,8 +2,8 @@
 import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {Http, HTTP_PROVIDERS} from '@angular/http';
 
-import {QueueDodgeComponent} from './index';
-import {RegionService} from './index';
+import {QueueDodgeComponent} from './queue-dodge.component';
+import {RegionService} from './region/region.service';
 
 bootstrap(QueueDodgeComponent, [
     ROUTER_PROVIDERS,

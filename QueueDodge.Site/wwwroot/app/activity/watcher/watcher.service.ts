@@ -1,11 +1,10 @@
 ﻿import {Injectable, EventEmitter, OnInit} from '@angular/core';
 
-import {
-    WatchedPlayer,
-    LadderChange,
-    Realm,
-    Region
-} from '../../index';
+import {WatchedPlayer} from './watched-player';
+import {LadderChange} from '../../models/ladder-change';
+import {Realm} from '../../models/realm';
+import {Region} from '../../models/region';
+
 
 @Injectable()
 export class WatcherService {

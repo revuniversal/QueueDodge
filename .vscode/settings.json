@@ -6,6 +6,7 @@
         "**/*.js": { "when": "$(basename).ts"},
         "**/*.js.*": { "when": "$(basename).map"},
         "**/*.lock.*": { "when": "$(basename).json"},
+        "": true,
         ".vs":true,
         "artifacts":true,
         "*.sln":true

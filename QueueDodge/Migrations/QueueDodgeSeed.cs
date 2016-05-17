@@ -5,7 +5,7 @@ using BattleDotSwag;
 using BattleDotSwag.Services;
 using BattleDotSwag.WoW.PVP;
 
-namespace QueueDodge.Data
+namespace QueueDodge
 {
     public class QueueDodgeSeed
     {
