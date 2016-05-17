@@ -1,6 +1,6 @@
 namespace QueueDodge
 {
-    public class CharacterPvp
+    public class CharacterPvpProfile
     {
         public int Arena_2v2 { get; set; }
         public int Arena_3v3 { get; set; }

@@ -1,7 +1,7 @@
 ﻿import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Response, HTTP_PROVIDERS} from '@angular/http';
 
-import {LadderChange} from '../../index';
+import {LadderChange} from '../../models/ladder-change';
 
 @Injectable()
 export class LiveService {

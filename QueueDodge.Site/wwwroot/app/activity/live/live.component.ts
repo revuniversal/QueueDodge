@@ -1,14 +1,13 @@
 ﻿import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 
-import {
-    LiveService,
-    WatcherService,
-    LadderChange,
-    ActivityService,
-    WatchedPlayer
-} from '../../index';
-    
+import {LiveService} from '../live/live.service';
+import {WatcherService} from '../watcher/watcher.service';
+import {LadderChange} from '../../models/ladder-change';
+import {ActivityService} from '../activity.service';
+import {WatchedPlayer} from '../watcher/watched-player';
+
+
 @Component({
     selector: 'live',
     templateUrl: '../app/activity/live/live.component.html',

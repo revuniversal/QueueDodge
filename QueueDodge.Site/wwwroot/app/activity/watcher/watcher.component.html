@@ -32,7 +32,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="#player of watcher.watchedPlayers">
+            <tr *ngFor="let player of watcher.watchedPlayers">
                 <td><img src="app/images/region/{{player.regionID}}.png" /></td>
                 <td>
                     <img class="icon-frame" src="app/images/race/race_{{player.raceID}}_{{player.genderID}}.jpg" />

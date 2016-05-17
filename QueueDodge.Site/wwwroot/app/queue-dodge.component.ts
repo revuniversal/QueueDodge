@@ -2,9 +2,9 @@
 import {ROUTER_DIRECTIVES, RouteConfig} from '@angular/router-deprecated';
 import 'rxjs/Rx';
 
-import {HomeComponent} from './index';
-import    {ActivityComponent}from './index';
-import    {RegionService} from './index';
+import {HomeComponent} from './home/home.component';
+import    {ActivityComponent}from './activity/activity.component';
+import    {RegionService} from './region/region.service';
 
 
 @Component({

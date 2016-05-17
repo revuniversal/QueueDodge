@@ -1,11 +1,10 @@
 ﻿import {Component, Input, OnInit} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 
-import {
-    WatcherService,
-    WatchedPlayer,
-    ActivityService
-} from '../../index';
+import {WatcherService} from './watcher.service';
+import {WatchedPlayer} from './watched-player';
+import {ActivityService} from '../activity.service';
+
 
 @Component({
     selector: 'watcher',
