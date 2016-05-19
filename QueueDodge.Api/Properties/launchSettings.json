@@ -11,10 +11,7 @@
     "web": {
       "commandName": "web",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5001",
-      "environmentVariables": {
-        "ASPNET_ENV": "Development"
-      }
+      "launchUrl": "http://localhost:5001"
     },
     "IIS Express": {
       "commandName": "IISExpress",

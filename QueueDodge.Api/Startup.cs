@@ -15,15 +15,10 @@ namespace QueueDodge.Api
         public Startup(IHostingEnvironment env)
         {
             //// Set up configuration sources.
-            //var builder = new ConfigurationBuilder()
-            //.AddEnvironmentVariables("APPSETTING_");
+            var builder = new ConfigurationBuilder()
+            .AddEnvironmentVariables("queueDodgeApi_");
 
-            //if (env.IsDevelopment())
-            //{
-            //    builder.AddUserSecrets();
-            //}
-
-            //Configuration = builder.Build();
+            Configuration = builder.Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -50,14 +45,15 @@ namespace QueueDodge.Api
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
 
             app.UseWebSockets();
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+                app.UseBrowserLink();
+            }
 
             app.Map("/ws/us/2v2", us2v2.Connect);
             app.Map("/ws/us/3v3", us3v3.Connect);
@@ -69,41 +65,18 @@ namespace QueueDodge.Api
             app.Map("/ws/eu/5v5", eu5v5.Connect);
             app.Map("/ws/eu/RBG", euRbg.Connect);
 
-          
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+       
+
+
         }
 
-        public static void Main(IApplicationBuilder app)
-        {
-            app.Run(async context =>
-            {
-                try
-                {
-                    Console.WriteLine("{0} {1}{2}{3}",
-                        context.Request.Method,
-                        context.Request.PathBase,
-                        context.Request.Path,
-                        context.Request.QueryString);
-                    Console.WriteLine($"Method: {context.Request.Method}");
-                    Console.WriteLine($"PathBase: {context.Request.PathBase}");
-                    Console.WriteLine($"Path: {context.Request.Path}");
-                    Console.WriteLine($"QueryString: {context.Request.QueryString}");
 
-                    var connectionFeature = context.Connection;
-                    Console.WriteLine($"Peer: {connectionFeature.RemoteIpAddress?.ToString()} {connectionFeature.RemotePort}");
-                    Console.WriteLine($"Sock: {connectionFeature.LocalIpAddress?.ToString()} {connectionFeature.LocalPort}");
-                    //Console.WriteLine($"IsLocal: {connectionFeature.IsLocal}");
-
-                    context.Response.ContentLength = 0;
-                    context.Response.ContentType = "text/plain";
-                    context.Response.StatusCode = 200;
-                    await context.Response.WriteAsync("ok");
-                }
-                catch (Exception ex)
-                {
-
-                    await context.Response.WriteAsync(ex.Message);
-                }
-            });
-        } //Microsoft.AspNetCore.Hosting.WebHost.Run<Startup>(args);
     }
 }

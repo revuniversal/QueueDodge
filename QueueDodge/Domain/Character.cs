@@ -9,7 +9,7 @@
         public int RaceID { get; set; }
         public int ClassID { get; set; }
         public int SpecializationID { get; set; }
-        public int Rating_3v3 { get; set; }
+       // public int Rating_3v3 { get; set; }
         
         public virtual Realm Realm { get; set; }
         public virtual Race Race { get; set; }

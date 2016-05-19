@@ -35,7 +35,9 @@ namespace QueueDodge.Api.Controllers
             // TODO:  Replace this with an standardized message before it's too late.
             Task.WaitAll(socket("clear"));
             var activity = await ladder.DetectChanges(bracket, _locale, _regionEnum);
-           return activity; 
+
+            return activity;
+
         }
 
         [HttpGet]
@@ -49,7 +51,7 @@ namespace QueueDodge.Api.Controllers
 
             return activity;
         }
-        
+
         private Func<string, Task> GetSocket(BattleDotSwag.Region region, string bracket)
         {
             // TODO:  This and everything below is a pile of crap.  How do I web socket?
@@ -85,7 +87,8 @@ namespace QueueDodge.Api.Controllers
                         return null;
                 }
             }
-            else {
+            else
+            {
                 return null;
             }
         }

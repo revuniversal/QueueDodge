@@ -19,8 +19,7 @@ public class Startup
     public Startup(IHostingEnvironment env)
     {
         var builder = new ConfigurationBuilder()
-            .AddEnvironmentVariables()
-            .AddUserSecrets();
+            .AddEnvironmentVariables("queueDodgeApi_");
 
         Configuration = builder.Build();
     }
