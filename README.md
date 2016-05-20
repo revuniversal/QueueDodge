@@ -13,7 +13,7 @@ I don't like people accusing me of harvesting IP addresses so I made it open sou
 
 1. [Get ASP.NET Core RC2](https://www.microsoft.com/net/core#windows)
 2. [Choose your favorite Entity Framework 7 compatible database.](http://ef.readthedocs.org/en/latest/providers/)
-3. Clone this repository.
+3. Clone this repository.  
 
 
     git clone https://github.com/NickolasAcosta/QueueDodge.git
