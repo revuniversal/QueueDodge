@@ -20,6 +20,7 @@ I don't like people accusing me of harvesting IP addresses so I made it open sou
     cd QueueDodge
     ./build
 
+
 Set these environment variables
 
     queueDodgeApi_apiKey        // Your Battle.net API key.
