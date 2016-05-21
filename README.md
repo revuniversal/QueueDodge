@@ -4,7 +4,8 @@ I don't like people accusing me of harvesting IP addresses so I made it open sou
 
 [![Join the chat at https://gitter.im/NickolasAcosta/QueueDodge](https://badges.gitter.im/NickolasAcosta/QueueDodge.svg)](https://gitter.im/NickolasAcosta/QueueDodge?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build status](https://ci.appveyor.com/api/projects/status/8nxyi7dli2mrukxb?svg=true)](https://ci.appveyor.com/project/NickolasAcosta/queuedodge)
-[![Build Status](https://travis-ci.org/NickolasAcosta/QueueDodge.svg?branch=master)](https://travis-ci.org/NickolasAcosta/QueueDodge)  
+[![Build Status](https://travis-ci.org/NickolasAcosta/QueueDodge.svg?branch=master)](https://travis-ci.org/NickolasAcosta/QueueDodge)
+
 **Stack**: C#/.NET, SQL, Angular2, Typescript  
 **Server**: Kestrel  
 **Reverse Proxy**: Nginx
@@ -13,7 +14,7 @@ I don't like people accusing me of harvesting IP addresses so I made it open sou
 
 1. [Get ASP.NET Core RC2](https://www.microsoft.com/net/core#windows)
 2. [Choose your favorite Entity Framework 7 compatible database.](http://ef.readthedocs.org/en/latest/providers/)
-3. Clone this repository.  
+3. Clone this repository.
 
 
     git clone https://github.com/NickolasAcosta/QueueDodge.git
