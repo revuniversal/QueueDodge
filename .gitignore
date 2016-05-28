@@ -13,6 +13,7 @@ vs
 .vs/*.*
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
+key.txt
 
 # Build results
 [Dd]ebug/
