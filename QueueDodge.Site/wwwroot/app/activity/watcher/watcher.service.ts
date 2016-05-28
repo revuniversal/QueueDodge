@@ -2,8 +2,8 @@
 
 import {WatchedPlayer} from "./watched-player";
 import {LadderChange} from "../../models/ladder-change";
-import {Realm} from "../../models/realm";
-import {Region} from "../../models/region";
+import {Realm} from "../../models/Realm";
+import {Region} from "../../models/Region";
 
 
 @Injectable()

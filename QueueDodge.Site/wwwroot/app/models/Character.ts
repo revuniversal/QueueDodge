@@ -1,7 +1,7 @@
-﻿import {Realm} from "./realm";
-import {Race} from "./race";
-import {Class} from "./class";
-import {Specialization} from "./specialization";
+﻿import {Realm} from "./Realm";
+import {Race} from "./Race";
+import {Class} from "./Class";
+import {Specialization} from "./Specialization";
 
 export class Character {
     public name: string;

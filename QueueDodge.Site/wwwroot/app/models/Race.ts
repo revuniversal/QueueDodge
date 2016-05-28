@@ -1,4 +1,4 @@
-﻿import {Faction} from "./faction";
+﻿import {Faction} from "./Faction";
 
 export class Race {
     public id: number;

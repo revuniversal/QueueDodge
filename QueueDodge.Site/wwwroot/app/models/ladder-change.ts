@@ -1,4 +1,4 @@
-﻿import {Realm} from "./realm";
+﻿import {Realm} from "./Realm";
 import {LadderEntry} from "./ladder-entry";
 
 export class LadderChange {
