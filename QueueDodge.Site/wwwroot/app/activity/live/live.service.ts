@@ -15,7 +15,7 @@ export class LiveService {
     }
 
     public connect(bracket: string, region: string) {
-        this.socket = new WebSocket("wss://localhost/ws/" + region + "/" + bracket);
+        this.socket = new WebSocket("ws://localhost/ws/" + region + "/" + bracket);
 
         this.socket.onopen = event => this.onConnect(event, region, bracket);
         this.socket.onmessage = event => this.onMessage(event, this);
