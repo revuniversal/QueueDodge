@@ -39,12 +39,12 @@
     "imports": [
       "portable-net45+win8+dnxcore50",
       "portable-net45+win8"
-    ]
+   ]
   }
 },
   "frameworks": {
     "netcoreapp1.0": {
-      "imports": ["portable-net45+win8" ],
+      "imports": ["dnxcore50","portable-net45+win8" ],
       "dependencies": {
         "QueueDodge": "1.0.0",
         "System.Runtime.Extensions":"4.1.0-rc2-24027"
