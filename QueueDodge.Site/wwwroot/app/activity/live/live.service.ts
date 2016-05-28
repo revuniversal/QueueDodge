@@ -1,7 +1,7 @@
-﻿import {Injectable, EventEmitter} from '@angular/core';
-import {Http, Response, HTTP_PROVIDERS} from '@angular/http';
+﻿import {Injectable, EventEmitter} from "@angular/core";
+import {Http, Response, HTTP_PROVIDERS} from "@angular/http";
 
-import {LadderChange} from '../../models/ladder-change';
+import {LadderChange} from "../../models/ladder-change";
 
 @Injectable()
 export class LiveService {
@@ -30,27 +30,27 @@ export class LiveService {
     public onConnect(ev: Event, region: string, bracket: string) {
         console.log("connected " + region + " " + bracket);
     }
-    
+
     public onMessage(ev: MessageEvent, service: LiveService) {
         let message: any;
         if (ev.data === "clear") {
-            message = "clear"
+            message = "clear";
         }
         else {
             message = JSON.parse(ev.data);
         }
         service.activityDetected.emit(message);
     }
-    
+
     public onClose(ev: CloseEvent, region: string, bracket: string) {
         console.log("closed " + region + " " + bracket);
     }
-    
+
     public onError(ev: Event, region: string, bracket: string) {
         console.log("error " + region + " " + bracket);
     }
-    
-    public getActivity(region: string, bracket: string){
+
+    public getActivity(region: string, bracket: string) {
         return this
             .http
             .get("api/region/" + region + "/bracket/" + bracket + "/recent")

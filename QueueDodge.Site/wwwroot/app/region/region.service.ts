@@ -1,5 +1,5 @@
-﻿import {Injectable, EventEmitter} from '@angular/core';
-import {Http, Response, HTTP_PROVIDERS} from '@angular/http';
+﻿import {Injectable, EventEmitter} from "@angular/core";
+import {Http, Response, HTTP_PROVIDERS} from "@angular/http";
 
 @Injectable()
 export class RegionService {
@@ -11,7 +11,7 @@ export class RegionService {
     constructor(http: Http) {
         this.http = http;
         // TODO: default to "us".  check local storage for users default eventually.
-        this.region = "us"; 
+        this.region = "us";
         this.regionChanged = new EventEmitter<string>();
     }
 

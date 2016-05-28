@@ -1,22 +1,22 @@
-﻿import {Component, OnInit, OnDestroy, EventEmitter} from '@angular/core';
-import {RouteParams, Router} from '@angular/router-deprecated';
+﻿import {Component, OnInit, OnDestroy, EventEmitter} from "@angular/core";
+import {RouteParams, Router} from "@angular/router-deprecated";
 
-import {LiveComponent} from '../activity/live/live.component';
-import {WatcherComponent} from '../activity/watcher/watcher.component';
-import {RegionService} from '../region/region.service';
-import {WatcherService} from '../activity/watcher/watcher.service';
-import {LiveService} from '../activity/live/live.service';
-import {ActivityService} from '../activity/activity.service';
-import {LadderChange} from '../models/ladder-change';
+import {LiveComponent} from "../activity/live/live.component";
+import {WatcherComponent} from "../activity/watcher/watcher.component";
+import {RegionService} from "../region/region.service";
+import {WatcherService} from "../activity/watcher/watcher.service";
+import {LiveService} from "../activity/live/live.service";
+import {ActivityService} from "../activity/activity.service";
+import {LadderChange} from "../models/ladder-change";
 
 
 @Component({
-    selector: 'activity',
-    templateUrl: '../app/activity/activity.component.html',
+    selector: "activity",
+    templateUrl: "../app/activity/activity.component.html",
     directives: [LiveComponent, WatcherComponent],
     providers: [ActivityService, WatcherService, LiveService]
 })
-export class ActivityComponent implements OnInit, OnDestroy{
+export class ActivityComponent implements OnInit, OnDestroy {
     private router: Router;
     private regionService: RegionService;
     private subscription: any;
@@ -28,7 +28,7 @@ export class ActivityComponent implements OnInit, OnDestroy{
     public bracket: string;
 
     constructor(regionService: RegionService,
-        activityService:ActivityService,
+        activityService: ActivityService,
         watcherService: WatcherService,
         liveService: LiveService,
         routeParams: RouteParams,
@@ -51,6 +51,6 @@ export class ActivityComponent implements OnInit, OnDestroy{
     }
 
     public regionChanged(region: string): void {
-        this.router.navigate(['Activity', { region: region, bracket: this.bracket }]);
+        this.router.navigate(["Activity", { region: region, bracket: this.bracket }]);
     }
-} 
+}

@@ -1,16 +1,16 @@
-﻿import {Component, Input, OnInit, OnDestroy} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
+﻿import {Component, Input, OnInit, OnDestroy} from "@angular/core";
+import {CORE_DIRECTIVES} from "@angular/common";
 
-import {LiveService} from '../live/live.service';
-import {WatcherService} from '../watcher/watcher.service';
-import {LadderChange} from '../../models/ladder-change';
-import {ActivityService} from '../activity.service';
-import {WatchedPlayer} from '../watcher/watched-player';
+import {LiveService} from "../live/live.service";
+import {WatcherService} from "../watcher/watcher.service";
+import {LadderChange} from "../../models/ladder-change";
+import {ActivityService} from "../activity.service";
+import {WatchedPlayer} from "../watcher/watched-player";
 
 
 @Component({
-    selector: 'live',
-    templateUrl: '../app/activity/live/live.component.html',
+    selector: "live",
+    templateUrl: "../app/activity/live/live.component.html",
     directives: [CORE_DIRECTIVES]
 })
 export class LiveComponent implements OnInit, OnDestroy {
@@ -32,13 +32,13 @@ export class LiveComponent implements OnInit, OnDestroy {
     public ngOnInit(): void {
         this.liveService.connect(this.bracket, this.region);
         this.liveService.activityDetected.subscribe((activity: any) => this.addActivity(activity));
-        //this.liveService
+        // this.liveService
         //    .getActivity(this.region, this.bracket)
         //    .subscribe(activity =>
         //        activity.forEach((entry: any) =>
         //            this.addActivity(entry)
         //        )
-        //);
+        // );
     }
     public ngOnDestroy(): void {
         this.liveService.activityDetected.unsubscribe();
@@ -61,6 +61,6 @@ export class LiveComponent implements OnInit, OnDestroy {
     public watch(player: LadderChange) {
         this.watcher.watch(player);
         let index: number = this.activity.indexOf(player);
-        this.activity.splice(index,1);
+        this.activity.splice(index, 1);
     }
 }

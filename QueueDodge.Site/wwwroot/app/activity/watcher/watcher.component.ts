@@ -1,14 +1,14 @@
-﻿import {Component, Input, OnInit} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
+﻿import {Component, Input, OnInit} from "@angular/core";
+import {CORE_DIRECTIVES} from "@angular/common";
 
-import {WatcherService} from './watcher.service';
-import {WatchedPlayer} from './watched-player';
-import {ActivityService} from '../activity.service';
+import {WatcherService} from "./watcher.service";
+import {WatchedPlayer} from "./watched-player";
+import {ActivityService} from "../activity.service";
 
 
 @Component({
-    selector: 'watcher',
-    templateUrl: '../app/activity/watcher/watcher.component.html',
+    selector: "watcher",
+    templateUrl: "../app/activity/watcher/watcher.component.html",
     directives: [CORE_DIRECTIVES]
 })
 export class WatcherComponent implements OnInit {
