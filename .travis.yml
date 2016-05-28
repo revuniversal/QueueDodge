@@ -24,4 +24,3 @@ script:
 - cd ../QueueDodge.Site
 - dotnet restore
 - dotnet build
-

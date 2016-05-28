@@ -8,6 +8,8 @@
 *.sln.docstates
 *.js
 *.js.map
+!gulpfile.js
+!system.config.js
 artifacts
 vs
 .vs/*.*
