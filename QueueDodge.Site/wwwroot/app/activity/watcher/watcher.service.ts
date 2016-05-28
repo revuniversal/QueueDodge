@@ -1,9 +1,9 @@
-﻿import {Injectable, EventEmitter, OnInit} from '@angular/core';
+﻿import {Injectable, EventEmitter, OnInit} from "@angular/core";
 
-import {WatchedPlayer} from './watched-player';
-import {LadderChange} from '../../models/ladder-change';
-import {Realm} from '../../models/realm';
-import {Region} from '../../models/region';
+import {WatchedPlayer} from "./watched-player";
+import {LadderChange} from "../../models/ladder-change";
+import {Realm} from "../../models/realm";
+import {Region} from "../../models/region";
 
 
 @Injectable()
@@ -19,27 +19,27 @@ export class WatcherService {
         this.watchedPlayers.push(watchedPlayer);
         this.addToLocalStorage(player);
     }
-    
-    public ignore(player: WatchedPlayer, region:string, bracket:string): void {
+
+    public ignore(player: WatchedPlayer, region: string, bracket: string): void {
         let watchedPlayer: number = this.findPlayerByWatch(player);
         this.watchedPlayers.splice(watchedPlayer, 1);
         this.removeFromLocalStorage(player, region, bracket);
     }
-    
+
     public detected(player: LadderChange): void {
         let watchedPlayer = this.findPlayerByLadderChange(player);
 
-        if (watchedPlayer != undefined) {
+        if (watchedPlayer !== undefined) {
             console.log(watchedPlayer.name + " spotted!");
-            let audio = new Audio('chime.wav');
+            let audio = new Audio("chime.wav");
             audio.play();
 
-            watchedPlayer.rankingProgress += (player.previous.ranking - player.current.ranking)
+            watchedPlayer.rankingProgress += (player.previous.ranking - player.current.ranking);
             watchedPlayer.ratingProgress += (player.current.rating - player.previous.rating);
             watchedPlayer.timesSeen += 1;
         }
     }
-    
+
     public playerIsWatched(player: LadderChange): boolean {
         let foundPlayer: WatchedPlayer = this.findPlayerByLadderChange(player);
         return foundPlayer != null;
@@ -53,7 +53,7 @@ export class WatcherService {
             }
         }
     }
-    
+
     private findPlayerByWatch(player: WatchedPlayer): number {
         for (let x = 0; x < this.watchedPlayers.length; x++) {
             let p = this.watchedPlayers[x];
@@ -62,7 +62,7 @@ export class WatcherService {
             }
         }
     }
-    
+
     private convert(player: LadderChange): WatchedPlayer {
         let watchedPlayer = new WatchedPlayer();
 
@@ -97,7 +97,7 @@ export class WatcherService {
         let watchedPlayersJson: string = JSON.stringify(players);
         localStorage.setItem(key, watchedPlayersJson);
     }
-    public removeFromLocalStorage(player: WatchedPlayer, region:string, bracket:string):void {
+    public removeFromLocalStorage(player: WatchedPlayer, region: string, bracket: string): void {
         let key: string = this.getKey(region, bracket);
         let players = this.getFromLocalStorage(region, bracket);
         let watchedPlayer: number = this.findPlayerByWatch(player);
@@ -119,7 +119,7 @@ export class WatcherService {
         return players;
     }
     private getKey(region: string, bracket: string): string {
-        let key: string = 'watched:' + region + ':' + bracket;
+        let key: string = "watched:" + region + ":" + bracket;
         return key;
     }
 }

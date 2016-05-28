@@ -1,5 +1,5 @@
-﻿import {Character} from './character';
-import {WinLoss} from './winloss';
+﻿import {Character} from "./character";
+import {WinLoss} from "./winloss";
 
 export class LadderEntry {
     public character: Character;
