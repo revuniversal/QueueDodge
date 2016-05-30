@@ -39,22 +39,17 @@ namespace QueueDodge
             var cachedEntries = ExistsInCache(entries, cache);
             var changes = CharacterChanged(cachedEntries);
 
-          //  var x = leaderboard.Rows.Where(p => Dedupe(p, processed));
-
-
-
             foreach (var change in changes)
             {
-                var change2 = SaveRealm(change, queueDodge);
-                var change3 = SaveCharacter(change2, queueDodge);
-                var fullChange = SaveLadderChange(change3, queueDodge);
-                NotifyChanged(fullChange, sendMessage);
-                queueDodge.SaveChanges();
+                var change2 = await SaveRealm(change, queueDodge);
+                var change3 = await SaveCharacter(change2, queueDodge);
+                var fullChange = await SaveLadderChange(change3, queueDodge);
+
+                await NotifyChanged(fullChange, sendMessage);
             }
 
             return changes.ToList();
         }
-
         public async Task<Leaderboard> GetActivity(string bracket, Locale locale, BattleDotSwag.Region region)
         {
             var service = new BattleNetService<Leaderboard>();
@@ -122,20 +117,21 @@ namespace QueueDodge
                 }
             }
         }
-        public LadderChange NotifyChanged(LadderChange change, Func<string, Task> sendMessage)
+
+        public async Task<LadderChange> NotifyChanged(LadderChange change, Func<string, Task> sendMessage)
         {
             var options = new JsonSerializerSettings() { ContractResolver = new CamelCasePropertyNamesContractResolver() };
 
             var json = JsonConvert.SerializeObject(change, options);
-            sendMessage(json);
+            await sendMessage(json);
             return change;
 
         }
-        public LadderChange SaveRealm(LadderChange change, QueueDodgeDB queueDodge)
+        public async Task<LadderChange> SaveRealm(LadderChange change, QueueDodgeDB queueDodge)
         {
-            var realmExists = queueDodge
+            var realmExists = await queueDodge
                 .Realms
-                .Any(p => p.ID == change.Current.Character.RealmID);
+                .AnyAsync(p => p.ID == change.Current.Character.RealmID);
 
             if (!realmExists)
             {
@@ -145,17 +141,17 @@ namespace QueueDodge
                     change.Current.Character.Realm.RegionID);
 
                 var trackedRealm = queueDodge.Realms.Add(realm);
-                queueDodge.SaveChanges();
+                await queueDodge.SaveChangesAsync();
             }
 
             return change;
 
         }
-        public LadderChange SaveCharacter(LadderChange change, QueueDodgeDB queueDodge)
+        public async Task<LadderChange> SaveCharacter(LadderChange change, QueueDodgeDB queueDodge)
         {
-            var characterExists = queueDodge
+            var characterExists = await queueDodge
                 .Characters
-                .Any(p => p.Name == change.Current.Character.Name
+                .AnyAsync(p => p.Name == change.Current.Character.Name
                 && p.RealmID == change.Current.Character.RealmID);
 
             if (!characterExists)
@@ -164,10 +160,10 @@ namespace QueueDodge
                 queueDodge.Entry(change.Current.Character).State = EntityState.Added;
 
                 //var attachedCharacter = queueDodge.Add(change.Current.Character).Entity;
-                queueDodge.SaveChanges();
+                await queueDodge.SaveChangesAsync();
             }
 
-            var character = queueDodge
+            var character = await queueDodge
                 .Characters
                 .Include(p => p.Class)
                 .Include(p => p.Realm)
@@ -177,7 +173,7 @@ namespace QueueDodge
                 .Include(p => p.Race.Faction)
                 .Where(p => p.Name == change.Current.Character.Name &&
                 p.RealmID == change.Current.Character.RealmID)
-                .Single();
+                .SingleAsync();
 
             change.Current.Character = character;
             change.Previous.Character = character;
@@ -185,30 +181,13 @@ namespace QueueDodge
             return change;
 
         }
-        public LadderChange SaveLadderChange(LadderChange change, QueueDodgeDB queueDodge)
+        public async Task<LadderChange> SaveLadderChange(LadderChange change, QueueDodgeDB queueDodge)
         {
-
             var changeModel = new LadderChangeModel(change);
             changeModel.CharacterID = change.Current.Character.ID;
             queueDodge.LadderChanges.Add(changeModel);
-
+            await queueDodge.SaveChangesAsync();
             return change;
-
         }
-
-
-
-
-
-        /*public async Task<IEnumerable<LadderEntry>> GetLadder(LadderFilter filter)
-        {
-            IEnumerable<LadderEntry> ladder;    
-            var ladderExists = cache.TryGetValue("", out ladder);
-
-            if(ladderExists)
-            {
-                return ladder;
-            }
-        }*/
     }
 }
