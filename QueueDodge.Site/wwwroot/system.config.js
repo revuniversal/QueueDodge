@@ -39,8 +39,7 @@
 
   var config = {
     map: map,
-    packages: packages,
-    transpiler: "typescript"
+    packages: packages
   }
 
   System.config(config);
