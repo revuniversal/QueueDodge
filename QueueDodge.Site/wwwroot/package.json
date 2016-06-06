@@ -1,5 +1,5 @@
 {
-  "name": "QueueDodge.Site",
+  "name": "queuedodge-site",
   "description": "web front end for queue dodge.",
   "private":true,
   "scripts": {},
@@ -23,6 +23,7 @@
     "jquery": "2.2.0"
   },
   "devDependencies": {
+    "typings":"1.0.4",
     "systemjs-builder": "0.15.16",
     "typescript": "^1.8.10",
     "gulp": "3.9.1",
