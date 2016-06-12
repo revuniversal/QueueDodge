@@ -3,7 +3,10 @@
   "compilationOptions": {
     "emitEntryPoint": true
   },
-    "dependencies": {
+  "buildOptions": {
+    "debugType": "portable"
+  },
+  "dependencies": {
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.0-rc2-3002702"
@@ -15,23 +18,41 @@
     "Microsoft.Extensions.Logging": "1.0.0-rc2-final",
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
-      "Microsoft.AspNetCore.Http.Abstractions": "1.0.0-rc2-final",
-      "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final",
-      "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-final",
-      "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc1-final"
+    "Microsoft.AspNetCore.Http.Abstractions": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc1-final"
   },
   "frameworks": {
     "netcoreapp1.0": {
-      "imports": [ "dnxcore50", "portable-net45+win8" ]
+      "imports": [
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
     }
   },
   "scripts": {
-    "prebuild": [ "npm install", "gulp dependencies", "gulp sass" ],
-    "postbuild": [ "tsc" ],
-    "prepack": [ "" ],
-    "postpack": [ "" ],
-    "prerestore": [ "npm install typescript -g", "npm install gulp -g" ],
-    "postrestore": [ "" ]
+    "prebuild": [
+      "npm install",
+      "gulp dependencies",
+      "gulp sass"
+    ],
+    "postbuild": [
+      "tsc"
+    ],
+    "prepack": [
+      ""
+    ],
+    "postpack": [
+      ""
+    ],
+    "prerestore": [
+      "npm install typescript -g",
+      "npm install gulp -g"
+    ],
+    "postrestore": [
+      ""
+    ]
   },
   "exclude": [
     "wwwroot",

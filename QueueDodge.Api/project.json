@@ -1,9 +1,10 @@
 {
   "version": "1.0.0-*",
   "userSecretsId": "QueueDodge.Api",
-  "compilationOptions": {
+  "buildOptions": {
+    "debugType": "portable",
     "emitEntryPoint": true
-  },
+},
   "dependencies": {
     "Microsoft.NETCore.App": {
       "type": "platform",
@@ -68,3 +69,4 @@
     "**.vspscc"
   ]
 }
+

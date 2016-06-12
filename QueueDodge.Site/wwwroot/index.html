@@ -1,39 +1,38 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-    <base href="/" />
-    <title>Queue Dodge</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="The description of my page" />
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700' rel='stylesheet' type='text/css'>
+  <base href="/" />
+  <title>Queue Dodge</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The description of my page" />
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700' rel='stylesheet' type='text/css'>
 
-    <link rel="shortcut icon" type="image/x-icon" href="~/app/images/favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="~/app/images/favicon.ico" />
 
-    <link rel="stylesheet" href='node_modules/bootstrap/dist/css/bootstrap.css' />
-    <link rel="stylesheet" href="app/styles/style.min.css">
+  <link rel="stylesheet" href='node_modules/bootstrap/dist/css/bootstrap.css' />
+  <link rel="stylesheet" href="app/styles/style.min.css">
 
-    <script src='node_modules/jquery/dist/jquery.js'></script>
-    <script src='node_modules/bootstrap/dist/js/bootstrap.js'></script>
+  <script src='node_modules/jquery/dist/jquery.js'></script>
+  <script src='node_modules/bootstrap/dist/js/bootstrap.js'></script>
 
-    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+  <script src="node_modules/zone.js/dist/zone.js"></script>
+  <script src="node_modules/reflect-metadata/Reflect.js"></script>
+  <script src="node_modules/systemjs/dist/system.src.js"></script>
+  <script src='node_modules/rxjs/bundles/Rx.js'></script>
 
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src='node_modules/rxjs/bundles/Rx.js'></script>
-   
-   <!-- <script src="system.config.js"></script>
+  <!-- <script src="system.config.js"></script>
     
     
   <script>
     System.import('app').catch(function(err){ console.error(err);  });
   </script>-->
 </head>
+
 <body>
-    <queue-dodge></queue-dodge>
-   <script src="dist/bundle.js"></script>
+  <queue-dodge></queue-dodge>
+  <script src="dist/bundle.min.js"></script>
 </body>
 
 </html>
-

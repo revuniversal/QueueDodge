@@ -77,6 +77,7 @@ namespace QueueDodge
             }
 
         }
+
         public IEnumerable<LadderEntry> ConvertToLadderEntry(IEnumerable<Row> source, string bracket, BattleDotSwag.Region region)
         {
             var factory = new LadderEntryFactory();
@@ -88,12 +89,14 @@ namespace QueueDodge
                 yield return ladderEntry;
             }
         }
+
         public IEnumerable<LadderEntry> CacheLadder(IEnumerable<LadderEntry> source, IMemoryCache cache, string bracket, BattleDotSwag.Region region)
         {
             var key = $"{bracket}:{region}";
             cache.Set(key, source);
             return source;
         }
+
         public IEnumerable<LadderEntryPair> ExistsInCache(IEnumerable<LadderEntry> source, IMemoryCache cache)
         {
             foreach (var entry in source)
@@ -111,6 +114,7 @@ namespace QueueDodge
                 }
             }
         }
+
         public IEnumerable<LadderChange> CharacterChanged(IEnumerable<LadderEntryPair> source)
         {
             foreach (var pair in source)
@@ -122,6 +126,7 @@ namespace QueueDodge
                 }
             }
         }
+
         public LadderChange NotifyChanged(LadderChange change, Func<string, Task> sendMessage)
         {
             var options = new JsonSerializerSettings() { ContractResolver = new CamelCasePropertyNamesContractResolver() };
@@ -131,6 +136,7 @@ namespace QueueDodge
             return change;
 
         }
+
         public LadderChange SaveRealm(LadderChange change, QueueDodgeDB queueDodge)
         {
             var realmExists = queueDodge
@@ -151,6 +157,7 @@ namespace QueueDodge
             return change;
 
         }
+
         public LadderChange SaveCharacter(LadderChange change, QueueDodgeDB queueDodge)
         {
             var characterExists = queueDodge
@@ -185,6 +192,7 @@ namespace QueueDodge
             return change;
 
         }
+        
         public LadderChange SaveLadderChange(LadderChange change, QueueDodgeDB queueDodge)
         {
 
