@@ -23,10 +23,14 @@ namespace QueueDodge.Api.Controllers
         {
            var foundPlayers = await queueDodge
                 .Characters
+                .Include(p => p.Race)
+                .Include(p => p.Class)
+                .Include(p => p.Specialization)
+                .Include(p => p.Realm)
+                .Include(p => p.Realm.Region)
                 .Where(p =>
-                (p.Realm.Name == realm || p.Realm.Slug == realm)
-                && p.Realm.Region.Name == region
-                && p.Name.Contains(character))
+                (p.Realm.Name.ToLower() == realm.ToLower() || p.Realm.Slug.ToLower() == realm.ToLower())
+                && p.Name.ToLower().Contains(character.ToLower()))
                 .ToListAsync();
          
             return foundPlayers;

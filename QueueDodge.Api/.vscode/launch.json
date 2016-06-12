@@ -6,8 +6,8 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/QueueDodge/bin/Debug/netcoreapp1.0/QueueDodge.dll",
-            "args": ["query","-r", "us", "-b","3v3","-i","30"],
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.0/QueueDodge.Api.dll",
+            "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false
         },
@@ -16,9 +16,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/QueueDodge.Api/bin/Debug/netcoreapp1.0/QueueDodge.Api.dll",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.0/QueueDodge.Api.dll",
             "args": [],
-            "cwd": "${workspaceRoot}/QueueDodge.Api",
+            "cwd": "${workspaceRoot}",
             "stopAtEntry": false,
             "launchBrowser": {
                 "enabled": true,
@@ -33,16 +33,13 @@
                 "linux": {
                     "command": "xdg-open"
                 }
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
             }
         },
         {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach",
-            "processId": 0
+            "processName": "<example>"
         }
     ]
 }
