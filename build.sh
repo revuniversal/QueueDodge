@@ -4,4 +4,6 @@ cd ../QueueDodge.Api
 dotnet build
 cd ../QueueDodge.Site
 dotnet build
-cd ..
+cd wwwroot
+npm install
+cd ../..

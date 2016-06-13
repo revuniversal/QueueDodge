@@ -1,0 +1,23 @@
+<div>
+    <label>Realm</label>
+    <select (change)="onRealmChange($event.target.value)">
+        <option *ngFor="let realm of realms | async">{{realm}}</option>
+    </select>
+
+
+
+    <label>Character</label>
+    <span style="position:relative;overflow:visible;">
+        <input type="text" id="character" />
+        <ul style="background-color:#393F4C; border:1px solid black;position:absolute;width:150%;top:25px;left:0;z-index:1;padding:0px;">
+            <li *ngFor="let character of characters | async" style="padding:5px;overflow:visible;" (click)="selectCharacter(character)">
+                <img class="icon-frame" src="app/images/race/race_{{character.Race.ID}}_{{character.Gender}}.jpg" />
+                <img class="icon-frame" src="app/images/class/class_{{character.Class.ID}}.jpg" />
+                <img class="icon-frame" src="app/images/spec/spec_{{character.Specialization.ID}}.jpg" />
+                <span class="_{{character.Class.ID}}">
+                    {{character.Name}}
+                </span>
+            </li>
+        </ul>
+    </span>
+</div>

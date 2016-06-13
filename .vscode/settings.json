@@ -9,7 +9,8 @@
         "": true,
         ".vs":true,
         "artifacts":true,
-        "*.sln":true
+        "*.sln":true,
+        "QueueDodge/Migrations":true
     }
 }
    

@@ -1,24 +1,6 @@
 ﻿<div>
     <h1>The Watcher</h1>
-    <!--<div class="row">
-        <div class="col-md-4">
-            <label>Realm</label>
-            <br />
-            <select ng-options="x as x.name group by x.region.name for x in vm.realms"
-                    ng-model="vm.player.realm"
-                    class="form-control input-sm"></select>
-        </div>
-        <div class="col-md-4">
-            <label>Name</label>
-            <br />
-            <input class="form-control input-sm"
-                   ng-model="vm.player.name" />
-        </div>
-        <div class="col-md-4">
-            <br />
-            <button type="submit" class="btn btn-primary">Watch Player</button>
-        </div>
-    </div>-->
+    <character-lookup region="{{region}}"></character-lookup>
     <table class="table table-condensed">
         <thead>
             <tr>

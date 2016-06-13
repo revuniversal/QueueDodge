@@ -4,12 +4,12 @@ import {CORE_DIRECTIVES} from "@angular/common";
 import {WatcherService} from "./watcher.service";
 import {WatchedPlayer} from "./watched-player";
 import {ActivityService} from "../activity.service";
-
+import {CharacterLookupComponent} from './character-lookup/character-lookup.component';
 
 @Component({
     selector: "watcher",
     templateUrl: "../app/activity/watcher/watcher.component.html",
-    directives: [CORE_DIRECTIVES]
+    directives: [CORE_DIRECTIVES,CharacterLookupComponent]
 })
 export class WatcherComponent implements OnInit {
     @Input() region: string;

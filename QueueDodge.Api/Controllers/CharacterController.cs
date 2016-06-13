@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace QueueDodge.Api.Controllers
 {
-    [Route("api/region/{region}/realm/{realm}/character/{character}")]
+    [Route(@"api/region/{region}/realm/{realm}/character/{character}")]
     public class CharacterController : Controller
     {
         private QueueDodgeDB queueDodge;
@@ -21,18 +21,25 @@ namespace QueueDodge.Api.Controllers
         [HttpGet]
         public async Task<IEnumerable<Character>> Get(string region, string realm, string character)
         {
-           var foundPlayers = await queueDodge
-                .Characters
-                .Include(p => p.Race)
-                .Include(p => p.Class)
-                .Include(p => p.Specialization)
-                .Include(p => p.Realm)
-                .Include(p => p.Realm.Region)
-                .Where(p =>
-                (p.Realm.Name.ToLower() == realm.ToLower() || p.Realm.Slug.ToLower() == realm.ToLower())
-                && p.Name.ToLower().Contains(character.ToLower()))
-                .ToListAsync();
-         
+            if (string.IsNullOrEmpty(character))
+            {
+                return new List<Character>();
+            }
+
+            var foundPlayers = await queueDodge
+                 .Characters
+                 .Include(p => p.Race)
+                 .Include(p => p.Class)
+                 .Include(p => p.Specialization)
+                 .Include(p => p.Realm)
+                 .Include(p => p.Realm.Region)
+                 .Where(p =>
+                 ((realm.ToLower() == "all") || (p.Realm.Name.ToLower() == realm.ToLower() || p.Realm.Slug.ToLower() == realm.ToLower()))
+                 && p.Name.ToLower().Contains(character.ToLower()))
+                 .OrderBy(p => p.Name)
+                 .Take(10)
+                 .ToListAsync();
+
             return foundPlayers;
         }
     }

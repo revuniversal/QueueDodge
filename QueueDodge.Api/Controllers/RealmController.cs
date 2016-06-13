@@ -19,14 +19,17 @@ namespace QueueDodge.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Realm>> Get(string region)
+        public async Task<IEnumerable<string>> Get(string region)
         {
-           var realms = await  queueDodge
+           var realms = await queueDodge
                 .Realms
                 .Include(p => p.Region)
                 .Where(p => p.Region.Name == region)
+                .Select(p => p.Name)
+                .OrderBy(p => p)
                 .ToListAsync();
-                
+
+                realms.Insert(0,"All");
             return realms;
         }
     }
