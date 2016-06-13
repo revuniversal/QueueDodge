@@ -77,7 +77,7 @@ namespace QueueDodge.Site
                             var response = await client.GetAsync(uri);
 
                             if(!silenceParamExists)
-                                Console.WriteLine($"{bracket}-{region}:  " + response.StatusCode + " at " + DateTime.Now.ToLocalTime());
+                                Console.WriteLine($"{bracket}-{region}:  {response.StatusCode} at {DateTime.Now.ToLocalTime()}");
 
                             await Task.Delay(Convert.ToInt32(interval) * 1000);
                         }
