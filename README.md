@@ -17,9 +17,9 @@ I don't like people accusing me of harvesting IP addresses so I made it open sou
 3. Clone this repository  
 
 
-    git clone https://github.com/NickolasAcosta/QueueDodge.git
-    cd QueueDodge
-    ./build
+    git clone https://github.com/NickolasAcosta/QueueDodge.git  
+    cd QueueDodge  
+    ./build  
 
 
 ## Set these environment variables
